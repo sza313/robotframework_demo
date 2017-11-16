@@ -1,0 +1,20 @@
+*** Settings ***
+Library           JiraRobot
+
+*** Test Cases ***
+Basic
+    ${element}=    Set Variable    Almafa
+    ${element}=    Set Variable    ${element} \ \ \ \ Korte
+    Log    ${element}
+    ${element}=    Set Variable    ${1.1}
+    ${element}=    Set Variable    ${element+1}
+    Log    ${element}
+    : FOR    ${i}    IN RANGE    1    10
+    \    log    ${i}
+    @{list}=    Create List    a    b    c    d
+    : FOR    ${element}    IN    @{list}
+    \    log    ${element}
+    ${condition}=    Set Variable    3
+    Run Keyword If    '${condition}'=='1'    Log    The value is 1
+    Run Keyword If    '${condition}'=='2'    Log    The value is 2
+    Run Keyword If    '${condition}'=='3'    Log    The value is 3

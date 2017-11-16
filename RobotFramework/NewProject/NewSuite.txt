@@ -1,0 +1,9 @@
+*** Settings ***
+Library           Selenium2Library
+Library           Dialogs
+Library           Collections
+Library           DateTime
+
+*** Test Cases ***
+NewTestCase
+    Open Browser    https://portal.accenture.com    chrome

@@ -1,0 +1,20 @@
+*** Settings ***
+Library           RequestsLibrary
+Library           Collections
+Library           Dialogs
+Library           String
+Resource          ../TestData/testData.txt
+
+*** Keywords ***
+getQuery
+    [Arguments]    ${serviceUrl}    ${subUrl}    ${sampleJson}
+    Create Session    sessionId    ${serviceUrl}
+    ${response}=    Get    sessionId    ${subUrl}
+    Log    The response status code is: ${response.status_code}
+    Log    The content of the response is: ${response.content}
+    Log    ========================================
+    Run keyword and continue on failure    Should be equal as numbers    ${response.status_code}    200    Expected a status code of 200 but got ${response.status_code}    values=False
+    ${json}=    To JSON    ${response.content}
+    log    ${json}
+    log    ${sampleJson}
+    Collections.Dictionaries Should Be Equal    ${json}    ${sampleJson}

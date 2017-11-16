@@ -1,0 +1,5 @@
+*** Variables ***
+${url}            http://demowebshop.tricentis.com/
+${browser}        chrome
+${CURRENT_TEST_USER}    ${EMPTY}
+${ORDER_NUMBER}    ${EMPTY}
