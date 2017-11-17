@@ -1,0 +1,24 @@
+*** Settings ***
+Library           Selenium2Library
+Library           Dialogs
+Library           Collections
+Resource          ../TestData/testData.txt
+Library           DateTime
+Library           String
+Library           ExcelLibrary
+Library           openpyxl
+Library           pyexcel_xls
+Library           CSVLibrary
+Library           DatabaseLibrary
+Library           pymysql
+
+*** Keywords ***
+SetTextBoxValue
+    [Arguments]    ${title}    ${value}
+    Wait Until Page Contains Element    xpath=//td[text()='${title}']/..//input
+    Selenium2Library.Input Text    xpath=//td[text()='${title}']/..//input    ${value}
+
+ClickOnButton
+    [Arguments]    ${title}    # Title of the Button to click
+    Wait Until Page Contains Element    xpath=//input[@value='${title}']
+    Click Element    xpath=//input[@value='${title}']

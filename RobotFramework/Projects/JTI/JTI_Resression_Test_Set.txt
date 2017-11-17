@@ -1,0 +1,22 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Test Setup
+Test Teardown
+Test Template
+Resource          Keywords/functionalKeywords.txt
+
+*** Test Cases ***
+TS_Login
+    [Documentation]    TS_Login
+    ...
+    ...    Name - open web shop
+    ...    Description - Navigate to https://insidetest.jti.com
+    ...    Expected Result - main page of webshop loaded
+    ...    Checkpoint - wait till page is loaded (login dialogue shown)
+    [Setup]
+    [Template]    Login
+    ${CURRENT_TEST_USER}    Szury4489
+    [Teardown]
+
+TS_Test_Of_Index_Page

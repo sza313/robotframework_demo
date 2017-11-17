@@ -1,0 +1,11 @@
+*** Settings ***
+Resource          uiKeywords.txt
+
+*** Keywords ***
+Login
+    [Arguments]    ${username}    ${password}
+    Open Browser    ${url}    ${browser}
+    SetTextBoxValue    User name:    ${username}
+    SetTextBoxValue    Password:    ${password}
+    ClickOnButton    Log On
+    Wait Until Page Contains Element    xpath=//img[@id='insideLogo']    10
