@@ -5,6 +5,7 @@ Test Setup
 Test Teardown
 Test Template
 Resource          Keywords/functionalKeywords.robot
+Resource          TestData/testData.robot
 
 *** Test Cases ***
 TS_Login
@@ -21,7 +22,10 @@ TS_Test_Of_Index_Page
     [Documentation]    TS_Test_Of_Index_Page
     ...
     ...    Name - Test of index page content and functionality
-    ...    Description - Log in to application, then check if critical parts of the webpage are present. Check "manage my news" popup, search and notification functionality.
-    ...    Expected Result - main page loaded, all parts are present and functions work as expected.
-    [Setup]    Login    ${CURRENT_TEST_USER}    ${PWD}
-    [Template]    TestIndexPage
+    ...    Description - Check if critical parts of the webpage are present. Check "manage my news" popup, search and notification functionality.
+    ...    Expected Result - Main page loaded, all parts are present and functions work as expected.
+    [Setup]
+    Check Main Navigation
+    Check Corporate News Part
+    Check My News Part
+    Check Engage Part
