@@ -21,4 +21,15 @@ Unset Tags
 Check If Articles Loaded
     [Documentation]    Returns true if additional articles are loaded. (more than 10 articles are present).
     ${count} =    Get Matching Xpath Count    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]
-    Should Be True    ${count} > 10
+    Should Be True    ${count} \> 10
+
+Setup Browser
+    Open Browser    ${url}    ${browser}
+    Maximize Browser Window
+
+Search For Keyword
+    [Arguments]    ${keyword}
+    ${searchbox}=    Set Variable    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input
+    Set Text Box Element Value    ${searchbox}    ${keyword}
+    Press Key    ${searchbox}    \\13
+    Wait Until Page Contains Element    //div[@class="searchResultsLists"]

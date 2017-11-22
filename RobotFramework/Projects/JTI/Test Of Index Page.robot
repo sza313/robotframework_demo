@@ -1,6 +1,5 @@
 *** Settings ***
-Suite Setup       Open Browser    ${url}    ${browser}
-Suite Teardown    Close Browser
+Suite Setup       Setup Browser
 Test Setup
 Test Teardown
 Test Template
@@ -34,7 +33,7 @@ Check if Corporate News Is Loaded
     Wait Until Page Contains Element    ${container}//a[contains(text(),'Corporate news')]
     XPath Should Match X Times    ${container}//div[@class="caption captionNews"]    3
 
-Check If My News Is loaded
+Check If My News Is Loaded
     [Documentation]    Description - Check if My news section exists with title "My news".
     Wait Until Page Contains Element    //section[contains(@class,'mynews')]//a[text()="My news"]
 
@@ -105,7 +104,6 @@ Check Engage Part Sticky Behaviour
     [Documentation]    Description - Engage part should be sticky when scrolled down.
     ...    Expected - Engage part is visible and has fixed position.
     ${container}=    Set Variable    //section[contains(@class,'engagepart')]
-    Maximize Browser Window
     Scroll To Bottom
     ${elementIsInViewport} =    Get Is Element In Viewport    ${container}
     Should Be True    ${elementIsInViewport}
@@ -120,10 +118,46 @@ Check Engage Part Normal Behaviour
     ${elementIsFixed}    Get Is Element Fixed    ${container}
     Should Not Be True    ${elementIsFixed}
 
+Show SharePoint Menu
+    [Documentation]    Description - Click to Edit button on the right site of top menu
+    ...    Expected - SharePoint menu appears above top menu
+    Click Element    //a[@class="toolsButton"]
+    Wait Until Element Is Visible    //div[contains(@class, "sharepointRibbon")]
+    Wait Until Element Is Visible    //div[@id="suiteBarRight"]
+    Wait Until Element Is Visible    //div[@id="DeltaSPRibbon"]
+
+Hide SharePoint Menu
+    [Documentation]    Description - Click to Edit button again
+    ...    Expected - SP menu disappears
+    Click Element    //a[@class="toolsButton"]
+    Wait Until Element Is Not Visible    //div[contains(@class, "sharepointRibbon")]
+    Wait Until Element Is Not Visible    //div[@id="suiteBarRight"]
+    Wait Until Element Is Not Visible    //div[@id="DeltaSPRibbon"]
+
+Show Notifications
+    [Documentation]    Description - Click on Bell icon to shown notices
+    ...    Expected - Notices are shown in dropdown menu
+    Click Element    //a[@id="notifications-toogle"]
+    Wait Until Element Is Visible    //ul[@class="dropdown-menu notifications"]
+    Wait Until Page Contains    Notifications
+
+Hide Notofications
+    [Documentation]    Description - Click again on Bell icon to hide notices
+    ...    Expected - notices are hidden
+    Click Element    //a[@id="notifications-toogle"]
+    Wait Until Element Is Not Visible    //ul[@class="dropdown-menu notifications"]
+
 Test Search With Results
     [Documentation]    Description - Click to Seachbox in Top menu and type e.g."test" and press Enter.
     ...    Expected - Redirected to results page with correct results.
+    Go To    ${url}
+    Search For Keyword    test
+    Wait Until Page Contains    test market
+    Wait Until Page Contains    Testing is our life
 
 Test Search With No Results
     [Documentation]    Description - Click to Seachbox in Top menu and type e.g."asdfg" and press Enter.
     ...    Expected - Redirected to results page with NO results.
+    Go To    ${url}
+    Search For Keyword    asdfg
+    Wait Until Page Contains    Sorry, no results matching your search query
