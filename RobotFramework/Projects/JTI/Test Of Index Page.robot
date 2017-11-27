@@ -4,12 +4,8 @@ Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
 Login
-    [Documentation]    TS_Login
-    ...
-    ...    Name - open web shop
-    ...    Navigate to https://insidetest.jti.com
-    ...    Expected Result - main page of webshop loaded
-    ...    Checkpoint - wait till page is loaded (login dialogue shown)
+    [Documentation]    Log into the application with given credentials.
+    ...    Expected - user logged in and redirected to index page.
     [Template]    Login
     ${CURRENT_TEST_USER}    Szury4489
 
