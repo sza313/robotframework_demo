@@ -7,7 +7,7 @@ Login
     [Documentation]    Log into the application with given credentials.
     ...    Expected - user logged in and redirected to index page.
     [Template]    Login
-    ${CURRENT_TEST_USER}    Szury4489
+    ${CURRENT_TEST_USER}    ${PWD}
 
 Check Global Menu Is Loaded
     [Documentation]    Check if main navigation is loaded by checking the container, profile pic and level 0 menu items.
@@ -75,8 +75,7 @@ Reload Page
     Reload Page
 
 Check Number Of Articles
-    [Documentation]    Count number of articles in my news section
-    ...    Expected - There should be 10 articles
+    [Documentation]    Check If there are 10 articles in news list in my news section.
     Xpath Should Match X Times    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]    10
 
 Load Articles With Infinite Scroll

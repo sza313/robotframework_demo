@@ -1,4 +1,5 @@
 *** Settings ***
+Suite Teardown    Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
@@ -96,18 +97,17 @@ Click On Hashtag
 Click All Communities In Sidebar
     [Documentation]    Click on All Communities in sidebar. All communities tab should be active with filters.
     Click Communities Nav Link    All communities
-    ${all communities container}=    Set Variable    css:.t-allComunities
-    Wait Until Element Contains    ${all communities container}    All communities
-    Wait Until Element Contains    ${all communities container}    My communities
-    Wait Until Element Contains    ${all communities container}    Create a community
+    Wait Until Element Contains    ${community tabs}    All communities
+    Wait Until Element Contains    ${community tabs}    My communities
+    Wait Until Element Contains    ${community tabs}    Create a community
     Link Should Have Class    All communities    active
 
 Check All Communities Tab
+    [Documentation]    Check If Comminities Tab is loaded. Filters and search field should be visible, All communities tab should be active.
     Click Communities Tab    All communities
-    ${all communities tab content}=    Set Variable    //div[@id="allCommunitiesWebPart"]
     Wait Until Page Contains Element    ${all communities tab content}
     Link Should Have Class    All communities    active    ${community tabs}
-    Element Should Be Visible    css:#allCommunitiesWebPart #SearchBox
+    Element Should Be Visible    ${all communities tab content}//div[@id="SearchBox"]
     Page Should Contain Button With Text    Market    ${all communities tab content}
     Page Should Contain Button With Text    Department    ${all communities tab content}
     Page Should Contain Button With Text    Brand    ${all communities tab content}
@@ -116,37 +116,44 @@ Check All Communities Tab
     Page Should Contain Button With Text    Access    ${all communities tab content}
 
 Set All Communities Filters
+    [Documentation]    Choose on from each community filter. Check if communities are filtered.
     Click Communities Tab    All communities
-    Wait Until Element Contains    id:allCommunitiesWebPart    Ukraine IT BA
-    ${all communities tab}=    Set Variable    //*[@id="allCommunitiesWebPart"]
-    Click Button With Text    Market    ${all communities tab}
-    Click Link    Adriatica    ${all communities tab}
-    Click Button With Text    Department    ${all communities tab}
-    Click Link    Anti-Illicit Trade    ${all communities tab}
-    Click Button With Text    Brand    ${all communities tab}
-    Click Link    Amber Leaf    ${all communities tab}
-    Click Button With Text    Language    ${all communities tab}
-    Click Link    English    ${all communities tab}
-    Click Button With Text    Subject    ${all communities tab}
-    Click Link    JTI Business    ${all communities tab}
-    Click Button With Text    Access    ${all communities tab}
-    Click Link    Public    ${all communities tab}
-    Wait Until Element Does Not Contain    id:allCommunitiesWebPart    Ukraine IT BA
+    Wait Until Element Contains    ${all communities tab content}    Ukraine IT BA
+    Click Button With Text    Market    ${all communities tab content}
+    Click Link    Adriatica    ${all communities tab content}
+    Click Button With Text    Department    ${all communities tab content}
+    Click Link    Anti-Illicit Trade    ${all communities tab content}
+    Click Button With Text    Brand    ${all communities tab content}
+    Click Link    Amber Leaf    ${all communities tab content}
+    Click Button With Text    Language    ${all communities tab content}
+    Click Link    English    ${all communities tab content}
+    Click Button With Text    Subject    ${all communities tab content}
+    Click Link    JTI Business    ${all communities tab content}
+    Click Button With Text    Access    ${all communities tab content}
+    Click Link    Public    ${all communities tab content}
+    Wait Until Element Does Not Contain    ${all communities tab content}    Ukraine IT BA
 
 Clear All Communities Filters
+    [Documentation]    Click on Clear Filters to clear All filters. Check if filtered community is visible again.
     Click Link    Clear filters    ${community tabs}
-    Wait Until Element Contains    id:allCommunitiesWebPart    Ukraine IT BA
+    Wait Until Element Contains    ${all communities tab content}    Ukraine IT BA
 
 Check All Communities Count
+    [Documentation]    Check if there are 10 communuties listed in the active tab.
+    Xpath Should Match X Times    ${all communities tab content}//div[@name="Item"]    10
 
 Check All Communities Pagiantion
+    ${first item in list}=    Set Variable    ${all communities tab content}//div[@name="Item"]
+    Wait Until Page Contains Element    ${first item in list}
+    Click Element    //a[@title="Move to page 2"]
+    Wait Until Page Does Not Contain Element    ${first item in list}
 
 Join 12 Pubilc Communities
 
 Unfollow 1 Community
 
 Check My Communities Tab
-    [Documentation]    Click My communities tab. My communities tab should be active without filters and search.
+    [Documentation]    Click My communities tab. My communities tab should be active. Filters and search bar should NOT be visible.
     Click Communities Tab    My communities
     ${my communities tab content}=    Set Variable    //div[@id="myCommunitiesWebPart"]
     Wait Until Page Contains Element    ${my communities tab content}

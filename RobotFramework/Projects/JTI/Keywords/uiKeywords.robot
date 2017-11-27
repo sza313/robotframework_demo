@@ -129,4 +129,4 @@ Button With Text Should Not Be Visible
 
 Click Communities Tab
     [Arguments]    ${text}
-    Click Link    My communities    ${community tabs}
+    Click Link    ${text}    ${community tabs}
