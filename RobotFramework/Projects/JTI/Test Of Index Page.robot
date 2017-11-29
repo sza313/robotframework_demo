@@ -76,7 +76,7 @@ Reload Page
 
 Check Number Of Articles
     [Documentation]    Check If there are 10 articles in news list in my news section.
-    Xpath Should Match X Times    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]    10
+    Page Should Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]    \    \    10
 
 Load Articles With Infinite Scroll
     [Documentation]    Scroll down and wait for infinite scroll to load articles

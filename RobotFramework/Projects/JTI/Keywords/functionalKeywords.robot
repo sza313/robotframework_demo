@@ -27,6 +27,7 @@ Setup Test Environment
     Maximize Browser Window
     ${time}=    Get Time    epoch
     Set Global Variable    ${current timestamp}    ${time}
+    Set Selenium Timeout    15
 
 Search For Keyword
     [Arguments]    ${keyword}
@@ -56,4 +57,92 @@ Check If Global Menu Is Loaded
     Check If Menu Item Exists    News
     Check If Menu Item Exists    Resources
 
-Join 12 Communities
+Join A Community
+    [Arguments]    ${container}
+    ${button}=    Set Variable    ${container}//button[text()="Join"]
+    Wait Until Page Contains Element    ${button}
+    ${button}=    Get WebElement    ${button}
+    Click Element    ${button}
+    Mouse Out    ${button}
+    Wait Until Element Contains    ${button}    Following
+
+Set Community Filter
+    [Arguments]    ${filter}    ${option}    ${container}
+    ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
+    Click Button With Text    ${filter}    ${container}
+    Click Link    ${option}    ${container}
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
+
+Clear Community Filters
+    [Arguments]    ${container}
+    ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
+    Click Link    Clear filters    ${community tabs}
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
+
+Leave A Community
+    [Arguments]    ${container}=
+    ${button}=    Set Variable    ${container}//button/descendant-or-self::*[contains(text(),"Following")]/ancestor-or-self::button
+    Wait Until Page Contains Element    ${button}
+    ${button}=    Get WebElement    ${button}
+    Click Element    ${button}
+    Wait Until Element Contains    ${button}    Join
+
+Check Pagination
+    [Arguments]    ${container}
+    Paginate To    2    ${container}
+    Page Should Contain Element    ${container}//div[@name="Item"]
+
+Navigate To All Communities Page
+    Scroll To Top
+    Click Communities Nav Link    All communities
+    Wait Until Element Contains    ${community tabs}    All communities
+    Wait Until Element Contains    ${community tabs}    My communities
+    Wait Until Element Contains    ${community tabs}    Create a community
+    Link Should Have Class    All communities    active
+
+Paginate To
+    [Arguments]    ${page number}    ${container}
+    Scroll To Bottom
+    ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
+    Wait Until Page Contains Element    //a[@title="Move to page ${page number}"]
+    Wait Until Keyword Succeeds    15 sec    0.5 sec    Click Element    //a[@title="Move to page ${page number}"]
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
+
+Click Communities Tab
+    [Arguments]    ${text}
+    Scroll To Top
+    Click Link    ${text}    ${community tabs}
+
+Search For Community
+    [Arguments]    ${name}
+    ${search filed}=    Set Variable    ${all communities tab}//input[@type="text"]
+    Input Text    ${search filed}    ${name}
+    Press Key    ${search filed}    \\13
+    Wait Until Page Contains Element    ${all communities tab}//a/h4[text()="${name}"]/..
+
+Join Community
+    [Arguments]    ${name}
+    Search For Community    ${name}
+    ${button}=    Set Variable    //div[@id="allCommunitiesWebPart"]//a/h4[text()="${name}"]//ancestor::div[@name="Item"]//button[text()="Join"]
+    Wait Until Page Contains Element    ${button}
+    ${button}=    Get WebElement    ${button}
+    Click Element    ${button}
+    Mouse Out    ${button}
+    Wait Until Element Contains    ${button}    Following
+
+Check If Community Is Opened
+    [Arguments]    ${name}
+    Wait Until Page Contains Element    //h1[text()="${name}"]
+    Wait Until Page Contains Element    //div[@id="MyActivityStream"]//a[text()="${name}" and @class="active"]
+
+Check Community Page Sidebar
+    ${sidebar}=    Set Variable    //div[contains(@class,"secondaryInfo")]
+    Wait Until Element Contains    ${sidebar}    COMMUNITY OWNERS
+    Wait Until Element Contains    ${sidebar}    COMMUNITY FOLLOWERS
+    Wait Until Element Contains    ${sidebar}    RECOMMENDED COMMUNITIES
+    Wait Until Element Contains    ${sidebar}    AVAILABLE COMMUNITY BADGES
+
+Activate Community Tab
+    [Arguments]    ${title}
+    Click Tab    ${title}
+    Wait Until Page Contains Element    //table[contains(@summary,"${title}")]

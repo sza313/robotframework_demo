@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Teardown    Close Browser
+Suite Teardown    # Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
@@ -96,76 +96,137 @@ Click On Hashtag
 
 Click All Communities In Sidebar
     [Documentation]    Click on All Communities in sidebar. All communities tab should be active with filters.
-    Click Communities Nav Link    All communities
-    Wait Until Element Contains    ${community tabs}    All communities
-    Wait Until Element Contains    ${community tabs}    My communities
-    Wait Until Element Contains    ${community tabs}    Create a community
-    Link Should Have Class    All communities    active
+    Navigate To All Communities Page
 
 Check All Communities Tab
     [Documentation]    Check If Comminities Tab is loaded. Filters and search field should be visible, All communities tab should be active.
     Click Communities Tab    All communities
-    Wait Until Page Contains Element    ${all communities tab content}
+    Wait Until Page Contains Element    ${all communities tab}
     Link Should Have Class    All communities    active    ${community tabs}
-    Element Should Be Visible    ${all communities tab content}//div[@id="SearchBox"]
-    Page Should Contain Button With Text    Market    ${all communities tab content}
-    Page Should Contain Button With Text    Department    ${all communities tab content}
-    Page Should Contain Button With Text    Brand    ${all communities tab content}
-    Page Should Contain Button With Text    Language    ${all communities tab content}
-    Page Should Contain Button With Text    Subject    ${all communities tab content}
-    Page Should Contain Button With Text    Access    ${all communities tab content}
+    Element Should Be Visible    ${all communities tab}//div[@id="SearchBox"]
+    Page Should Contain Button With Text    Market    ${all communities tab}
+    Page Should Contain Button With Text    Department    ${all communities tab}
+    Page Should Contain Button With Text    Brand    ${all communities tab}
+    Page Should Contain Button With Text    Language    ${all communities tab}
+    Page Should Contain Button With Text    Subject    ${all communities tab}
+    Page Should Contain Button With Text    Access    ${all communities tab}
 
 Set All Communities Filters
     [Documentation]    Choose on from each community filter. Check if communities are filtered.
     Click Communities Tab    All communities
-    Wait Until Element Contains    ${all communities tab content}    Ukraine IT BA
-    Click Button With Text    Market    ${all communities tab content}
-    Click Link    Adriatica    ${all communities tab content}
-    Click Button With Text    Department    ${all communities tab content}
-    Click Link    Anti-Illicit Trade    ${all communities tab content}
-    Click Button With Text    Brand    ${all communities tab content}
-    Click Link    Amber Leaf    ${all communities tab content}
-    Click Button With Text    Language    ${all communities tab content}
-    Click Link    English    ${all communities tab content}
-    Click Button With Text    Subject    ${all communities tab content}
-    Click Link    JTI Business    ${all communities tab content}
-    Click Button With Text    Access    ${all communities tab content}
-    Click Link    Public    ${all communities tab content}
-    Wait Until Element Does Not Contain    ${all communities tab content}    Ukraine IT BA
+    Set Community Filter    Market    Adriatica    ${all communities tab}
+    Set Community Filter    Department    Anti-Illicit Trade    ${all communities tab}
+    Set Community Filter    Brand    Amber Leaf    ${all communities tab}
+    Set Community Filter    Language    English    ${all communities tab}
+    Set Community Filter    Subject    JTI Business    ${all communities tab}
+    Set Community Filter    Access    Public    ${all communities tab}
 
 Clear All Communities Filters
     [Documentation]    Click on Clear Filters to clear All filters. Check if filtered community is visible again.
-    Click Link    Clear filters    ${community tabs}
-    Wait Until Element Contains    ${all communities tab content}    Ukraine IT BA
+    Clear Community Filters    ${all communities tab}
 
 Check All Communities Count
     [Documentation]    Check if there are 10 communuties listed in the active tab.
-    Xpath Should Match X Times    ${all communities tab content}//div[@name="Item"]    10
+    Wait Until Keyword Succeeds    10 secs    0.5 secs    Page Should Contain Element    ${all communities tab}//div[@name="Item"]    None    NONE
+    ...    10
 
 Check All Communities Pagiantion
-    ${first item in list}=    Set Variable    ${all communities tab content}//div[@name="Item"]
-    Wait Until Page Contains Element    ${first item in list}
-    Click Element    //a[@title="Move to page 2"]
-    Wait Until Page Does Not Contain Element    ${first item in list}
+    [Documentation]    Check if clicking on second page in the paginator will load the next couple of communities
+    Check Pagination    ${all communities tab}
 
 Join 12 Pubilc Communities
-
-Unfollow 1 Community
+    [Documentation]    Join communities to test My Communities pagination and count items
+    Navigate To All Communities Page
+    Set Community Filter    Access    Public    ${all communities tab}
+    Repeat Keyword    10 times    Join A Community    ${all communities tab}
+    Paginate To    2    ${all communities tab}
+    Repeat Keyword    2 times    Join A Community    ${all communities tab}
 
 Check My Communities Tab
     [Documentation]    Click My communities tab. My communities tab should be active. Filters and search bar should NOT be visible.
+    Navigate To All Communities Page
     Click Communities Tab    My communities
-    ${my communities tab content}=    Set Variable    //div[@id="myCommunitiesWebPart"]
-    Wait Until Page Contains Element    ${my communities tab content}
+    ${my communities tab}=    Set Variable    //div[@id="myCommunitiesWebPart"]
+    Wait Until Page Contains Element    ${my communities tab}
     Link Should Have Class    My communities    active    ${community tabs}
     Element Should Not Be Visible    css:#allCommunitiesWebPart #SearchBox
-    Page Should Not Contain Button With Text    Market    ${my communities tab content}
-    Page Should Not Contain Button With Text    Department    ${my communities tab content}
-    Page Should Not Contain Button With Text    Brand    ${my communities tab content}
-    Page Should Not Contain Button With Text    Language    ${my communities tab content}
-    Page Should Not Contain Button With Text    Subject    ${my communities tab content}
-    Page Should Not Contain Button With Text    Access    ${my communities tab content}
+    Page Should Not Contain Button With Text    Market    ${my communities tab}
+    Page Should Not Contain Button With Text    Department    ${my communities tab}
+    Page Should Not Contain Button With Text    Brand    ${my communities tab}
+    Page Should Not Contain Button With Text    Language    ${my communities tab}
+    Page Should Not Contain Button With Text    Subject    ${my communities tab}
+    Page Should Not Contain Button With Text    Access    ${my communities tab}
 
 Check My Communities Count
+    [Documentation]    Check if there are 10 communuties listed in the active tab.
+    Wait Until Keyword Succeeds    10 secs    0.5 secs    Page Should Contain Element    ${my communities tab}//div[@name="Item"]    None    NONE
+    ...    10
 
 Check My Communities Pagiantion
+    [Documentation]    Check if clicking on second page in the paginator will load the next couple of communities
+    Check Pagination    ${my communities tab}
+
+Unfollow All Communities
+    [Documentation]    Unfollow all communities for future testing
+    Navigate To All Communities Page
+    Click Communities Tab    My communities
+    Wait Until Keyword Succeeds    10 secs    0.5 secs    Page Should Contain Element    ${my communities tab}//div[@name="Item"]    None    NONE
+    ...    10
+    Repeat Keyword    10 times    Leave A Community    ${my communities tab}
+    Paginate To    2    ${my communities tab}
+    Repeat Keyword    2 times    Leave A Community    ${my communities tab}
+
+Hover Over A Followed Community
+    [Documentation]    Follow a community, then hover over the buttton to see "Leave" text. Unfollow community.
+    Set Community Filter    Access    Public    ${all communities tab}
+    Join A Community    ${all communities tab}
+    Mouse Over    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button
+    Wait Until Element Contains    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button    Leave
+
+Test Search For Community
+    [Documentation]    Type in the newly created community name to search bar in all communities tab, then press enter. Results should contain the named community.
+    Go To    ${all communities url}
+    Search For Community    ${fixed community}
+
+Open Created Community
+    Go To    ${all communities url}
+    Search For Community    ${fixed community}
+    Click Element    ${all communities tab}//a/h4[text()="${fixed community}"]/..
+    Wait Until Page Contains Element    //a[@id="joinLeaveAction"]    15
+    Wait Until Page Contains Element    //a[text()="Invite others to follow"]
+    Wait Until Page Contains Element    //span[text()="Manage community owners"]/..
+    Wait Until Page Contains Element    //a[@role="tab" and text()="Activity stream"]/parent::li[contains(@class,"active")]
+
+Follow Or Unfollow Opened Community
+    Go To    ${fixed community url}
+    ${button}=    Set Variable    //a[@id="joinLeaveAction"]
+    Wait Until Page Contains Element    ${button}
+    ${text before}=    Get Text    ${button}
+    Click Element    ${button}
+    Wait Until Element Does Not Contain    ${button}    ${text before}
+    Run Keyword If    "${text before}" == "follow community"    Element Should Contain    ${button}    stop following community
+    Run Keyword If    "${text before}" == "stop following community "    Element Should Contain    ${button}    follow community
+
+Click Invite Others Button
+    [Documentation]    Click Invite Others button. Email client should be opened.
+    Go To    ${fixed community url}
+    Click Link    Invite others to follow
+    Wait For Outlook Window    ${fixed community}
+    Wait For Active Window    Microsoft Outlook
+    Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]
+
+Check Manage Owners Dialog
+    Go To    ${fixed community url}
+    Click Link    Manage community owners    ${community page}
+    Wait Until Dialog Is Open    Manage Owners
+    Close Dialog    Manage Owners
+
+Check Files Tab In Opened Community
+    Go To    ${fixed community url}
+    Activate Community Tab    Files
+    Check Community Page Sidebar
+
+Check Pictures Tab In Opened Community
+    Go To    ${fixed community url}
+    Activate Community Tab    Pictures
+    Check Community Page Sidebar
