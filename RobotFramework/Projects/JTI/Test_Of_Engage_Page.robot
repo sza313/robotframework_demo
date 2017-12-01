@@ -85,17 +85,20 @@ Click On Hashtag
     [Documentation]    Click On the created Hashtag in the last added comment.
     ...    Expected - Hastag tab show up, posts filterd to those that contain the same hashtag.
     ${hashtag}=    Set Variable    (//*[contains(@class,"ngActivityRow")])[1]//*[@class="hashtag"]
-    Element Should Contain    ${hashtag}    \#Hastag_${surname}_${current timestamp}
+    ${hastag name}=    Set Variable    \#Hastag_${surname}_${current timestamp}
+    Element Should Contain    ${hashtag}    ${hastag name}
     ${question with current hastag} =    Set Variable    //*[@class="ngSummary" and descendant-or-self::*[contains(text(),"Hastag_${surname}_${current timestamp}")]]
     ${question without current hastag} =    Set Variable    //*[@class="ngSummary" and not(descendant-or-self::*[contains(text(),"Hastag_${surname}_${current timestamp}")])]
     Page Should Contain Element    ${question with current hastag}
     Page Should Contain Element    ${question without current hastag}
     Click Element    ${hashtag}
+    Check If New Tab Is Opened With Title    ${hastag name}
     Wait Until Page Does Not Contain Element    ${question without current hastag}
     Wait Until Page Contains Element    ${question with current hastag}
 
 Click All Communities In Sidebar
     [Documentation]    Click on All Communities in sidebar. All communities tab should be active with filters.
+    Go To    ${engage page url}
     Navigate To All Communities Page
 
 Check All Communities Tab
@@ -141,6 +144,20 @@ Join 12 Pubilc Communities
     Repeat Keyword    10 times    Join A Community    ${all communities tab}
     Paginate To    2    ${all communities tab}
     Repeat Keyword    2 times    Join A Community    ${all communities tab}
+
+Request To Join A Community
+    [Documentation]    Click on Request to join button and fill in some text to the message box. Click send and wait for the message to appear.
+    Log Out
+    Log In    ${test user 2 name}    ${test user 2 pwd}
+    Go To    ${all communities url}
+    Request To Join A Community
+    Log Out
+    Log In    ${test user 1 name}    ${test user 1 pwd}
+    Go To    ${fixed community pending requests url}
+    Wait Until Page Contains    Hudak, Szabolcs
+    Click Element    //table[@summary="Access Requests"]//a[@title="Open Menu"]
+    Wait Until Page Contains Link With Text    Decline
+    Click Link Which Contains    Decline
 
 Check My Communities Tab
     [Documentation]    Click My communities tab. My communities tab should be active. Filters and search bar should NOT be visible.
@@ -189,6 +206,7 @@ Test Search For Community
     Search For Community    ${fixed community}
 
 Open Created Community
+    [Documentation]    Search for the new community and go the its page. Check that mandatory elements are loaded and community is highlighted. Activity stream tab should be active.
     Go To    ${all communities url}
     Search For Community    ${fixed community}
     Click Element    ${all communities tab}//a/h4[text()="${fixed community}"]/..
@@ -198,6 +216,7 @@ Open Created Community
     Wait Until Page Contains Element    //a[@role="tab" and text()="Activity stream"]/parent::li[contains(@class,"active")]
 
 Follow Or Unfollow Opened Community
+    [Documentation]    Click on follow / stop following community button on community page. Button should change text to the opposite.
     Go To    ${fixed community url}
     ${button}=    Set Variable    //a[@id="joinLeaveAction"]
     Wait Until Page Contains Element    ${button}
@@ -210,23 +229,210 @@ Follow Or Unfollow Opened Community
 Click Invite Others Button
     [Documentation]    Click Invite Others button. Email client should be opened.
     Go To    ${fixed community url}
-    Click Link    Invite others to follow
+    Click Link Which Contains    Invite others to follow
     Wait For Outlook Window    ${fixed community}
     Wait For Active Window    Microsoft Outlook
     Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]
 
 Check Manage Owners Dialog
+    [Documentation]    Click on Manage owners button. Dialog with title "Manage Owners" should show up.
     Go To    ${fixed community url}
-    Click Link    Manage community owners    ${community page}
+    Click Link Which Contains    Manage community owners    ${community page}
     Wait Until Dialog Is Open    Manage Owners
     Close Dialog    Manage Owners
 
 Check Files Tab In Opened Community
+    [Documentation]    Check files tab and sidebar on community page.
     Go To    ${fixed community url}
-    Activate Community Tab    Files
+    Click Tab    Files
+    Wait Until Page Contains Element    //table[contains(@summary,"Files")]
     Check Community Page Sidebar
 
 Check Pictures Tab In Opened Community
+    [Documentation]    Check Pictures tab and sidebar on community page.
     Go To    ${fixed community url}
-    Activate Community Tab    Pictures
+    Click Tab    Pictures
+    Wait Until Page Contains Element    //table[contains(@summary,"Pictures")]
     Check Community Page Sidebar
+
+Check Calendars Tab In Opened Community
+    [Documentation]    Check Calendars tab and sidebar on community page.
+    Go To    ${fixed community url}
+    Click Tab    Calendar
+    Wait Until Page Contains Element    //iframe[contains(@title,"Calendar")]
+    Check Community Page Sidebar
+
+Check Tasks Tab In Opened Community
+    [Documentation]    Check Tasks tab and sidebar on community page.
+    Go To    ${fixed community url}
+    Click Tab    Tasks
+    Wait Until Page Contains Element    //table[contains(@summary,"Tasks")]
+    Check Community Page Sidebar
+
+Check Links Tab In Opeend Community
+    [Documentation]    Check Links tab and sidebar on community page.
+    Go To    ${fixed community url}
+    Click Tab    Links
+    Wait Until Page Contains Element    //table[contains(@summary,"Links")]
+    Check Community Page Sidebar
+
+Check Ideas Tab In Opened Community
+    [Documentation]    Check Ideas tab and sidebar on community page.
+    Go To    ${fixed community url}
+    Click Tab    Ideas
+    Wait Until Page Contains Span With Text    Campaign Management
+    Wait Until Page Contains Link With Text    Manage Users
+    Wait Until Page Contains Link With Text    Manage Idea Campaign Settings
+    Wait Until Page Contains Link With Text    Idea List Permissions
+    Wait Until Page Contains Link With Text    Idea List Schema
+    Wait Until Page Contains Link With Text    Idea List Content Approval
+    Wait Until Page Contains Link With Text    Idea List Export
+    Wait Until Page Contains Link With Text    Manage Idea Categories
+    Wait Until Page Contains Element    //iframe[contains(@title,"Ideas")]
+    Check Community Page Sidebar
+
+Check Admin Settings Tab In Opened Community
+    [Documentation]    Check Admin settings tab and sidebar on community page.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Check Community Page Sidebar
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Span With Text    Admin links
+    Wait Until Page Contains Link With Text    Edit properties
+    Wait Until Page Contains Link With Text    Edit membership
+    Wait Until Page Contains Link With Text    Badges - edit community badges
+    Wait Until Page Contains Link With Text    Badges - setup automatic awarding of event based badges
+    Wait Until Page Contains Link With Text    Badges - manually award badges
+    Wait Until Page Contains Link With Text    Community engagement scorecard
+    Wait Until Page Contains Link With Text    Edit classifications and interests
+    Wait Until Page Contains Link With Text    Email followers
+    Wait Until Page Contains Link With Text    Recycle bin
+    Wait Until Page Contains Link With Text    Delete this community
+    Wait Until Page Contains Span With Text    Top Users Activity Report
+    Wait Until Page Contains Span With Text    Activity By Type
+    Wait Until Page Contains Span With Text    Admin Notifications
+    Wait Until Page Contains Span With Text    Activity History
+    Wait Until Page Contains Span With Text    Export Report
+    Unselect Frame
+
+Check Edit Properties Popup
+    [Documentation]    Click Edit Properties in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Edit properties
+    Click Link Which Contains    Edit properties
+    Unselect Frame
+    Wait Until Dialog Is Open    Edit community
+    Close Dialog    Edit community
+
+Check Edit Membership Popup
+    [Documentation]    Click Edit membership in admin settings tab. New tab should open with title "Membership". Close Tab.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Edit membership
+    Click Link Which Contains    Edit membership
+    Unselect Frame
+    Check If New Tab Is Opened With Title    Membership
+
+Check Badges - Edit Community Badges Popup
+    [Documentation]    Click "Badges - edit community badges" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Badges - edit community badges
+    Click Link Which Contains    Badges - edit community badges
+    Unselect Frame
+    Wait Until Dialog Is Open    Spotlight Badge Administration
+    Close Dialog    Spotlight Badge Administration
+
+Check Badges - Setup Automatic Awarding Popup
+    [Documentation]    Click "Badges - setup automatic awarding of event based badges" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Badges - setup automatic awarding of event based badges
+    Click Link Which Contains    Badges - setup automatic awarding of event based badges
+    Unselect Frame
+    Wait Until Dialog Is Open    Event Based Rule Definitions
+    Close Dialog    Event Based Rule Definitions
+
+Check Badges - Manually Award Badges Popup
+    [Documentation]    Click "Badges - manually award badges" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Badges - manually award badges
+    Click Link Which Contains    Badges - manually award badges
+    Unselect Frame
+    Wait Until Dialog Is Open    Manual Badge Awarding
+    Close Dialog    Manual Badge Awarding
+
+Check Community Engagement Scorecard Popup
+    [Documentation]    Click "Community engagement scorecard" in admin settings tab. Content should be loaded in the same frame. chek frame contents.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Community engagement scorecard
+    Click Link Which Contains    Community engagement scorecard
+    Wait Until Page Contains    ${fixed community} - \ dashboard
+    Click Link    //a[text()="detailed graphs"]
+    Wait Until Page Contains    Engagement Scorecard
+    Wait Until Page Contains    ${fixed community} detailed graphs
+    Unselect Frame
+
+Check Edit Classifications And Interests Popup
+    [Documentation]    Click "Edit classifications and interests" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Edit classifications and interests
+    Click Link Which Contains    Edit classifications and interests
+    Unselect Frame
+    Wait Until Dialog Is Open    Community Tags
+    Close Dialog    Community Tags
+
+Check Community Visitors Report Popup
+    [Documentation]    Click "Community visitors report" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Community visitors report
+    Click Link Which Contains    Community visitors report
+    Unselect Frame
+    Wait Until Dialog Is Open    Visitors Report
+    Close Dialog    Visitors Report
+
+Check Email Followers Popup
+    [Documentation]    Click "Email followers" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Email followers
+    Click Link Which Contains    Email followers
+    Unselect Frame
+    Wait Until Dialog Is Open    Community Email
+    Close Dialog    Community Email
+
+Check Recycle Bin Popup
+    [Documentation]    Click "Recycle bin" in admin settings tab. Popup should open. Close popup.
+    Go To    ${fixed community url}
+    Click Tab    Admin settings
+    Scroll To Top
+    Select Frame    //iframe[@title="Community admin page viewer"]
+    Wait Until Page Contains Link With Text    Recycle bin
+    Click Link Which Contains    Recycle bin
+    Wait Until Page Contains    ${fixed community}
+    Wait Until Page Contains    Site Settings
+    Wait Until Page Contains    Recycle Bin
+    Unselect Frame

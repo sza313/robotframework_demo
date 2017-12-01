@@ -2,14 +2,22 @@
 Resource          uiKeywords.robot
 
 *** Keywords ***
-Login
+Log In
     [Arguments]    ${username}    ${password}
     [Documentation]    Check if Login page works correctly.
     ...    Expected - Users should be able to log in with given user name and password.
+    Go To    ${index page url}
     Set Text Box Form Value    User name:    ${username}
     Set Text Box Form Value    Password:    ${password}
     Click Input Button With Value    Log On
     Wait Until Page Contains Element    //img[@id='insideLogo']    10
+
+Log Out
+    Go To    ${index page url}
+    Open Profile Menu
+    Click Profile Menu Item    Log out
+    Click Log Out Button
+    Delete All Cookies
 
 Unset Tags
     ${modal} =    Set Variable    //div[@id="modal_editmyNews"]
@@ -70,13 +78,13 @@ Set Community Filter
     [Arguments]    ${filter}    ${option}    ${container}
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
     Click Button With Text    ${filter}    ${container}
-    Click Link    ${option}    ${container}
+    Click Link Which Contains    ${option}    ${container}
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
 
 Clear Community Filters
     [Arguments]    ${container}
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
-    Click Link    Clear filters    ${community tabs}
+    Click Link Which Contains    Clear filters    ${community tabs}
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
 
 Leave A Community
@@ -111,7 +119,7 @@ Paginate To
 Click Communities Tab
     [Arguments]    ${text}
     Scroll To Top
-    Click Link    ${text}    ${community tabs}
+    Click Link Which Contains    ${text}    ${community tabs}
 
 Search For Community
     [Arguments]    ${name}
@@ -142,7 +150,24 @@ Check Community Page Sidebar
     Wait Until Element Contains    ${sidebar}    RECOMMENDED COMMUNITIES
     Wait Until Element Contains    ${sidebar}    AVAILABLE COMMUNITY BADGES
 
-Activate Community Tab
+Check If New Tab Is Opened With Title
     [Arguments]    ${title}
-    Click Tab    ${title}
-    Wait Until Page Contains Element    //table[contains(@summary,"${title}")]
+    ${tabs}=    Get Window Handles
+    ${original tab}=    Get From List    ${tabs}    0
+    ${new tab}=    Get From List    ${tabs}    1
+    Select Window    ${new tab}
+    Wait Until Page Contains    ${title}
+    Close Window
+    Select Window    ${original tab}
+
+Request To Join A Community
+    Search For Community    ${fixed community}
+    Click Button With Text    Request to join    ${all communities tab}
+    Wait Until Page Contains Element    tag:textarea
+    Input Text    tag:textarea    ${surname}_${current timestamp}
+    Click Element    //input[@type="submit"]
+    Wait Until Page Contains Element    //div[@class="ms-accessRequestsControl-message" and contains(text(),"${surname}_${current timestamp}")]
+
+Click Profile Menu Item
+    [Arguments]    ${name}
+    Click Link Which Contains    ${name}    //li[@id="jtiMyProfile"]

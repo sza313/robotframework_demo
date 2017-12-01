@@ -111,11 +111,10 @@ Link Should Have Class
     [Arguments]    ${link text}    ${class}    ${container}=
     Page Should Contain Element    ${container}//a[contains(text(),"${link text}") and contains(@class,"${class}")]
 
-Click Link
+Click Link Which Contains
     [Arguments]    ${link text}    ${container}=
-    Wait Until Page Contains Element    ${container}//a/descendant-or-self::*[text()='${link text}']
-    Wait Until Element Is Visible    ${container}//a/descendant-or-self::*[text()='${link text}']
-    Click Element    ${container}//a/descendant-or-self::*[text()='${link text}']
+    Wait Until Page Contains Element    ${container}//a[descendant-or-self::*[contains(text(),"${link text}")]]
+    Click Element    ${container}//a[descendant-or-self::*[contains(text(),"${link text}")]]
 
 Button With Text Should Be Visible
     [Arguments]    ${button text}    ${container}=
@@ -153,3 +152,41 @@ Check Tab
     [Arguments]    ${title}    ${container}=    # Title: tab title. Container: xpath of the ancestor that contains the tabslist (ul) element. can be parent or any ancestor.
     [Documentation]    Checks If Tab is present on the page with given title text.
     Wait Until Page Contains Element    ${container}//ul[@class="nav nav-tabs"]//a[@role="tab" and text()="${title}"]
+
+Scroll Element Into View
+    [Arguments]    ${element}
+    ${argList}=    Create List    ${element}
+    ${sl}=    Get Library Instance    SeleniumLibrary
+    ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath)\{ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; el.scrollIntoView(); return true;})(arguments[0]);    @{argList}
+
+Wait Until Page Contains Span With Text
+    [Arguments]    ${text}
+    Wait Until Page Contains Element    //span[contains(text(),"${text}")]
+
+Wait Until Page Contains Link With Text
+    [Arguments]    ${text}
+    Wait Until Page Contains Element    //a/descendant-or-self::*[contains(text(),"${text}")]
+
+Click Log Out Button
+    ${button}=    Set Variable    //h4[text()="Log out"]/ancestor::div[@role="dialog"]//a[text()="Log out"]
+    Wait Until Page Contains Element    ${button}
+    Wait Until Element Is Visible    ${button}
+    Click Element    ${button}
+
+Open Profile Menu
+    Click Element    //li[@id="jtiMyProfile"]/a
+
+Open SharePoint Menu
+    Click Element    //a[@class="toolsButton"]
+    Wait Until Element Is Visible    //div[contains(@class, "sharepointRibbon")]
+    Wait Until Element Is Visible    //div[@id="suiteBarRight"]
+    Wait Until Element Is Visible    //div[@id="DeltaSPRibbon"]
+
+Close SharePoint Menu
+    Click Element    //a[@class="toolsButton"]
+    Wait Until Element Is Not Visible    //div[contains(@class, "sharepointRibbon")]
+    Wait Until Element Is Not Visible    //div[@id="suiteBarRight"]
+    Wait Until Element Is Not Visible    //div[@id="DeltaSPRibbon"]
+
+Open SharePoint Settings Dropdown
+    Click Element    //div[@id="suiteBarButtons"]//a[@title="Settings"]

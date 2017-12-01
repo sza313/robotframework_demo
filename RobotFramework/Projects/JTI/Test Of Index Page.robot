@@ -6,8 +6,8 @@ Resource          Keywords/functionalKeywords.robot
 Login
     [Documentation]    Log into the application with given credentials.
     ...    Expected - user logged in and redirected to index page.
-    [Template]    Login
-    ${CURRENT_TEST_USER}    ${PWD}
+    [Template]    Log In
+    ${test user 1 name}    ${test user 1 pwd}
 
 Check Global Menu Is Loaded
     [Documentation]    Check if main navigation is loaded by checking the container, profile pic and level 0 menu items.
@@ -107,18 +107,12 @@ Check Engage Part Normal Behaviour
 Show SharePoint Menu
     [Documentation]    Click to Edit button on the right site of top menu
     ...    Expected - SharePoint menu appears above top menu
-    Click Element    //a[@class="toolsButton"]
-    Wait Until Element Is Visible    //div[contains(@class, "sharepointRibbon")]
-    Wait Until Element Is Visible    //div[@id="suiteBarRight"]
-    Wait Until Element Is Visible    //div[@id="DeltaSPRibbon"]
+    Open SharePoint Menu
 
 Hide SharePoint Menu
     [Documentation]    Click to Edit button again
     ...    Expected - SP menu disappears
-    Click Element    //a[@class="toolsButton"]
-    Wait Until Element Is Not Visible    //div[contains(@class, "sharepointRibbon")]
-    Wait Until Element Is Not Visible    //div[@id="suiteBarRight"]
-    Wait Until Element Is Not Visible    //div[@id="DeltaSPRibbon"]
+    Close SharePoint Menu
 
 Show Notifications
     [Documentation]    Click on Bell icon to shown notices
