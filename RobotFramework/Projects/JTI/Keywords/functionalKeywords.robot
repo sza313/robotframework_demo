@@ -171,3 +171,7 @@ Request To Join A Community
 Click Profile Menu Item
     [Arguments]    ${name}
     Click Link Which Contains    ${name}    //li[@id="jtiMyProfile"]
+
+Go To Fixed Community Access Request Page
+    Go To    ${fixed community pending requests url}
+    Wait Until Page Contains    Access Requests

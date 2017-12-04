@@ -3,6 +3,7 @@ ${browser}        chrome
 ${test user 1 name}    CSTFERNBA
 ${test user 1 pwd}    rETURNOFTHEJET1
 ${test user 2 name}    CSTHUDAKS
+${test user 2 full name}    Hudak, Szabolcs
 ${test user 2 pwd}    Szury4489
 ${index page url}    https://insidetest.jti.com
 ${engage page url}    https://insidetest.jti.com/Social/Engage
