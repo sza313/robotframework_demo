@@ -1,13 +1,13 @@
 *** Settings ***
 Suite Setup       Setup Test Environment
+Suite Teardown    Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
-Login
+Log In
     [Documentation]    Log into the application with given credentials.
     ...    Expected - user logged in and redirected to index page.
-    [Template]    Log In
-    ${test user 1 name}    ${test user 1 pwd}
+    Log In    ${test user 1 name}    ${test user 1 pwd}
 
 Check Global Menu Is Loaded
     [Documentation]    Check if main navigation is loaded by checking the container, profile pic and level 0 menu items.
@@ -31,18 +31,7 @@ Check if Engage Is Loaded
 Open My News Popup With Cog Button
     [Documentation]    Click on cog button in my news section.
     ...    Expected - My news modal window should pop up with contents loaded.
-    ${cogButton} =    Set Variable    //section[contains(@class,'mynews')]//h1[@class='sectionTitle']//a[@class='edit']
-    ${modal} =    Set Variable    //div[@id="modal_editmyNews"]
-    Click Element    ${cogButton}
-    Wait Until Page Contains Element    ${modal}
-    Wait Until Page Contains Element    //ul[@id="myNewsFilter"]
-    Wait Until Page Contains Element    ${modal}//ul[@class="nav nav-tabs"]
-    Check Tab    Markets    ${modal}
-    Check Tab    Departments    ${modal}
-    Check Tab    Brands    ${modal}
-    Check Tab    Regions    ${modal}
-    Page Should Contain Input Button With Text    Close    ${modal}
-    Page Should Contain Input Button With Text    Save changes    ${modal}
+    Check My News Popup
 
 Add Tag Via Text Field In My News Popup
     [Documentation]    Click to text field "+add" and type any tag e.g. L&M -> Select tag from dropdown
@@ -74,17 +63,14 @@ Reload Page
     ...    Expected - Site should be reloaded
     Reload Page
 
-Check Number Of Articles
+Count Number Of Articles
     [Documentation]    Check If there are 10 articles in news list in my news section.
-    Page Should Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]    \    \    10
+    Page Should Contain Element    ${article item}    \    \    10
 
 Load Articles With Infinite Scroll
     [Documentation]    Scroll down and wait for infinite scroll to load articles
     ...    Expected - Articles should be loaded (articles count is more than 10 now)
-    Scroll To Bottom
-    Wait Until Keyword Succeeds    1 min    0.5 sec    Check If Articles Loaded
-    ${count} =    Get Matching Xpath Count    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]
-    Should Be True    ${count} > 10
+    Load Articles With Infinite Scroll
 
 Check Engage Part Sticky Behaviour
     [Documentation]    Engage part should be sticky when scrolled down.

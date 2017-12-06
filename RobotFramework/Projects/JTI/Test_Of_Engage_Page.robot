@@ -1,8 +1,12 @@
 *** Settings ***
-Suite Teardown    # Close Browser
+Suite Setup       Setup Test Environment
+Suite Teardown    Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
+Log In
+    Log In    ${test user 1 name}    ${test user 1 pwd}
+
 Navigate To Engage Page
     [Documentation]    Click to Engage button from Top menu
     ...    Expected - Engage site loaded
@@ -137,33 +141,29 @@ Check All Communities Pagiantion
     [Documentation]    Check if clicking on second page in the paginator will load the next couple of communities
     Check Pagination    ${all communities tab}
 
+Hover Over A Followed Community
+    [Documentation]    Follow a community, then hover over the buttton to see "Leave" text. Unfollow community.
+    Go To    ${all communities url}
+    Unfollow All Communities
+    Reload Page
+    Click Communities Tab    All communities
+    Set Community Filter    Access    Public    ${all communities tab}
+    Join A Community    ${all communities tab}
+    Mouse Over    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button
+    Wait Until Element Contains    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button    Leave
+    Click Element    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button
+
 Join 12 Pubilc Communities
     [Documentation]    Join communities to test My Communities pagination and count items
-    Navigate To All Communities Page
+    Go To    ${all communities url}
     Set Community Filter    Access    Public    ${all communities tab}
     Repeat Keyword    10 times    Join A Community    ${all communities tab}
     Paginate To    2    ${all communities tab}
     Repeat Keyword    2 times    Join A Community    ${all communities tab}
 
-Request To Join A Community
-    [Documentation]    Click on Request to join button and fill in some text to the message box. Click send and wait for the message to appear.
-    Comment    Log Out
-    Setup Test Environment
-    Log In    ${test user 2 name}    ${test user 2 pwd}
-    Go To    ${all communities url}
-    Request To Join A Community
-    Log Out
-    Log In    ${test user 1 name}    ${test user 1 pwd}
-    Wait Until Keyword Succeeds    5 times    5 secs    Go To Fixed Community Access Request Page
-    Wait Until Page Contains    ${test user 2 full name}
-    Click Element    //div[not(contains(@class,"ms-accReq-hide")) and contains(@class,"ms-webpartzone-cell")]//*[text()="${test user 2 full name}"]/ancestor::table[@summary="Access Requests"]//div[contains(@onclick, "ShowMenuForTrOuter")]/a[@title="Open Menu"]
-    Wait Until Page Contains Link With Text    Decline
-    Click Link Which Contains    Decline    //*[text()="${test user 2 full name}"]/ancestor::div[@class="js-callout-content"]
-    Wait Until Page Does Not Contain    //div[not(contains(@class,"ms-accReq-hide")) and contains(@class,"ms-webpartzone-cell")]//*[text()="${test user 2 full name}"]/ancestor::table[@summary="Access Requests"]
-
 Check My Communities Tab
     [Documentation]    Click My communities tab. My communities tab should be active. Filters and search bar should NOT be visible.
-    Navigate To All Communities Page
+    Go To    ${all communities url}
     Click Communities Tab    My communities
     ${my communities tab}=    Set Variable    //div[@id="myCommunitiesWebPart"]
     Wait Until Page Contains Element    ${my communities tab}
@@ -184,23 +184,6 @@ Check My Communities Count
 Check My Communities Pagiantion
     [Documentation]    Check if clicking on second page in the paginator will load the next couple of communities
     Check Pagination    ${my communities tab}
-
-Unfollow All Communities
-    [Documentation]    Unfollow all communities for future testing
-    Navigate To All Communities Page
-    Click Communities Tab    My communities
-    Wait Until Keyword Succeeds    10 secs    0.5 secs    Page Should Contain Element    ${my communities tab}//div[@name="Item"]    None    NONE
-    ...    10
-    Repeat Keyword    10 times    Leave A Community    ${my communities tab}
-    Paginate To    2    ${my communities tab}
-    Repeat Keyword    2 times    Leave A Community    ${my communities tab}
-
-Hover Over A Followed Community
-    [Documentation]    Follow a community, then hover over the buttton to see "Leave" text. Unfollow community.
-    Set Community Filter    Access    Public    ${all communities tab}
-    Join A Community    ${all communities tab}
-    Mouse Over    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button
-    Wait Until Element Contains    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button    Leave
 
 Test Search For Community
     [Documentation]    Type in the newly created community name to search bar in all communities tab, then press enter. Results should contain the named community.
@@ -230,11 +213,24 @@ Follow Or Unfollow Opened Community
 
 Click Invite Others Button
     [Documentation]    Click Invite Others button. Email client should be opened.
-    Go To    ${fixed community url}
+    Go To    ${all communities url}
+    Unfollow All Communities
+    Click Communities Tab    All communities
+    Set Community Filter    Access    Public    ${all communities tab}
+    Join A Community    ${all communities tab}
+    Reload Page
+    Click Communities Tab    My communities
+    ${link}=    Set Variable    ${my communities tab}//div[@name="Item"]//a
+    Wait Until Page Contains Element    ${link}
+    Click Element    ${link}
+    Wait Until Page Contains Element    //div[@class="communitySubInfo"]/../h1
+    ${community name}=    Get Text    //div[@class="communitySubInfo"]/../h1
+    Wait Until Page Contains Link With Text    Invite others to follow
     Click Link Which Contains    Invite others to follow
-    Wait For Outlook Window    ${fixed community}
+    Wait For Outlook Window    ${community name}
     Wait For Active Window    Microsoft Outlook
     Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]
+    Click Element    //a[@id="joinLeaveAction"]
 
 Check Manage Owners Dialog
     [Documentation]    Click on Manage owners button. Dialog with title "Manage Owners" should show up.

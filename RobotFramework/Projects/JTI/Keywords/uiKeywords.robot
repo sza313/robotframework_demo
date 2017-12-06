@@ -8,7 +8,6 @@ Library           ExcelLibrary
 Library           openpyxl
 Library           pyexcel_xls
 Library           CSVLibrary
-Library           DatabaseLibrary
 Resource          ../TestData/testData.robot
 Resource          ../TestData/elements.robot
 Library           AutoItLibrary
@@ -60,7 +59,7 @@ Check If Menu Item Exists
     Wait Until Page Contains Element    ${main menu}//a/descendant-or-self::*[contains(text(),"${title}")]
 
 Scroll To Bottom
-    Execute Javascript    window.scrollTo(0,document.body.scrollHeight)
+    Execute Javascript    window.scrollTo(0,99999); console.log("scrolled to bottom");
 
 Get Is Element In Viewport
     [Arguments]    ${element}
@@ -190,3 +189,8 @@ Close SharePoint Menu
 
 Open SharePoint Settings Dropdown
     Click Element    //div[@id="suiteBarButtons"]//a[@title="Settings"]
+
+Input Community Field Textarea
+    [Arguments]    ${title}    ${value}
+    Wait Until Page Contains Element    //span[text()='${title}']/../..//input
+    Input Text    //span[text()='${title}']/../..//textarea    ${value}

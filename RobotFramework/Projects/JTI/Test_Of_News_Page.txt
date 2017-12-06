@@ -1,0 +1,35 @@
+*** Settings ***
+Suite Setup       Setup Test Environment
+Suite Teardown    Close Browser
+Resource          Keywords/functionalKeywords.robot
+
+*** Test Cases ***
+Log In
+    Log In    ${test user 1 name}    ${test user 1 pwd}
+
+Navigate To News Page
+    [Documentation]    Click News button from Top menu
+    ...    Expected - Engage site loaded
+    Click Main Menu Item    News
+    Location Should Be    ${news page url}
+
+Check My News Popup
+    Check My News Popup
+    Click Button With Text    Close
+    Wait Until Element Is Not Visible    //div[@id="modal_editmyNews"]
+
+Count Number Of Articles
+    Page Should Contain Element    ${article item}    \    \    10
+
+Load Articles With Infinite Scroll
+    Load Articles With Infinite Scroll
+
+Filter By Tags
+    Scroll To Top
+    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
+    ${tag name}=    Get Text    ${tag}
+    Click Element    ${tag}
+    Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
+
+Filter By Filters
+    Set Community Filter

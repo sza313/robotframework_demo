@@ -27,8 +27,9 @@ Unset Tags
 
 Check If Articles Loaded
     [Documentation]    Returns true if additional articles are loaded. (more than 10 articles are present).
-    ${count} =    Get Matching Xpath Count    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[@class="articleListItem"]
-    Should Be True    ${count} \> 10
+    Scroll To Bottom
+    ${count} =    Get Element Count    ${article item}
+    Should Be True    ${count} > 10
 
 Setup Test Environment
     Open Browser    ${index page url}    ${browser}
@@ -175,3 +176,40 @@ Click Profile Menu Item
 Go To Fixed Community Access Request Page
     Go To    ${fixed community pending requests url}
     Wait Until Page Contains    Access Requests
+
+Check If Community Is Created
+    [Arguments]    ${name}
+    Go To    ${sp communities list url}
+    Input Text    id:inplaceSearchDiv_WPQ4_lsinput    Com_${surname}_${current timestamp}
+    Press Key    id:inplaceSearchDiv_WPQ4_lsinput    \\13
+    Wait Until Page Contains    Com_${surname}_${current timestamp}
+
+Leave A Community And Fail If More Left
+    [Arguments]    ${container}
+    ${button}=    Set Variable    ${container}//button/descendant-or-self::*[contains(text(),"Following")]/ancestor-or-self::button
+    ${button count}=    Get Element Count    ${button}
+    Run Keyword If    ${button count} > 0    Leave A Community    ${container}
+    Page Should Contain Element    ${button}    None    INFO    0
+
+Unfollow All Communities
+    Click Communities Tab    My communities
+    Wait Until Keyword Succeeds    1 min    0 secs    Leave A Community And Fail If More Left    ${my communities tab}
+    Reload Page
+    Wait Until Keyword Succeeds    1 min    0 secs    Leave A Community And Fail If More Left    ${my communities tab}
+
+Check My News Popup
+    ${cogButton} =    Set Variable    //h1[@class='sectionTitle']//a[@class='edit']
+    ${modal} =    Set Variable    //div[@id="modal_editmyNews"]
+    Click Element    ${cogButton}
+    Wait Until Page Contains Element    ${modal}
+    Wait Until Page Contains Element    //ul[@id="myNewsFilter"]
+    Wait Until Page Contains Element    ${modal}//ul[@class="nav nav-tabs"]
+    Check Tab    Markets    ${modal}
+    Check Tab    Departments    ${modal}
+    Check Tab    Brands    ${modal}
+    Check Tab    Regions    ${modal}
+    Page Should Contain Input Button With Text    Close    ${modal}
+    Page Should Contain Input Button With Text    Save changes    ${modal}
+
+Load Articles With Infinite Scroll
+    Wait Until Keyword Succeeds    1 min    0.5 sec    Check If Articles Loaded
