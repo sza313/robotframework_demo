@@ -1,6 +1,5 @@
 *** Settings ***
 Suite Setup       Setup Test Environment
-Suite Teardown    Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
@@ -24,12 +23,38 @@ Count Number Of Articles
 Load Articles With Infinite Scroll
     Load Articles With Infinite Scroll
 
-Filter By Tags
-    Scroll To Top
-    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
-    ${tag name}=    Get Text    ${tag}
-    Click Element    ${tag}
-    Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
+Test My News
+    Click Sidebar Nav Link    My news
+    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
+    Filter By Tags
+    Filter By Filters    ${main content}
+    Clear Filters    ${main content}
 
-Filter By Filters
-    Set Community Filter
+Test All News
+    Click Sidebar Nav Link    All news
+    Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"All news")]
+    Filter By Tags
+    Filter By Filters    ${main content}
+    Clear Filters    ${main content}
+
+Test Corporate News
+    Click Sidebar Nav Link    Corporate news
+    Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
+    Filter By Tags
+    Filter By Filters    ${main content}
+    Clear Filters    ${main content}
+
+Test Announcements
+    Click Sidebar Nav Link    Announcements
+    Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
+    Filter By Tags
+    Filter By Filters    ${main content}
+    Clear Filters    ${main content}
+
+Test Jobs
+    Click Sidebar Nav Link    Jobs
+    Wait Until Page Contains Element    //a[@role="tab" and text()="Job search"]
+    Wait Until Page Contains Element    //a[@role="tab" and text()="Candidate"]
+    Click Element    //a[@role="tab" and text()="Candidate"]
+    Wait Until Page Contains Element    //a[@role="tab" and text()="Job alert"]
+    Click Element    //a[@role="tab" and text()="Job alert"]

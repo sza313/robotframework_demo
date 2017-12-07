@@ -103,7 +103,12 @@ Click On Hashtag
 Click All Communities In Sidebar
     [Documentation]    Click on All Communities in sidebar. All communities tab should be active with filters.
     Go To    ${engage page url}
-    Navigate To All Communities Page
+    Scroll To Top
+    Click Sidebar Nav Link    All communities
+    Wait Until Element Contains    ${community tabs}    All communities
+    Wait Until Element Contains    ${community tabs}    My communities
+    Wait Until Element Contains    ${community tabs}    Create a community
+    Link Should Have Class    All communities    active
 
 Check All Communities Tab
     [Documentation]    Check If Comminities Tab is loaded. Filters and search field should be visible, All communities tab should be active.
@@ -121,16 +126,16 @@ Check All Communities Tab
 Set All Communities Filters
     [Documentation]    Choose on from each community filter. Check if communities are filtered.
     Click Communities Tab    All communities
-    Set Community Filter    Market    Adriatica    ${all communities tab}
-    Set Community Filter    Department    Anti-Illicit Trade    ${all communities tab}
-    Set Community Filter    Brand    Amber Leaf    ${all communities tab}
-    Set Community Filter    Language    English    ${all communities tab}
-    Set Community Filter    Subject    JTI Business    ${all communities tab}
-    Set Community Filter    Access    Public    ${all communities tab}
+    Set Filter    Market    Adriatica    ${all communities tab}
+    Set Filter    Department    Anti-Illicit Trade    ${all communities tab}
+    Set Filter    Brand    Amber Leaf    ${all communities tab}
+    Set Filter    Language    English    ${all communities tab}
+    Set Filter    Subject    JTI Business    ${all communities tab}
+    Set Filter    Access    Public    ${all communities tab}
 
 Clear All Communities Filters
     [Documentation]    Click on Clear Filters to clear All filters. Check if filtered community is visible again.
-    Clear Community Filters    ${all communities tab}
+    Clear Filters    ${all communities tab}
 
 Check All Communities Count
     [Documentation]    Check if there are 10 communuties listed in the active tab.
@@ -147,7 +152,7 @@ Hover Over A Followed Community
     Unfollow All Communities
     Reload Page
     Click Communities Tab    All communities
-    Set Community Filter    Access    Public    ${all communities tab}
+    Set Filter    Access    Public    ${all communities tab}
     Join A Community    ${all communities tab}
     Mouse Over    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button
     Wait Until Element Contains    //div[@id="allCommunitiesWebPart"]//button/descendant-or-self::*[contains(text(),"Following")]/ancestor::button    Leave
@@ -156,7 +161,7 @@ Hover Over A Followed Community
 Join 12 Pubilc Communities
     [Documentation]    Join communities to test My Communities pagination and count items
     Go To    ${all communities url}
-    Set Community Filter    Access    Public    ${all communities tab}
+    Set Filter    Access    Public    ${all communities tab}
     Repeat Keyword    10 times    Join A Community    ${all communities tab}
     Paginate To    2    ${all communities tab}
     Repeat Keyword    2 times    Join A Community    ${all communities tab}
@@ -216,7 +221,7 @@ Click Invite Others Button
     Go To    ${all communities url}
     Unfollow All Communities
     Click Communities Tab    All communities
-    Set Community Filter    Access    Public    ${all communities tab}
+    Set Filter    Access    Public    ${all communities tab}
     Join A Community    ${all communities tab}
     Reload Page
     Click Communities Tab    My communities

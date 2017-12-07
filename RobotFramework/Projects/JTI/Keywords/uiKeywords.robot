@@ -93,9 +93,9 @@ Click Input Button With Value
     [Arguments]    ${button text}
     Click Element    //input[@value='${button text}']
 
-Click Communities Nav Link
+Click Sidebar Nav Link
     [Arguments]    ${link text}    # Link text
-    Click Element    //div[@id="MyActivityStream"]//a[text()="${link text}"]
+    Click Element    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
 
 Button With Text Should Have Class
     [Arguments]    ${text}    ${class}

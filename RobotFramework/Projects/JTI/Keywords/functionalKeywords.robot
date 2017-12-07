@@ -75,17 +75,20 @@ Join A Community
     Mouse Out    ${button}
     Wait Until Element Contains    ${button}    Following
 
-Set Community Filter
-    [Arguments]    ${filter}    ${option}    ${container}
+Set Filter
+    [Arguments]    ${filter}    ${container}
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
-    Click Button With Text    ${filter}    ${container}
-    Click Link Which Contains    ${option}    ${container}
+    ${filter button}=    Set Variable    ${container}//button/descendant-or-self::*[contains(text(),"${filter}")]
+    ${suggestions}=    Set Variable    ${filter button}/../ul[@class="dropdown-menu"]
+    Click Element    ${filter button}
+    Wait Until Page Contains Element    ${suggestions}
+    Click Element    (${suggestions}//a)[1]
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
 
-Clear Community Filters
+Clear Filters
     [Arguments]    ${container}
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
-    Click Link Which Contains    Clear filters    ${community tabs}
+    Click Link Which Contains    Clear filters
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
 
 Leave A Community
@@ -100,14 +103,6 @@ Check Pagination
     [Arguments]    ${container}
     Paginate To    2    ${container}
     Page Should Contain Element    ${container}//div[@name="Item"]
-
-Navigate To All Communities Page
-    Scroll To Top
-    Click Communities Nav Link    All communities
-    Wait Until Element Contains    ${community tabs}    All communities
-    Wait Until Element Contains    ${community tabs}    My communities
-    Wait Until Element Contains    ${community tabs}    Create a community
-    Link Should Have Class    All communities    active
 
 Paginate To
     [Arguments]    ${page number}    ${container}
@@ -213,3 +208,17 @@ Check My News Popup
 
 Load Articles With Infinite Scroll
     Wait Until Keyword Succeeds    1 min    0.5 sec    Check If Articles Loaded
+
+Filter By Tags
+    Scroll To Top
+    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
+    ${tag name}=    Get Text    ${tag}
+    Click Element    ${tag}
+    Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
+
+Filter By Filters
+    [Arguments]    ${container}
+    Set Filter    Brand    ${container}
+    Set Filter    Department    ${container}
+    Set Filter    Market    ${container}
+    Set Filter    Language    ${container}
