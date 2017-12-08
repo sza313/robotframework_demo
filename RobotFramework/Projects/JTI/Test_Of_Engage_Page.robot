@@ -57,7 +57,7 @@ Check If Recommended Communities Widget Is Loaded
 
 Post A Comment
     [Documentation]    Input TestCom_[surname]_[timestamp] to the post textarea and see if the comment was added to posts below.
-    ${comment}=    Set Variable    TestCom_${surname}_${current timestamp}
+    ${comment}=    Set Variable    TestCom_${test user 1 name}_${current timestamp}
     Input Text    css:.ngPostInput.ac_input    ${comment}
     Click Button With Text    Post
     Wait Until Page Contains    ${comment}    15
@@ -66,7 +66,7 @@ Post A Comment
 Preview A Question
     [Documentation]    Click on Ask a Question, add a question and click Preview.
     ...    Expected - Preview should show up under the textfield.
-    ${question}=    Set Variable    TestCom_${surname}_${current timestamp} #Hastag_${surname}_${current timestamp} @Fernbach, Aron
+    ${question}=    Set Variable    TestCom_${test user 1 name}_${current timestamp} #Hastag_${test user 1 name}_${current timestamp} @Fernbach, Aron
     ${time}=    Get Time    epoch
     Click Element    css:#ngAskQuestion a
     Input Text    css:.ngPostInput.ac_input    ${question}
@@ -77,7 +77,7 @@ Preview A Question
 Post A Question
     [Documentation]    Click on Ask a Question, add a question and click Post.
     ...    Expected - Question added to the comments below.
-    ${question}=    Set Variable    TestCom_${surname}_${current timestamp} #Hastag_${surname}_${current timestamp} @Fernbach, Aron
+    ${question}=    Set Variable    TestCom_${test user 1 name}_${current timestamp} #Hastag_${test user 1 name}_${current timestamp} @Fernbach, Aron
     ${time}=    Get Time    epoch
     Click Element    css:#ngAskQuestion a
     Clear Element Text    css:.ngPostInput.ac_input
@@ -91,10 +91,10 @@ Click On Hashtag
     [Documentation]    Click On the created Hashtag in the last added comment.
     ...    Expected - Hastag tab show up, posts filterd to those that contain the same hashtag.
     ${hashtag}=    Set Variable    (//*[contains(@class,"ngActivityRow")])[1]//*[@class="hashtag"]
-    ${hastag name}=    Set Variable    \#Hastag_${surname}_${current timestamp}
+    ${hastag name}=    Set Variable    \#Hastag_${test user 1 name}_${current timestamp}
     Element Should Contain    ${hashtag}    ${hastag name}
-    ${question with current hastag} =    Set Variable    //*[@class="ngSummary" and descendant-or-self::*[contains(text(),"Hastag_${surname}_${current timestamp}")]]
-    ${question without current hastag} =    Set Variable    //*[@class="ngSummary" and not(descendant-or-self::*[contains(text(),"Hastag_${surname}_${current timestamp}")])]
+    ${question with current hastag} =    Set Variable    //*[@class="ngSummary" and descendant-or-self::*[contains(text(),"Hastag_${test user 1 name}_${current timestamp}")]]
+    ${question without current hastag} =    Set Variable    //*[@class="ngSummary" and not(descendant-or-self::*[contains(text(),"Hastag_${test user 1 name}_${current timestamp}")])]
     Page Should Contain Element    ${question with current hastag}
     Page Should Contain Element    ${question without current hastag}
     Click Element    ${hashtag}

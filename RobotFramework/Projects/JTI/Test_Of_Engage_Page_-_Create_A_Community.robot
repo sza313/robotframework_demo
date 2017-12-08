@@ -17,8 +17,8 @@ Open Create A Community Popup And Create One
     Click Link Which Contains    Create a community
     Wait Until Dialog Is Open    Create community
     Select Frame    //h1[contains(text(),"Create community")]/ancestor::div[@role="dialog"]//iframe
-    Input Text    (//input[@class="form-control"])[1]    Com_${surname}_${current timestamp}
-    Input Text    //span[contains(@class,"community-title") and contains(text(),"Description")]/../..//textarea    Com_${surname}_${current timestamp}
+    Input Text    (//input[@class="form-control"])[1]    Com_${test user 1 name}_${current timestamp}
+    Input Text    //span[contains(@class,"community-title") and contains(text(),"Description")]/../..//textarea    Com_${test user 1 name}_${current timestamp}
     Select From List By Label    (//select[@multiple="multiple"])[1]    Adriatica
     Select From List By Label    (//select[@multiple="multiple"])[2]    Amber Leaf
     Select From List By Label    (//select[@multiple="multiple"])[3]    Anti-Illicit Trade
@@ -27,4 +27,4 @@ Open Create A Community Popup And Create One
     Unselect Frame
 
 Check If Community Is Created
-    Wait Until Keyword Succeeds    1 hour    15 secs    Check If Community Is Created    Com_${surname}_${current timestamp}
+    Wait Until Keyword Succeeds    1 hour    15 secs    Check If Community Is Created    Com_${test user 1 name}_${current timestamp}

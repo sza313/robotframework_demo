@@ -161,9 +161,9 @@ Request To Join A Community
     Search For Community    ${fixed community}
     Click Button With Text    Request to join    ${all communities tab}
     Wait Until Page Contains Element    tag:textarea
-    Input Text    tag:textarea    ${surname}_${current timestamp}
+    Input Text    tag:textarea    ${test user 1 name}_${current timestamp}
     Click Element    //input[@type="submit"]
-    Wait Until Page Contains Element    //div[@class="ms-accessRequestsControl-message" and contains(text(),"${surname}_${current timestamp}")]
+    Wait Until Page Contains Element    //div[@class="ms-accessRequestsControl-message" and contains(text(),"${test user 1 name}_${current timestamp}")]
 
 Click Profile Menu Item
     [Arguments]    ${name}
@@ -176,9 +176,9 @@ Go To Fixed Community Access Request Page
 Check If Community Is Created
     [Arguments]    ${name}
     Go To    ${sp communities list url}
-    Input Text    id:inplaceSearchDiv_WPQ4_lsinput    Com_${surname}_${current timestamp}
+    Input Text    id:inplaceSearchDiv_WPQ4_lsinput    Com_${test user 1 name}_${current timestamp}
     Press Key    id:inplaceSearchDiv_WPQ4_lsinput    \\13
-    Wait Until Page Contains    Com_${surname}_${current timestamp}
+    Wait Until Page Contains    Com_${test user 1 name}_${current timestamp}
 
 Leave A Community And Fail If More Left
     [Arguments]    ${container}
