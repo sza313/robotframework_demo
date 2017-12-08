@@ -194,3 +194,11 @@ Input Community Field Textarea
     [Arguments]    ${title}    ${value}
     Wait Until Page Contains Element    //span[text()='${title}']/../..//input
     Input Text    //span[text()='${title}']/../..//textarea    ${value}
+
+Wait Until Search Tab Exists And Highlighted
+    [Arguments]    ${tab name}
+    Wait Until Page Contains Element    //a[@class="ms-srchnav-link-selected" and text()="${tab name}"]
+
+Click Search Tab
+    [Arguments]    ${tab name}
+    Click Element    //li[contains(@class,"ms-srchnav-item")]//a[text()="${tab name}"]

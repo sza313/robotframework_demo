@@ -76,13 +76,14 @@ Join A Community
     Wait Until Element Contains    ${button}    Following
 
 Set Filter
-    [Arguments]    ${filter}    ${container}
+    [Arguments]    ${filter}    ${option}=    ${container}=
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
     ${filter button}=    Set Variable    ${container}//button/descendant-or-self::*[contains(text(),"${filter}")]
     ${suggestions}=    Set Variable    ${filter button}/../ul[@class="dropdown-menu"]
     Click Element    ${filter button}
     Wait Until Page Contains Element    ${suggestions}
-    Click Element    (${suggestions}//a)[1]
+    Run Keyword If    "${option}"=="${EMPTY}"    Click Element    (${suggestions}//a)[1]
+    Run Keyword If    "${option}"!="${EMPTY}"    Click Element    ${suggestions}//a[text()="${option}"]
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
 
 Clear Filters
@@ -208,6 +209,7 @@ Check My News Popup
 
 Load Articles With Infinite Scroll
     Wait Until Keyword Succeeds    1 min    0.5 sec    Check If Articles Loaded
+    Scroll To Top
 
 Filter By Tags
     Scroll To Top
@@ -218,7 +220,21 @@ Filter By Tags
 
 Filter By Filters
     [Arguments]    ${container}
-    Set Filter    Brand    ${container}
-    Set Filter    Department    ${container}
-    Set Filter    Market    ${container}
-    Set Filter    Language    ${container}
+    Set Filter    Brand    \    ${container}
+    Set Filter    Department    \    ${container}
+    Set Filter    Market    \    ${container}
+    Set Filter    Language    \    ${container}
+
+Check If Results Page Tab Loaded
+    [Arguments]    ${tab name}    ${item locator}
+    Wait Until Page Contains Element    ${item locator}
+    Wait Until Search Tab Exists And Highlighted    ${tab name}
+    Wait Until Keyword Succeeds    15 secs    0.5 secs    Page Should Contain Element    ${item locator}    None    NONE
+    ...    10
+
+Filter Search Results By Any Sidebar Filter
+    [Arguments]    ${result item locator}
+    ${unfiltered elements}=    Get WebElements    ${result item locator}
+    Click Link    //a[@id="FilterLink"]
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${result item locator}
+    Page Should Not Contain    Sorry, something went wrong.

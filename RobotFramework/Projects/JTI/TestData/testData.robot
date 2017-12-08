@@ -14,3 +14,4 @@ ${fixed community url}    https://insidetest.jti.com/social/1188/SitePages/Home.
 ${fixed community pending requests url}    https://insidetest.jti.com/social/1188/Access%20Requests/pendingreq.aspx
 ${sp communities list url}    https://insidetest.jti.com/social/engage/Lists/Communities%20List/AllItems.aspx
 ${news page url}    https://insidetest.jti.com/Pages/MyNews.aspx
+${resources results page url}    https://insidetest.jti.com/EnterpriseSearchCenter/Pages/JTIresults.aspx?k=*
