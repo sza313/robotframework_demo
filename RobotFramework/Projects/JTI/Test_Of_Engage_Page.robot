@@ -222,10 +222,10 @@ Click Invite Others Button
     [Documentation]    Click Invite Others button. Email client should be opened.
     Go To    ${all communities url}
     Unfollow All Communities
-    Click Communities Tab    All communities
+    Go To    ${all communities url}
     Set Filter    Access    Public    ${all communities tab}
     Join A Community    ${all communities tab}
-    Reload Page
+    Go To    ${all communities url}
     Click Communities Tab    My communities
     ${link}=    Set Variable    ${my communities tab}//div[@name="Item"]//a
     Wait Until Page Contains Element    ${link}
