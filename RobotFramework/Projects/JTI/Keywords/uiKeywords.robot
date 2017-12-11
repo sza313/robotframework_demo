@@ -19,8 +19,9 @@ Set Text Box Form Value
     Input Text    //td[text()='${title}']/..//input    ${value}
 
 Click Button With Text
-    [Arguments]    ${button text}    ${container}=    # Title of the Button to click
+    [Arguments]    ${button text}    ${container}=
     Wait Until Page Contains Element    ${container}//button/descendant-or-self::*[contains(text(),"${button text}")]
+    Scroll Element Into View    ${container}//button/descendant-or-self::*[contains(text(),"${button text}")]
     Click Element    ${container}//button/descendant-or-self::*[contains(text(),"${button text}")]
 
 Page Should Contain Input Button With Text
@@ -128,10 +129,12 @@ Check If WebElements Are Not Equal
     ${found elements}=    Get WebElements    ${locator}
     Should Not Be Equal    ${given elements}    ${found elements}
 
-Wait For Outlook Window
+Wait For Community Invitation Outlook Window
     [Arguments]    ${title}
     Wait For Active Window    Invitation to the ${title} Community - Message (HTML)
     Win Close    Invitation to the ${title} Community - Message (HTML)
+    Wait For Active Window    Microsoft Outlook
+    Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]
 
 Wait Until Dialog Is Open
     [Arguments]    ${title}
@@ -156,7 +159,7 @@ Scroll Element Into View
     [Arguments]    ${element}
     ${argList}=    Create List    ${element}
     ${sl}=    Get Library Instance    SeleniumLibrary
-    ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath)\{ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; el.scrollIntoView(); return true;})(arguments[0]);    @{argList}
+    ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath)\{ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; el.scrollIntoView(false); return true;})(arguments[0]);    @{argList}
 
 Wait Until Page Contains Span With Text
     [Arguments]    ${text}
@@ -202,3 +205,9 @@ Wait Until Search Tab Exists And Highlighted
 Click Search Tab
     [Arguments]    ${tab name}
     Click Element    //li[contains(@class,"ms-srchnav-item")]//a[text()="${tab name}"]
+
+Wait For Email Share Outlook Window
+    Wait For Active Window    Sharing post - Message (HTML)
+    Win Close    Sharing post - Message (HTML)
+    Wait For Active Window    Microsoft Outlook
+    Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]

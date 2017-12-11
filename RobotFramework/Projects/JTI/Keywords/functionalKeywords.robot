@@ -238,3 +238,23 @@ Filter Search Results By Any Sidebar Filter
     Click Link    //a[@id="FilterLink"]
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${result item locator}
     Page Should Not Contain    Sorry, something went wrong.
+
+Add A Post On My Profle Page
+    Generate Timestamp
+    Input Text    //div[@id="ngPostControl"]//textarea    TestPost_${test user 1 name}_${current timestamp}
+    Click Button With Text    Post    //div[@id="ngPostControl"]
+    Wait Until Page Contains    TestPost_${test user 1 name}_${current timestamp}
+
+Generate Timestamp
+    ${time}=    Get Time    epoch
+    Set Global Variable    ${current timestamp}    ${time}
+
+Click On Post Quick Menu Item
+    [Arguments]    ${post}    ${menu item}    # post element locator | menu item text
+    Mouse Over    ${post}
+    Wait Until Element Is Visible    ${post}//div[@class="ngHiddenActions"]/a
+    Scroll Element Into View    ${post}
+    Click Element    ${post}//div[@class="ngHiddenActions"]/a
+    Wait Until Element Is Visible    ${post}//div[@class="ngHiddenActions"]//li[text()="${menu item}"]
+    Scroll Element Into View    ${post}
+    Click Element    ${post}//div[@class="ngHiddenActions"]//li[text()="${menu item}"]

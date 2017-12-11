@@ -234,9 +234,7 @@ Click Invite Others Button
     ${community name}=    Get Text    //div[@class="communitySubInfo"]/../h1
     Wait Until Page Contains Link With Text    Invite others to follow
     Click Link Which Contains    Invite others to follow
-    Wait For Outlook Window    ${community name}
-    Wait For Active Window    Microsoft Outlook
-    Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]
+    Wait For Community Invitation Outlook Window    ${community name}
     Click Element    //a[@id="joinLeaveAction"]
 
 Check Manage Owners Dialog

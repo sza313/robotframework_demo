@@ -15,3 +15,4 @@ ${fixed community pending requests url}    https://insidetest.jti.com/social/118
 ${sp communities list url}    https://insidetest.jti.com/social/engage/Lists/Communities%20List/AllItems.aspx
 ${news page url}    https://insidetest.jti.com/Pages/MyNews.aspx
 ${resources results page url}    https://insidetest.jti.com/EnterpriseSearchCenter/Pages/JTIresults.aspx?k=*
+${profile page url}    https://myinsidetest.jti.com/Person.aspx?accountname=JTICORP%5C${test user 1 name}
