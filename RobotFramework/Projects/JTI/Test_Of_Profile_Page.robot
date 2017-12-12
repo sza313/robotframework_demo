@@ -151,3 +151,34 @@ Delete A Post
     Click On Post Quick Menu Item    ${post}    Delete
     Handle Alert    ACCEPT
     Wait Until Page Does Not Contain    TestPost_${test user 1 name}_${current timestamp}
+
+Check Organization Tab
+    [Documentation]    Click Organization tab. User is shown in hierarchy of company.
+    Click Tab    Organization
+    Wait Until Page Contains    ${test user 1 full name}
+
+Check Content Tab
+    [Documentation]    Click to Content tab. Tab is shown with correct content without side webparts.
+    Click Element    //a[@role="tab" and contains(text(),"Content")]
+    Wait Until Page Contains Element    //a[@role="tab" and contains(text(),"Content")]/parent::*[contains(@class,"active")]
+    Wait Until Page Contains Element    //div[@class="ms-srch-item"]
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+
+Check Tasks Tab
+    [Documentation]    Click to Tasks tab. Tab is shown with correct content without side webparts.
+    Click Tab    Tasks
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+
+Check Follow-up Tab
+    [Documentation]    Click to Follow-up tab. Tab is shown with correct content without side webparts.
+    Click Tab    Follow-ups
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+
+Check Links Tab
+    [Documentation]    Click to Links tab. Tab is shown with correct content without side webparts.
+    Click Tab    Links
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]

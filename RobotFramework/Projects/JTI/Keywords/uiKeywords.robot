@@ -147,8 +147,9 @@ Close Dialog
     Wait Until Page Does Not Contain Element    //div[@role="dialog"]//h1[text()="${title}"]
 
 Click Tab
-    [Arguments]    ${name}
-    Click Element    //a[@role="tab" and text()="${name}"]
+    [Arguments]    ${name}    ${container}=
+    Click Element    ${container}//a[@role="tab" and text()="${name}"]
+    Wait Until Page Contains Element    ${container}//a[@role="tab" and text()="${name}"]/parent::*[contains(@class,"active")]
 
 Check Tab
     [Arguments]    ${title}    ${container}=    # Title: tab title. Container: xpath of the ancestor that contains the tabslist (ul) element. can be parent or any ancestor.

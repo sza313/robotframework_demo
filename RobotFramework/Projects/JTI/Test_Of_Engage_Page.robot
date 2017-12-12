@@ -298,7 +298,7 @@ Check Admin Settings Tab In Opened Community
     [Documentation]    Check Admin settings tab and sidebar on community page.
     Go To    ${fixed community url}
     Click Tab    Admin settings
-    Check Community Page Sidebar
+    Wait Until Page Does Not Contain Element    //div[contains(@class,"secondaryInfo")]
     Select Frame    //iframe[@title="Community admin page viewer"]
     Wait Until Page Contains Span With Text    Admin links
     Wait Until Page Contains Link With Text    Edit properties
