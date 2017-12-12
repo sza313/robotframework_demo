@@ -36,15 +36,8 @@ Open My News Popup With Cog Button
 Add Tag Via Text Field In My News Popup
     [Documentation]    Click to text field "+add" and type any tag e.g. L&M -> Select tag from dropdown
     ...    Expocted - Tag was found and added
-    ${container} =    Set Variable    //div[@id="modal_editmyNews"]
-    ${results} =    Set Variable    ${container}//div[@id='myNewsTagsResults']
-    ${tagsinput} =    Set Variable    ${container}//input[@type='text' and @id='myNewsTags']
-    ${keyword} =    Set Variable    L&M
-    Click Element    ${tagsinput}
-    Set Text Box Element Value    ${tagsinput}    ${keyword}
-    Wait Until Element Is Visible    ${results}
-    Click Element    ${results}//div[text()='${keyword}']
-    Check Tag By Name    ${keyword}    ${container}
+    Wait Until Keyword Succeeds    30 secs    0.5 secs    Add Suggested Tag    Lucky Strike    //div[@id="modal_editmyNews"]
+    Remove Tag    Lucky Strike
 
 Add Tags Via Tabs In My News Popup
     [Documentation]    Click on checkboxes in the tabs in My News popup.
@@ -57,6 +50,9 @@ Add Tags Via Tabs In My News Popup
     Check Tag By Name    Andorra    ${modal}
     Check Tag By Name    Canary Island    ${modal}
     Check Tag By Name    Spain    ${modal}
+    Remove Tag    Andorra
+    Remove Tag    Canary Island
+    Remove Tag    Spain
 
 Reload Page
     [Documentation]    Reload page

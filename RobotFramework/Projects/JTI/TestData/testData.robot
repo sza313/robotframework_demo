@@ -16,3 +16,4 @@ ${sp communities list url}    https://insidetest.jti.com/social/engage/Lists/Com
 ${news page url}    https://insidetest.jti.com/Pages/MyNews.aspx
 ${resources results page url}    https://insidetest.jti.com/EnterpriseSearchCenter/Pages/JTIresults.aspx?k=*
 ${profile page url}    https://myinsidetest.jti.com/Person.aspx?accountname=JTICORP%5C${test user 1 name}
+${profile settings url}    https://myinsidetest.jti.com/JTIEditPerson.aspx#param_skills

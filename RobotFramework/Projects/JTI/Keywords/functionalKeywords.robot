@@ -258,3 +258,33 @@ Click On Post Quick Menu Item
     Wait Until Element Is Visible    ${post}//div[@class="ngHiddenActions"]//li[text()="${menu item}"]
     Scroll Element Into View    ${post}
     Click Element    ${post}//div[@class="ngHiddenActions"]//li[text()="${menu item}"]
+
+Click Edit Profile Page Nav Link
+    [Arguments]    ${link text}    ${panel title}    # link text - link we want to click in sidebar navigation | panel title - activated panel's name should match this.
+    ${nav link}=    Set Variable    //div[contains(@class,"navParam")]/a[contains(text(),"${link text}")]
+    Wait Until Page Contains Element    ${nav link}
+    Click Element    ${nav link}
+    Comment    Wait Until Page Contains Element    //div[contains(@class,"navParam")]/a[contains(text(),"${link text}") and contains(@class,"active")]    # nav link class should be active
+    Wait Until Element Is Visible    //h3[contains(text(),"${panel title}")]/ancestor::div[@class="panel panel-default"]    # panel who's name is ${panel title} should be visible in viewport
+
+Save Profile Page
+    [Documentation]    Clicks on the "Save" button on the profile page and reloads page.
+    Click Button With Text    Save changes
+    Wait Until Element Contains    //div[@class="innersaveBar"]    User profile updated
+    Reload Page
+    Wait Until Page Contains    CSTFERNBA
+
+Add Suggested Tag
+    [Arguments]    ${keyword}    ${container}
+    ${results} =    Set Variable    ${container}//div[@id='myNewsTagsResults']
+    ${tagsinput} =    Set Variable    ${container}//input[@type='text' and @id='myNewsTags']
+    Wait Until Page Contains Element    ${tagsinput}    0.5 secs
+    Clear Element Text    ${tagsinput}
+    Input Text    ${tagsinput}    ${keyword}
+    Wait Until Element Is Visible    ${results}    2 secs
+    Click Element    ${results}//div[text()='${keyword}']
+    Check Tag By Name    ${keyword}    ${container}
+
+Remove Tag
+    [Arguments]    ${tag name}
+    Click Element    //li[contains(@class,"pill") and ./span[text()="${tag name}"]]/span[@class="glyphicon glyphicon-close"]

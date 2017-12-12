@@ -12,9 +12,8 @@ Log In
 Navigate To My Profile Page
     [Documentation]    Click on profile picture in global menu and select My profile.
     ...    Expected - My profile site is opened in Activity stream tab.
-    Click Element    //li[@id="jtiMyProfile"]/a
-    Wait Until Element Is Visible    //li[@id="jtiMyProfile"]//a[text()="My profile"]
-    Click Element    //li[@id="jtiMyProfile"]//a[text()="My profile"]
+    Open Profile Menu
+    Click Profile Menu Item    My profile
     Wait Until Page Contains Element    //h1[contains(text(),"${test user 1 full name}")]
 
 Check If Left Side Webparts Are Loaded

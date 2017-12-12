@@ -1,0 +1,116 @@
+*** Settings ***
+Suite Setup       Setup Test Environment
+Suite Teardown    Close Browser
+Resource          Keywords/functionalKeywords.robot
+
+*** Test Cases ***
+Log In
+    [Documentation]    Log into the application with given credentials.
+    ...    Expected - user logged in and redirected to index page.
+    Log In    ${test user 1 name}    ${test user 1 pwd}
+
+Navigate To Edit Profile Page
+    [Documentation]    Click to Photo of user in right side of Top menu and choose Settings. Edit my profile site should be opened.
+    Open Profile Menu
+    Click Profile Menu Item    Settings
+    Wait Until Element Contains    //h3[@class="panel-title"]    Profile
+
+Click Profile Panel
+    [Documentation]    Click to Profile in the left navigation.
+    ...    Expected - Profile webpart is shown in top of window and button Profile in the left navigation is highlighted.
+    Click Edit Profile Page Nav Link    Profile    Profile
+
+Change Language
+    [Documentation]    Click to "Your preferred language" dropdown in Profile webpart and change language to e.g.Deutsch.
+    ...    Expected - The site is automatically reload and the language is changed to German.
+    Go To    ${profile settings url}
+    Wait Until Page Contains Element    id:AccountLanguageVal
+    Select From List By Label    id:AccountLanguageVal    Deutsch
+    Wait Until Page Contains    Ihre bevorzugte Sprache
+    Select From List By Label    id:AccountLanguageVal    English
+    Wait Until Page Contains    Your preferred language
+
+Check About Text Length
+    [Documentation]    Go to "About me" field and insert text that is longer than 240 characters.
+    ...    Expected - Text limited to 240 characters.
+    Clear Element Text    id:AccountAboutMeVal
+    Input Text    id:AccountAboutMeVal    Insert this test to profile...Insert this test to profile...Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile...OKERROR    # "ERROR" should be cut off from the end of the text.
+    Textarea Value Should Be    id:AccountAboutMeVal    Insert this test to profile...Insert this test to profile...Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile...OK
+
+Change Other Settings And Save
+    [Documentation]    Change any others details in profile and click save. Settings should be changed accordingly after page reload.
+    Select From List By Label    id:AccountDefaultMarketVal    Canada
+    Select From List By Label    id:AccountPrimaryDepartmentVal    BSC
+    Select From List By Label    id:AccountBirthDayDay    1
+    Select From List By Value    id:AccountBirthDayMonth    7
+    Clear Element Text    id:AccountInterestsVal
+    Input Text    id:AccountInterestsVal    Photography
+    Clear Element Text    id:AccountAboutMeVal
+    Input Text    id:AccountAboutMeVal    My life for Ner'Zhul
+    Save Profile Page
+    List Selection Should Be    id:AccountDefaultMarketVal    Canada
+    List Selection Should Be    id:AccountPrimaryDepartmentVal    BSC
+    List Selection Should Be    id:AccountBirthDayDay    1
+    List Selection Should Be    id:AccountBirthDayMonth    7
+    Textarea Value Should Be    id:AccountInterestsVal    Photography
+    Textarea Value Should Be    id:AccountAboutMeVal    My life for Ner'Zhul
+    Select From List By Label    id:AccountDefaultMarketVal    Hungary
+    Select From List By Label    id:AccountPrimaryDepartmentVal    Anti-Illicit Trade
+    Select From List By Label    id:AccountBirthDayDay    7
+    Select From List By Value    id:AccountBirthDayMonth    3
+    Clear Element Text    id:AccountInterestsVal
+    Input Text    id:AccountInterestsVal    Music
+    Clear Element Text    id:AccountAboutMeVal
+    Input Text    id:AccountAboutMeVal    About Me
+    Save Profile Page
+    List Selection Should Be    id:AccountDefaultMarketVal    Hungary
+    List Selection Should Be    id:AccountPrimaryDepartmentVal    Anti-Illicit Trade
+    List Selection Should Be    id:AccountBirthDayDay    7
+    List Selection Should Be    id:AccountBirthDayMonth    3
+    Textarea Value Should Be    id:AccountInterestsVal    Music
+    Textarea Value Should Be    id:AccountAboutMeVal    About Me
+
+Click Expertise Panel
+    [Documentation]    Click to Expertise in the left navigation.
+    ...    Expected - Manage my expertise tags webpart is shown in top of window and button Expertise in the left navigation is highlighted.
+    Click Edit Profile Page Nav Link    Expertise    Manage my expertise tags
+
+Add Expertise Tag
+    [Documentation]    Click to add topics and type text of item to field and select one of suggestions.
+    Input Text    id:manageMyResponsibilities-addResponsibility-input    tag-${current timestamp}
+    Press Key    id:manageMyResponsibilities-addResponsibility-input    \\13
+    Wait Until Page Contains Element    //li[contains(@class,"pill") and ./span[text()="tag-${current timestamp}"]]
+    Click Element    //li[contains(@class,"pill") and ./span[text()="tag-${current timestamp}"]]/span[@class="glyphicon glyphicon-close"]
+
+Click News Panel
+    [Documentation]    Click to News in the left navigation.
+    ...    Expected - Manage my news tags webpart is shown in top of window and button News in the left navigation is highlighted
+    Click Edit Profile Page Nav Link    News    Choose my news
+
+Add News Tag
+    [Documentation]    Click to text field "+add" and type any tag e.g. L&M -> Select tag from dropdown.
+    ...    Expected - Tag was found and added.
+    Input Text    id:myNewsTags    Lucky Strike
+    Wait Until Keyword Succeeds    30 secs    0.5 secs    Add Suggested Tag    Lucky Strike    //div[@id="param_news"]
+    Remove Tag    Lucky Strike
+
+Check News Tabs
+    [Documentation]    In tab Markets, Departments and Brands select any items.
+    ...    Expected - Ticked items was added among tags according the rules (1st Markets, 2nd Departments, 3rd Brands).
+    ${panel}=    Set Variable    //div[@id="param_news"]
+    Click Tab    Markets    ${panel}
+    Click Check Box    Andorra    ${panel}
+    Check Tag By Name    Andorra    ${panel}
+    Remove Tag    Andorra
+    Click Tab    Departments    ${panel}
+    Click Check Box    BSC    ${panel}
+    Check Tag By Name    BSC    ${panel}
+    Remove Tag    BSC
+    Click Tab    Brands    ${panel}
+    Click Check Box    Amber Leaf    ${panel}
+    Check Tag By Name    Amber Leaf    ${panel}
+    Remove Tag    Amber Leaf
+    Click Tab    Regions    ${panel}
+    Click Check Box    AMERICAS    ${panel}
+    Check Tag By Name    AMERICAS    ${panel}
+    Remove Tag    AMERICAS
