@@ -51,7 +51,7 @@ Click Check Box By Label
 
 Select Check Box By Label
     [Arguments]    ${label}    ${container}=
-    ${checkbox} =    Set Variable    ${container}//span[text()[contains(.,'${label}')]]/../input[@type='checkbox']
+    ${checkbox} =    Set Variable    ${container}//span[text()="${label}"]/../input[@type="checkbox"]
     Wait Until Page Contains Element    ${checkbox}    15
     Select Checkbox    ${checkbox}
 
