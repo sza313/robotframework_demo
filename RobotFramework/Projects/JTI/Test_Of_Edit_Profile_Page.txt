@@ -24,7 +24,9 @@ Change Language
     [Documentation]    Click to "Your preferred language" dropdown in Profile webpart and change language to e.g.Deutsch.
     ...    Expected - The site is automatically reload and the language is changed to German.
     Go To    ${profile settings url}
+    Wait Until Page Contains    CSTFERNBA
     Wait Until Page Contains Element    id:AccountLanguageVal
+    Sleep    5 secs
     Select From List By Label    id:AccountLanguageVal    Deutsch
     Wait Until Page Contains    Ihre bevorzugte Sprache
     Select From List By Label    id:AccountLanguageVal    English
@@ -37,10 +39,10 @@ Check About Text Length
     Input Text    id:AccountAboutMeVal    Insert this test to profile...Insert this test to profile...Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile...OKERROR    # "ERROR" should be cut off from the end of the text.
     Textarea Value Should Be    id:AccountAboutMeVal    Insert this test to profile...Insert this test to profile...Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile..Insert this test to profile...Insert this test to profile...OK
 
-Change Other Settings And Save
+Change Settings In Profile And Save
     [Documentation]    Change any others details in profile and click save. Settings should be changed accordingly after page reload.
     Select From List By Label    id:AccountDefaultMarketVal    Canada
-    Select From List By Label    id:AccountPrimaryDepartmentVal    BSC
+    Select From List By Label    id:AccountPrimaryDepartmentVal    Business Development
     Select From List By Label    id:AccountBirthDayDay    1
     Select From List By Value    id:AccountBirthDayMonth    7
     Clear Element Text    id:AccountInterestsVal
@@ -49,13 +51,13 @@ Change Other Settings And Save
     Input Text    id:AccountAboutMeVal    My life for Ner'Zhul
     Save Profile Page
     List Selection Should Be    id:AccountDefaultMarketVal    Canada
-    List Selection Should Be    id:AccountPrimaryDepartmentVal    BSC
+    List Selection Should Be    id:AccountPrimaryDepartmentVal    Business Development
     List Selection Should Be    id:AccountBirthDayDay    1
     List Selection Should Be    id:AccountBirthDayMonth    7
     Textarea Value Should Be    id:AccountInterestsVal    Photography
     Textarea Value Should Be    id:AccountAboutMeVal    My life for Ner'Zhul
     Select From List By Label    id:AccountDefaultMarketVal    Hungary
-    Select From List By Label    id:AccountPrimaryDepartmentVal    Anti-Illicit Trade
+    Select From List By Label    id:AccountPrimaryDepartmentVal    Finance
     Select From List By Label    id:AccountBirthDayDay    7
     Select From List By Value    id:AccountBirthDayMonth    3
     Clear Element Text    id:AccountInterestsVal
@@ -64,7 +66,7 @@ Change Other Settings And Save
     Input Text    id:AccountAboutMeVal    About Me
     Save Profile Page
     List Selection Should Be    id:AccountDefaultMarketVal    Hungary
-    List Selection Should Be    id:AccountPrimaryDepartmentVal    Anti-Illicit Trade
+    List Selection Should Be    id:AccountPrimaryDepartmentVal    Finance
     List Selection Should Be    id:AccountBirthDayDay    7
     List Selection Should Be    id:AccountBirthDayMonth    3
     Textarea Value Should Be    id:AccountInterestsVal    Music
@@ -99,18 +101,109 @@ Check News Tabs
     ...    Expected - Ticked items was added among tags according the rules (1st Markets, 2nd Departments, 3rd Brands).
     ${panel}=    Set Variable    //div[@id="param_news"]
     Click Tab    Markets    ${panel}
-    Click Check Box    Andorra    ${panel}
+    Select Check Box By Label    Andorra    ${panel}
     Check Tag By Name    Andorra    ${panel}
     Remove Tag    Andorra
     Click Tab    Departments    ${panel}
-    Click Check Box    BSC    ${panel}
-    Check Tag By Name    BSC    ${panel}
-    Remove Tag    BSC
+    Select Check Box By Label    Business Development    ${panel}
+    Check Tag By Name    Business Development    ${panel}
+    Remove Tag    Business Development
     Click Tab    Brands    ${panel}
-    Click Check Box    Amber Leaf    ${panel}
-    Check Tag By Name    Amber Leaf    ${panel}
-    Remove Tag    Amber Leaf
+    Select Check Box By Label    Winston    ${panel}
+    Check Tag By Name    Winston    ${panel}
+    Remove Tag    Winston
     Click Tab    Regions    ${panel}
-    Click Check Box    AMERICAS    ${panel}
-    Check Tag By Name    AMERICAS    ${panel}
-    Remove Tag    AMERICAS
+    Select Check Box By Label    Global    ${panel}
+    Check Tag By Name    Global    ${panel}
+    Remove Tag    Global
+
+Click Notifications Panel
+    [Documentation]    Click to Notifications in the left navigation.
+    ...    Expected - Notifications webpart is shown in top of window and button Notifications in the left navigation is highlighted.
+    Click Edit Profile Page Nav Link    Notifications    Notifications
+
+Change Settings In Notifications And Save
+    [Documentation]    Change any details and click "Save changes". Data should be persistent after page reload.
+    Scroll Element Into View    //input[@id="engageEmailDigestSwitch"]
+    Select Checkbox    //input[@id="engageEmailDigestSwitch"]
+    Scroll Element Into View    //input[@id="engageEmailDigestCommunitiesSwitch"]
+    Select Checkbox    //input[@id="engageEmailDigestCommunitiesSwitch"]
+    Scroll Element Into View    //input[@id="engageEmailDigestColleaguesSwitch"]
+    Select Checkbox    //input[@id="engageEmailDigestColleaguesSwitch"]
+    Scroll Element Into View    //input[@id="engageEmailDigestMyActivitiesSwitch"]
+    Select Checkbox    //input[@id="engageEmailDigestMyActivitiesSwitch"]
+    Scroll Element Into View    //input[@id="weeklyNotificationSwitch"]
+    Select Checkbox    //input[@id="weeklyNotificationSwitch"]
+    Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
+    Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Monday
+    Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
+    Select Checkbox    //input[@id="newsEmailDigestSwitch"]
+    Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
+    Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Monday
+    Save Profile Page
+    Checkbox Should Be Selected    //input[@id="engageEmailDigestSwitch"]
+    Checkbox Should Be Selected    //input[@id="engageEmailDigestCommunitiesSwitch"]
+    Checkbox Should Be Selected    //input[@id="engageEmailDigestColleaguesSwitch"]
+    Checkbox Should Be Selected    //input[@id="engageEmailDigestMyActivitiesSwitch"]
+    Checkbox Should Be Selected    //input[@id="weeklyNotificationSwitch"]
+    List Selection Should Be    //select[@id="weeklyNotificationDayPicker"]    Monday
+    Checkbox Should Be Selected    //input[@id="newsEmailDigestSwitch"]
+    List Selection Should Be    //select[@id="newsEmailDigestDayPicker"]    Monday
+    Scroll Element Into View    //input[@id="engageEmailDigestSwitch"]
+    Unselect Checkbox    //input[@id="engageEmailDigestSwitch"]
+    Scroll Element Into View    //input[@id="engageEmailDigestCommunitiesSwitch"]
+    Unselect Checkbox    //input[@id="engageEmailDigestCommunitiesSwitch"]
+    Scroll Element Into View    //input[@id="engageEmailDigestColleaguesSwitch"]
+    Unselect Checkbox    //input[@id="engageEmailDigestColleaguesSwitch"]
+    Scroll Element Into View    //input[@id="engageEmailDigestMyActivitiesSwitch"]
+    Unselect Checkbox    //input[@id="engageEmailDigestMyActivitiesSwitch"]
+    Scroll Element Into View    //input[@id="weeklyNotificationSwitch"]
+    Unselect Checkbox    //input[@id="weeklyNotificationSwitch"]
+    Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
+    Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Friday
+    Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
+    Unselect Checkbox    //input[@id="newsEmailDigestSwitch"]
+    Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
+    Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Friday
+    Save Profile Page
+    Checkbox Should Not Be Selected    //input[@id="engageEmailDigestSwitch"]
+    Checkbox Should Not Be Selected    //input[@id="engageEmailDigestCommunitiesSwitch"]
+    Checkbox Should Not Be Selected    //input[@id="engageEmailDigestColleaguesSwitch"]
+    Checkbox Should Not Be Selected    //input[@id="engageEmailDigestMyActivitiesSwitch"]
+    Checkbox Should Not Be Selected    //input[@id="weeklyNotificationSwitch"]
+    List Selection Should Be    //select[@id="weeklyNotificationDayPicker"]    Friday
+    Checkbox Should Not Be Selected    //input[@id="newsEmailDigestSwitch"]
+    List Selection Should Be    //select[@id="newsEmailDigestDayPicker"]    Friday
+
+Click Colleagues Panel
+    [Documentation]    Click to Colleagues in the left navigation.
+    ...    Expected - Colleagues webpart is shown in top of window and button Colleagues in the left navigation is highlighted.
+    Click Edit Profile Page Nav Link    Colleagues    Colleagues
+
+Add A Colleague
+    [Documentation]    Add a colleague via the popup in Colleagues panel. Check if colleague added after page reload.
+    Click Link Which Contains    Add Colleagues
+    Wait Until Dialog Is Open    Add Colleagues
+    ${add colleageus dialog}=    Set Variable    //div[@role="dialog" and .//h1[contains(text(),"Add Colleagues")]]
+    Click Element    ${add colleageus dialog}//a[@title="Browse"]
+    ${select people dialog}=    Set Variable    //div[@role="dialog" and .//h1[contains(text(),"Select People")]]
+    Wait Until Dialog Is Open    Select People
+    Wait Until Page Contains Element    ${select people dialog}//iframe
+    Select Frame    ${select people dialog}//iframe
+    Wait Until Page Contains Element    //input[contains(@id,"queryTextBox")]
+    Input Text    //input[contains(@id,"queryTextBox")]    ${test user 2 full name}
+    Press Key    //input[contains(@id,"queryTextBox")]    \\13
+    Wait Until Page Contains Element    //tr[./td[contains(tet(),"${test user 2 full name}")]]
+    Click Element    //tr[./td[contains(tet(),"${test user 2 full name}")]]
+    Click Element    //input[contains(@name,"AddSel")]
+    Click Element    //input[contains(@name,"btnOk")]
+    Unselect Frame
+    Click Element    //input[contains(@name,"OkButton")]
+    Wait Until Page Contains Element    //a[text()="${test user 2 full name}"]
+
+Remove A Colleague
+    [Documentation]    Tick the checkbox near of any colleague and click to Remove colleagues. Colleague should be removed from the list.
+    Select Checkbox    //a[text()="${test user 2 full name}"]/ancestor::tr//input[@type="checkbox"]
+    Click Link Which Contains    Remove Colleagues
+    Handle Alert    ACCEPT
+    Wait Until Page Does Not Contain Element    //a[text()="${test user 2 full name}"]/ancestor::tr

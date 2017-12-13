@@ -44,9 +44,9 @@ Add Tags Via Tabs In My News Popup
     ...    Expected - Tags are added with same name to the tags list.
     [Setup]    Unset Tags
     ${modal} =    Set Variable    //div[@id="modal_editmyNews"]
-    Click Check Box    Andorra    ${modal}
-    Click Check Box    Canary Island    ${modal}
-    Click Check Box    Spain    ${modal}
+    Click Check Box By Label    Andorra    ${modal}
+    Click Check Box By Label    Canary Island    ${modal}
+    Click Check Box By Label    Spain    ${modal}
     Check Tag By Name    Andorra    ${modal}
     Check Tag By Name    Canary Island    ${modal}
     Check Tag By Name    Spain    ${modal}

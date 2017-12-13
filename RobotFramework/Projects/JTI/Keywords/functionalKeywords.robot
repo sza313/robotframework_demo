@@ -21,9 +21,9 @@ Log Out
 
 Unset Tags
     ${modal} =    Set Variable    //div[@id="modal_editmyNews"]
-    Uncheck Check Box    Andorra    ${modal}
-    Uncheck Check Box    Canary Island    ${modal}
-    Uncheck Check Box    Spain    ${modal}
+    Unselect Check Box By Label    Andorra    ${modal}
+    Unselect Check Box By Label    Canary Island    ${modal}
+    Unselect Check Box By Label    Spain    ${modal}
 
 Check If Articles Loaded
     [Documentation]    Returns true if additional articles are loaded. (more than 10 articles are present).
@@ -264,8 +264,8 @@ Click Edit Profile Page Nav Link
     ${nav link}=    Set Variable    //div[contains(@class,"navParam")]/a[contains(text(),"${link text}")]
     Wait Until Page Contains Element    ${nav link}
     Click Element    ${nav link}
-    Comment    Wait Until Page Contains Element    //div[contains(@class,"navParam")]/a[contains(text(),"${link text}") and contains(@class,"active")]    # nav link class should be active
     Wait Until Element Is Visible    //h3[contains(text(),"${panel title}")]/ancestor::div[@class="panel panel-default"]    # panel who's name is ${panel title} should be visible in viewport
+    Wait Until Page Contains Element    //div[contains(@class,"navParam")]/a[contains(text(),"${link text}") and contains(@class,"active")]    # nav link class should be active
 
 Save Profile Page
     [Documentation]    Clicks on the "Save" button on the profile page and reloads page.
@@ -273,6 +273,7 @@ Save Profile Page
     Wait Until Element Contains    //div[@class="innersaveBar"]    User profile updated
     Reload Page
     Wait Until Page Contains    CSTFERNBA
+    Sleep    5 secs
 
 Add Suggested Tag
     [Arguments]    ${keyword}    ${container}

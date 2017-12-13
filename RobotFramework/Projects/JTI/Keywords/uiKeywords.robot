@@ -39,17 +39,23 @@ Set Text Box Element Value
     Wait Until Page Contains Element    ${el}
     Input Text    ${el}    ${value}
 
-Click Check Box
+Check Tag By Name
+    [Arguments]    ${tagname}    ${container}=
+    Wait Until Page Contains Element    ${container}//div[contains(@class,'pill')]//span[text()='${tagname}']
+
+Click Check Box By Label
     [Arguments]    ${label}    ${container}=
     ${checkbox} =    Set Variable    ${container}//span[text()[contains(.,'${label}')]]/../input[@type='checkbox']
     Wait Until Page Contains Element    ${checkbox}    15
     Click Element    ${checkbox}
 
-Check Tag By Name
-    [Arguments]    ${tagname}    ${container}=
-    Wait Until Page Contains Element    ${container}//div[contains(@class,'pill')]//span[text()='${tagname}']
+Select Check Box By Label
+    [Arguments]    ${label}    ${container}=
+    ${checkbox} =    Set Variable    ${container}//span[text()[contains(.,'${label}')]]/../input[@type='checkbox']
+    Wait Until Page Contains Element    ${checkbox}    15
+    Select Checkbox    ${checkbox}
 
-Uncheck Check Box
+Unselect Check Box By Label
     [Arguments]    ${label}    ${container}=
     ${checkbox} =    Set Variable    ${container}//span[text()[contains(.,'${label}')]]/../input[@type='checkbox']
     Wait Until Page Contains Element    ${checkbox}    15
@@ -61,6 +67,13 @@ Check If Menu Item Exists
 
 Scroll To Bottom
     Execute Javascript    window.scrollTo(0,99999); console.log("scrolled to bottom");
+
+Scroll To Top
+    Execute Javascript    window.scrollTo(0,0)
+
+Scroll Element Into View
+    [Arguments]    ${element}
+    Execute Javascript    document.evaluate('${element}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView({block: "center"});
 
 Get Is Element In Viewport
     [Arguments]    ${element}
@@ -76,9 +89,6 @@ Get Is Element Fixed
     ${sl}=    Get Library Instance    SeleniumLibrary
     ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath)\{ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; console.log(el); return window.getComputedStyle(el).position \=\=\= 'fixed';\})(arguments[0]);    @{argList}
     [Return]    ${elementInViewport}
-
-Scroll To Top
-    Execute Javascript    window.scrollTo(0,0)
 
 Click Main Menu Item
     [Arguments]    ${title}
@@ -156,12 +166,6 @@ Check Tab
     [Documentation]    Checks If Tab is present on the page with given title text.
     Wait Until Page Contains Element    ${container}//ul[@class="nav nav-tabs"]//a[@role="tab" and text()="${title}"]
 
-Scroll Element Into View
-    [Arguments]    ${element}
-    ${argList}=    Create List    ${element}
-    ${sl}=    Get Library Instance    SeleniumLibrary
-    ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath)\{ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; el.scrollIntoView(false); return true;})(arguments[0]);    @{argList}
-
 Wait Until Page Contains Span With Text
     [Arguments]    ${text}
     Wait Until Page Contains Element    //span[contains(text(),"${text}")]
@@ -212,3 +216,7 @@ Wait For Email Share Outlook Window
     Win Close    Sharing post - Message (HTML)
     Wait For Active Window    Microsoft Outlook
     Control Click    Microsoft Outlook    \    [CLASS:Button; INSTANCE:2]
+
+Execute Javascript File
+    [Arguments]    ${file name}
+    Execute Javascript    ${CURDIR}${/}..${/}Scripts${/}${file name}
