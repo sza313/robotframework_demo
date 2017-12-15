@@ -18,3 +18,4 @@ ${resources results page url}    https://insidetest.jti.com/EnterpriseSearchCent
 ${profile page url}    https://myinsidetest.jti.com/Person.aspx?accountname=JTICORP%5C${test user 1 name}
 ${profile settings url}    https://myinsidetest.jti.com/JTIEditPerson.aspx#param_skills
 ${onboarding page url}    https://insidetest.jti.com/Pages/Onboarding.aspx
+${welcome page url}    https://insidetest.jti.com/pages/welcome.aspx

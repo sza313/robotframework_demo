@@ -288,5 +288,12 @@ Add Suggested Tag
     Check Tag By Name    ${keyword}    ${container}
 
 Remove Tag
-    [Arguments]    ${tag name}
-    Click Element    //li[contains(@class,"pill") and ./span[text()="${tag name}"]]/span[@class="glyphicon glyphicon-close"]
+    [Arguments]    ${tag name}    ${container}=
+    Click Element    ${container}//li[contains(@class,"pill") and ./span[text()="${tag name}"]]/span[@class="glyphicon glyphicon-close"]
+    Wait Until Page Does Not Contain Element    ${container}//li[contains(@class,"pill") and ./span[text()="${tag name}"]]
+
+Add Tag
+    [Arguments]    ${tag name}    ${container}=
+    Input Text    ${container}//input[contains(@class,"pillbox-add-item")]    ${tag name}
+    Press Key    ${container}//input[contains(@class,"pillbox-add-item")]    \\13
+    Wait Until Page Contains Element    ${container}//li[contains(@class,"pill") and ./span[text()="${tag name}"]]
