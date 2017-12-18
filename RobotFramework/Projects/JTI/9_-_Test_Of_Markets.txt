@@ -1,0 +1,70 @@
+*** Settings ***
+Suite Setup       Setup Test Environment
+Suite Teardown    Close Browser
+Resource          Keywords/functionalKeywords.robot
+
+*** Test Cases ***
+Log In
+    [Documentation]    Log into the application with given credentials.
+    ...    Expected - user logged in and redirected to index page.
+    Log In    ${test user 1 name}    ${test user 1 pwd}
+
+Test Topics Landing Site
+    Go To    https://insidetest.jti.com/Markets/HQ/Pages/Topics_Landing.aspx
+    Wait Until Page Contains Element    //div[@class="owner"]/a[text()!=""]
+    Wait Until Page Contains Element    //h1[@class="topicTitle"]
+    Wait Until Page Contains Element    //p[@class="first-description topicNarrative"]
+    Wait Until Page Contains Element    //button[@title="Add to the Bookmarks"]
+    Wait Until Page Contains Element    //button[@title="Share this page"]
+    Wait Until Page Contains Element    //div[contains(@class,"mosaic-tile")]
+    Wait Until Page Contains    What's new ?
+    Wait Until Page Contains    What's new ?
+    Wait Until Page Contains    library
+    Wait Until Page Contains    Quick links
+    Wait Until Page Contains Element    //div[contains(@class,"articleListItem")]
+    Wait Until Page Contains Element    //div[contains(@class,"library-content")]//div[@class="item"]
+    Wait Until Page Contains Element    //ul[contains(@class,"pagination")]
+
+Test Topics Brand Site
+    Go To    https://insidetest.jti.com/Markets/HQ/Pages/Topics_Brand.aspx
+    Wait Until Page Contains Element    //div[@class="owner"]/a[text()!=""]
+    Wait Until Page Contains Element    //div[contains(@class,"hero-logo")]
+    Wait Until Page Contains Element    //p[contains(@class,"first-description-logo")]
+    Wait Until Page Contains Element    //a[contains(@class,"mid-tile")]
+    Wait Until Page Contains    Latest documents
+    Wait Until Page Contains    What's new ?
+    Wait Until Page Contains    library
+    Wait Until Page Contains Element    //div[contains(@class,"articleListItem")]
+    Wait Until Page Contains Element    //div[contains(@class,"library-content")]//div[@class="item"]
+    Wait Until Page Contains Element    //ul[contains(@class,"pagination")]
+    Wait Until Page Contains Element    //button[@title="Add to the Bookmarks"]
+    Wait Until Page Contains Element    //button[@title="Share this page"]
+
+Test Topics Generic Site
+    Go To    https://insidetest.jti.com/Markets/HQ/Pages/Topics_Generic.aspx
+    Wait Until Page Contains Element    //div[@class="owner"]/a[text()!=""]
+    Wait Until Page Contains Element    //a[contains(@class,"mid-tile")]
+    Wait Until Page Contains Element    //h1[@class="topicTitle"]
+    Wait Until Page Contains Element    //p[@class="first-description topicNarrative"]
+    Wait Until Page Contains Element    //button[@title="Add to the Bookmarks"]
+    Wait Until Page Contains Element    //button[@title="Share this page"]
+    Wait Until Page Contains    Quick links
+    Wait Until Page Contains    What's new ?
+    Wait Until Page Contains    library
+    Wait Until Page Contains    Engage with
+    Wait Until Page Contains Element    //div[contains(@class,"articleListItem")]
+    Wait Until Page Contains Element    //div[contains(@class,"library-content")]//div[@class="item"]
+    Wait Until Page Contains Element    //ul[contains(@class,"pagination")]
+
+Test Topics Simple Site
+    Go To    https://insidetest.jti.com/Markets/HQ/Pages/Topics_Simple.aspx
+    Wait Until Page Contains Element    //div[@class="owner"]/a[text()!=""]
+    Wait Until Page Contains Element    //h1[@class="topicTitle"]
+    Wait Until Page Contains Element    //p[@class="first-description topicNarrative"]
+    Wait Until Page Contains Element    //button[@title="Add to the Bookmarks"]
+    Wait Until Page Contains Element    //button[@title="Share this page"]
+    Wait Until Page Contains    Quick links
+    Wait Until Page Contains    Latest documents
+    Wait Until Page Contains Element    //div[contains(@class,"library-content")]//div[@class="item"]
+    Wait Until Page Contains Element    //div[contains(@class,"articleListItem")]
+    Wait Until Page Contains Link With Text    Meet the team

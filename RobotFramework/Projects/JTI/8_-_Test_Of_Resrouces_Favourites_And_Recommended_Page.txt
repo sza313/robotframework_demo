@@ -1,0 +1,46 @@
+*** Settings ***
+Suite Setup       Setup Test Environment
+Suite Teardown    Close Browser
+Resource          Keywords/functionalKeywords.robot
+
+*** Test Cases ***
+Log In
+    [Documentation]    Log into the application with given credentials.
+    ...    Expected - user logged in and redirected to index page.
+    Log In    ${test user 1 name}    ${test user 1 pwd}
+
+Navigate To Favourites Page
+    [Documentation]    Navigate to Favourites page by clicking on main menu item "Resources", and by selecting "Favourites" from "My Pages" dropdown.
+    Click Main Menu Item    Resources
+    Wait Until Page Contains    My favorites
+    Wait Until Page Contains Element    //a[@class="active" and text()="My favorites"]
+    Go To    ${index page url}
+    Click Main Menu Item    My pages
+    Wait Until Page Contains Link With Text    See All
+    Click Link Which Contains    See All
+    Wait Until Page Contains    My favorites
+    Wait Until Page Contains Element    //a[@class="active" and text()="My favorites"]
+
+Check If All Webparts Are Loaded
+    [Documentation]    Check If My favorites page parts are loaded corectly.
+    Wait Until Page Contains Link With Text    My favorites
+    Wait Until Page Contains Link With Text    Recommended
+    Wait Until Page Contains Link With Text    Applications & sites
+    Wait Until Page Contains Link With Text    Guidelines & toolkits
+    Wait Until Page Contains Link With Text    Policies & procedures
+    Wait Until Page Contains Link With Text    Reports & case studies
+    Wait Until Page Contains Link With Text    Templates
+    Wait Until Page Contains Link With Text    Training
+    Wait Until Page Contains Span With Text    My applications and sites
+    Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
+    Wait Until Page Contains Span With Text    My saved documents
+    Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
+    Wait Until Page Contains Element    //h3[text()="My pages"]
+
+Navigate To Recommended Page
+    [Documentation]    Click "Recommended" link in left navigation and check if contents are loaded properly.
+    Click Sidebar Nav Link    Recommended
+    Wait Until Page Contains    Recommended for you
+    Wait Until Page Contains Span With Text    Recommended applications and sites
+    Wait Until Page Contains Span With Text    Recommended documents
+    Wait Until Page Contains Element    //h3[text()="My pages"]
