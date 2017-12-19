@@ -297,3 +297,28 @@ Add Tag
     Input Text    ${container}//input[contains(@class,"pillbox-add-item")]    ${tag name}
     Press Key    ${container}//input[contains(@class,"pillbox-add-item")]    \\13
     Wait Until Page Contains Element    ${container}//li[contains(@class,"pill") and ./span[text()="${tag name}"]]
+
+Check Library Content Pagination
+    [Arguments]    ${library name}
+    Wait Until Page Contains Pagination    //span[text()="${library name}"]/following-sibling::div[@class="library-content"]
+
+Check Favorites Page Sidebar
+    Wait Until Page Contains Link With Text    My favorites
+    Wait Until Page Contains Link With Text    Recommended
+    Wait Until Page Contains Link With Text    Applications & sites
+    Wait Until Page Contains Link With Text    Guidelines & toolkits
+    Wait Until Page Contains Link With Text    Policies & procedures
+    Wait Until Page Contains Link With Text    Reports & case studies
+    Wait Until Page Contains Link With Text    Templates
+    Wait Until Page Contains Link With Text    Training
+
+Check Favorites And Reccomendations Page
+    [Arguments]    ${name}
+    Click Sidebar Nav Link    ${name}
+    Check Favorites Page Sidebar
+    Wait Until Page Contains    ${name}
+    Wait Until Page Contains Pagination    //div[@class="wrapMain"]
+    Wait Until Page Contains    Recommended
+    Comment    TODO
+    Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
+    Wait Until Page Contains Link With Text    Clear filters

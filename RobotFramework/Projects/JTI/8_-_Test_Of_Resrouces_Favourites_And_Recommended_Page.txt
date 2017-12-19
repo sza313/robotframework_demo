@@ -23,24 +23,44 @@ Navigate To Favourites Page
 
 Check If All Webparts Are Loaded
     [Documentation]    Check If My favorites page parts are loaded corectly.
-    Wait Until Page Contains Link With Text    My favorites
-    Wait Until Page Contains Link With Text    Recommended
-    Wait Until Page Contains Link With Text    Applications & sites
-    Wait Until Page Contains Link With Text    Guidelines & toolkits
-    Wait Until Page Contains Link With Text    Policies & procedures
-    Wait Until Page Contains Link With Text    Reports & case studies
-    Wait Until Page Contains Link With Text    Templates
-    Wait Until Page Contains Link With Text    Training
+    Check Favorites Page Sidebar
     Wait Until Page Contains Span With Text    My applications and sites
+    Check Library Content Pagination    My applications and sites
     Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Wait Until Page Contains Span With Text    My saved documents
+    Check Library Content Pagination    My saved documents
     Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Wait Until Page Contains Element    //h3[text()="My pages"]
+    Comment    TODO
 
 Navigate To Recommended Page
     [Documentation]    Click "Recommended" link in left navigation and check if contents are loaded properly.
     Click Sidebar Nav Link    Recommended
     Wait Until Page Contains    Recommended for you
+    Check Favorites Page Sidebar
     Wait Until Page Contains Span With Text    Recommended applications and sites
+    Check Library Content Pagination    Recommended applications and sites
+    Wait Until Page Contains Element    //span[text()="Recommended applications and sites"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Wait Until Page Contains Span With Text    Recommended documents
+    Check Library Content Pagination    Recommended documents
+    Wait Until Page Contains Element    //span[text()="Recommended documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Wait Until Page Contains Element    //h3[text()="My pages"]
+    Comment    TODO
+
+Check Applications And Sites Page
+    Check Favorites And Reccomendations Page    Applications & sites
+
+Check Guidelines And Toolkits Page
+    Check Favorites And Reccomendations Page    Guidelines & toolkits
+
+Check Policies And Procedures Page
+    Check Favorites And Reccomendations Page    Policies & procedures
+
+Check Reports And Case Studies Page
+    Check Favorites And Reccomendations Page    Reports & case studies
+
+Check Templates Page
+    Check Favorites And Reccomendations Page    Templates
+
+Check Training Page
+    Check Favorites And Reccomendations Page    Training

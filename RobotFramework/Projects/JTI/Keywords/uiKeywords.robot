@@ -220,3 +220,7 @@ Wait For Email Share Outlook Window
 Execute Javascript File
     [Arguments]    ${file name}
     Execute Javascript    ${CURDIR}${/}..${/}Scripts${/}${file name}
+
+Wait Until Page Contains Pagination
+    [Arguments]    ${container}=
+    Wait Until Page Contains Element    ${container}//ul[contains(@class,"pagination")]

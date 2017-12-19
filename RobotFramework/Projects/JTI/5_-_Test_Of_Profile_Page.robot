@@ -44,15 +44,6 @@ Add A Question
     Click Button With Text    Post    //div[@id="ngPostControl"]
     Wait Until Page Contains    TestQuestion_${test user 1 name}_${current timestamp}
 
-Add A Private Message
-    [Documentation]    Click to Add private message and add any private message and click Send.
-    ...    Expected - Private message was posted.
-    Generate Timestamp
-    Click Element    //li[@id="ngDirectMessage"]//a
-    Input Text    //div[@id="ngPostControl"]//textarea    TestPM_${test user 1 name}_${current timestamp}
-    Click Button With Text    Send    //div[@id="ngPostControl"]
-    Wait Until Page Contains    TestPM_${test user 1 name}_${current timestamp}
-
 Like A Post
     [Documentation]    Click to "Like to" to like a post. Link should change to "Unlike". Text "You like this" should be displayed at the bottom of the post.
     ${post}=    Set Variable    //div[contains(@class,"ngActivityRow") and .//a[text()="Like"]]
@@ -158,26 +149,53 @@ Check Organization Tab
 
 Check Content Tab
     [Documentation]    Click to Content tab. Tab is shown with correct content without side webparts.
-    Click Element    //a[@role="tab" and contains(text(),"Content")]
-    Wait Until Page Contains Element    //a[@role="tab" and contains(text(),"Content")]/parent::*[contains(@class,"active")]
-    Wait Until Page Contains Element    //div[@class="ms-srch-item"]
-    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
-    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+    Click Tab    Content
+    Wait Until Page Contains Element    //a[@role="tab" and contains(text(),"Content")]/parent::*[contains(@class,"active")]    # check if tab has class "active"
+    Wait Until Page Contains Element    //div[@id="content"]//div[@name="Item"]    # check if there are results in the tab
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]    # left sidebar should not exist
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]    # right sidebar should not exist
 
 Check Tasks Tab
     [Documentation]    Click to Tasks tab. Tab is shown with correct content without side webparts.
     Click Tab    Tasks
-    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
-    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+    Wait Until Page Contains Element    //div[@id="tasks"]//div[@id="Result"]    # check if results exist
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]    # left sidebar should not exist
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]    # right sidebar should not exist
 
 Check Follow-up Tab
     [Documentation]    Click to Follow-up tab. Tab is shown with correct content without side webparts.
     Click Tab    Follow-ups
-    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
-    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+    Wait Until Page Contains Element    //div[@id="followup"]//div[contains@class,"ngActivityRow")]    # check if follow-ups results exist
+    Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]    # left sidebar should not exist
+    Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]    # right sidebar should not exist
 
 Check Links Tab
     [Documentation]    Click to Links tab. Tab is shown with correct content without side webparts.
     Click Tab    Links
     Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]
     Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]
+    Click Link Which Contains    Add Link
+    Wait Until Dialog Is Open    Add Link
+    Select Frame    //div[@role="dialog" and .//h1[text()="Add Link"]]//iframe
+    Input Text    //input[contains(@name,"txbTitle")]    test link ${current timestamp}
+    Input Text    //input[contains(@name,"txbUrl")]    http://google.com
+    Click Input Button With Value    OK
+    Unselect Frame
+    Wait Until Page Contains Link With Text    test link ${current timestamp}
+
+Manage Links
+    Click Link Which Contains    Manage Links
+    Wait Until Page Contains Element    //input[@type="checkbox" and @title="test link ${current timestamp}"]
+    Select Checkbox    //input[@type="checkbox" and @title="test link ${current timestamp}"]
+    Click Link Which Contains    Edit Links    //span[@id="DeltaPlaceHolderMain"]
+    Wait Until Dialog Is Open    Edit My Link
+    Select Frame    //div[@role="dialog" and .//h1[text()="Edit My Link"]]//iframe
+    Input Text    //input[contains(@name,"txbTitle")]    test link edit ${current timestamp}
+    Click Input Button With Value    OK
+    Unselect Frame
+    Wait Until Page Contains    test link edit ${current timestamp}
+    Wait Until Page Contains Element    //input[@type="checkbox" and @title="test link edit ${current timestamp}"]
+    Select Checkbox    //input[@type="checkbox" and @title="test link edit ${current timestamp}"]
+    Click Link Which Contains    Delete    //span[@id="DeltaPlaceHolderMain"]
+    Handle Alert    ACCEPT
+    Wait Until Page Does Not Contain    test link edit ${current timestamp}
