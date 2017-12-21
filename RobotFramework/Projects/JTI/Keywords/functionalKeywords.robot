@@ -71,8 +71,9 @@ Join A Community
     ${button}=    Set Variable    ${container}//button[text()="Join"]
     Wait Until Page Contains Element    ${button}
     ${button}=    Get WebElement    ${button}
+    Scroll Element Into View    ${container}//button[text()="Join"]
     Click Element    ${button}
-    Mouse Out    ${button}
+    Mouse Over    ${main menu}
     Wait Until Element Contains    ${button}    Following
 
 Set Filter
@@ -96,6 +97,7 @@ Leave A Community
     [Arguments]    ${container}=
     ${button}=    Set Variable    ${container}//button/descendant-or-self::*[contains(text(),"Following")]/ancestor-or-self::button
     Wait Until Page Contains Element    ${button}
+    Scroll Element Into View    ${button}
     ${button}=    Get WebElement    ${button}
     Click Element    ${button}
     Wait Until Element Contains    ${button}    Join
@@ -110,6 +112,7 @@ Paginate To
     Scroll To Bottom
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
     Wait Until Page Contains Element    ${container}//a[@title="Move to page ${page number}"]
+    Scroll Element Into View    ${container}//a[@title="Move to page ${page number}"]
     Wait Until Keyword Succeeds    15 sec    0.5 sec    Click Element    ${container}//a[@title="Move to page ${page number}"]
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
 
@@ -160,10 +163,13 @@ Check If New Tab Is Opened With Title
 Request To Join A Community
     Search For Community    ${fixed community}
     Click Button With Text    Request to join    ${all communities tab}
+    Wait Until Page Contains    You’ve just tried to access a private community
+    Click Link Which Contains    I’d like access to this private community.
+    Wait Until Page Contains    Request Access
     Wait Until Page Contains Element    tag:textarea
     Input Text    tag:textarea    ${test user 1 name}_${current timestamp}
     Click Element    //input[@type="submit"]
-    Wait Until Page Contains Element    //div[@class="ms-accessRequestsControl-message" and contains(text(),"${test user 1 name}_${current timestamp}")]
+    Wait Until Page Contains    Your access request has been sent.
 
 Click Profile Menu Item
     [Arguments]    ${name}

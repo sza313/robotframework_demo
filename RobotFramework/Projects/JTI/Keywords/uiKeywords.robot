@@ -80,7 +80,7 @@ Get Is Element In Viewport
     [Documentation]    Check if element is visible in current viewport.
     ${argList}=    Create List    ${element}
     ${sl}=    Get Library Instance    SeleniumLibrary
-    ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath)\{ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; console.log(el); var rect \= el.getBoundingClientRect(); return (rect.top \>\= 0 && rect.top \<\= (window.innerHeight || document.documentElement.clientHeight) && rect.left \>\= 0 && rect.left \<\= (window.innerWidth || document.documentElement.clientWidth) && rect.right \>\= 0 && rect.right \<\= (window.innerWidth || document.documentElement.clientWidth));\})(arguments[0]);    @{argList}
+    ${elementInViewport} =    Call Method    ${sl._current_browser()}    execute_script    return (function(xpath){ var el \= document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; console.log(el); var rect \= el.getBoundingClientRect(); return (rect.top <\= (window.innerHeight || document.documentElement.clientHeight) && rect.bottom >\= 0 && rect.left <\= (window.innerWidth || document.documentElement.clientWidth) && rect.right >\= 0)})(arguments[0]);    @{argList}
     [Return]    ${elementInViewport}
 
 Get Is Element Fixed
@@ -159,7 +159,7 @@ Close Dialog
 Click Tab
     [Arguments]    ${name}    ${container}=
     Click Element    ${container}//a[@role="tab" and text()="${name}"]
-    Wait Until Page Contains Element    ${container}//a[@role="tab" and text()="${name}"]/parent::*[contains(@class,"active")]
+    Wait Until Page Contains Element    ${container}//a[@role="tab" and text()="${name}"]/ancestor::li[contains(@class,"active")]
 
 Check Tab
     [Arguments]    ${title}    ${container}=    # Title: tab title. Container: xpath of the ancestor that contains the tabslist (ul) element. can be parent or any ancestor.
