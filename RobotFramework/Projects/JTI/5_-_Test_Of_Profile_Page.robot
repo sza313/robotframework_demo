@@ -149,7 +149,7 @@ Check Organization Tab
 
 Check Content Tab
     [Documentation]    Click to Content tab. Tab is shown with correct content without side webparts.
-    Click Tab    Content
+    Click Tab Which Contains    Content
     Wait Until Page Contains Element    //a[@role="tab" and contains(text(),"Content")]/parent::*[contains(@class,"active")]    # check if tab has class "active"
     Wait Until Page Contains Element    //div[@id="content"]//div[@name="Item"]    # check if there are results in the tab
     Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]    # left sidebar should not exist
@@ -164,8 +164,8 @@ Check Tasks Tab
 
 Check Follow-up Tab
     [Documentation]    Click to Follow-up tab. Tab is shown with correct content without side webparts.
-    Click Tab    Follow-ups
-    Wait Until Page Contains Element    //div[@id="followup"]//div[contains@class,"ngActivityRow")]    # check if follow-ups results exist
+    Click Tab Which Contains    Follow-up
+    Wait Until Page Contains Element    //div[@id="followUp"]//div[contains(@class,"ngActivityRow")]    # check if follow-ups results exist
     Wait Until Page Does Not Contain Element    //div[@class="t-leftpane"]    # left sidebar should not exist
     Wait Until Page Does Not Contain Element    //div[@class="t-rightpane"]    # right sidebar should not exist
 

@@ -206,6 +206,7 @@ Check My News Popup
     Wait Until Page Contains Element    ${modal}
     Wait Until Page Contains Element    //ul[@id="myNewsFilter"]
     Wait Until Page Contains Element    ${modal}//ul[@class="nav nav-tabs"]
+    Sleep    5 secs
     Check Tab    Markets    ${modal}
     Check Tab    Departments    ${modal}
     Check Tab    Brands    ${modal}
@@ -262,7 +263,6 @@ Click On Post Quick Menu Item
     Scroll Element Into View    ${post}
     Click Element    ${post}//div[@class="ngHiddenActions"]/a
     Wait Until Element Is Visible    ${post}//div[@class="ngHiddenActions"]//li[text()="${menu item}"]
-    Scroll Element Into View    ${post}
     Click Element    ${post}//div[@class="ngHiddenActions"]//li[text()="${menu item}"]
 
 Click Edit Profile Page Nav Link

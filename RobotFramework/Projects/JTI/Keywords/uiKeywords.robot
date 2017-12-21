@@ -224,3 +224,8 @@ Execute Javascript File
 Wait Until Page Contains Pagination
     [Arguments]    ${container}=
     Wait Until Page Contains Element    ${container}//ul[contains(@class,"pagination")]
+
+Click Tab Which Contains
+    [Arguments]    ${name}    ${container}=
+    Click Element    ${container}//a[@role="tab" and contains(text(),"${name}")]
+    Wait Until Page Contains Element    ${container}//a[@role="tab" and contains(text(),"${name}")]/ancestor::li[contains(@class,"active")]

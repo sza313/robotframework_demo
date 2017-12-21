@@ -100,6 +100,7 @@ Check News Tabs
     [Documentation]    In tab Markets, Departments and Brands select any items.
     ...    Expected - Ticked items was added among tags according the rules (1st Markets, 2nd Departments, 3rd Brands).
     ${panel}=    Set Variable    //div[@id="param_news"]
+    Scroll Element Into View    ${panel}//div[contains(@class,"FiltersTabNav")]
     Click Tab    Markets    ${panel}
     Select Check Box By Label    Andorra    ${panel}
     Check Tag By Name    Andorra    ${panel}
@@ -109,9 +110,9 @@ Check News Tabs
     Check Tag By Name    Business Development    ${panel}
     Remove Tag    Business Development
     Click Tab    Brands    ${panel}
-    Select Check Box By Label    Winston    ${panel}
-    Check Tag By Name    Winston    ${panel}
-    Remove Tag    Winston
+    Select Check Box By Label    NAS    ${panel}
+    Check Tag By Name    NAS    ${panel}
+    Remove Tag    NAS
     Click Tab    Regions    ${panel}
     Select Check Box By Label    Global    ${panel}
     Check Tag By Name    Global    ${panel}
@@ -207,6 +208,7 @@ Add A Colleague
 
 Remove A Colleague
     [Documentation]    Tick the checkbox near of any colleague and click to Remove colleagues. Colleague should be removed from the list.
+    Scroll Element Into View    //a[text()="${test user 2 full name}"]/ancestor::tr//input[@type="checkbox"]
     Select Checkbox    //a[text()="${test user 2 full name}"]/ancestor::tr//input[@type="checkbox"]
     Click Link Which Contains    Remove Colleagues
     Handle Alert    ACCEPT
