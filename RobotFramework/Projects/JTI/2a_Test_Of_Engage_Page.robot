@@ -98,7 +98,7 @@ Click On Hashtag
     Page Should Contain Element    ${question with current hastag}
     Page Should Contain Element    ${question without current hastag}
     Click Element    ${hashtag}
-    Check If New Tab Is Opened With Title    ${hastag name}
+    Check If New Tab Is Opened    ${hastag name}
     Wait Until Page Does Not Contain Element    ${question without current hastag}
     Wait Until Page Contains Element    ${question with current hastag}
 
@@ -339,7 +339,7 @@ Check Edit Membership Popup
     Wait Until Page Contains Link With Text    Edit membership
     Click Link Which Contains    Edit membership
     Unselect Frame
-    Check If New Tab Is Opened With Title    Membership
+    Check If New Tab Is Opened    Membership
 
 Check Badges - Edit Community Badges Popup
     [Documentation]    Click "Badges - edit community badges" in admin settings tab. Popup should open. Close popup.
