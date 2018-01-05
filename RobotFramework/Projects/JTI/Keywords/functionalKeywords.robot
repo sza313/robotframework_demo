@@ -150,13 +150,13 @@ Check Community Page Sidebar
     Wait Until Element Contains    ${sidebar}    RECOMMENDED COMMUNITIES
     Wait Until Element Contains    ${sidebar}    AVAILABLE COMMUNITY BADGES
 
-Check If New Tab Is Opened With Title
-    [Arguments]    ${title}
+Check If New Tab Is Opened
+    [Arguments]    ${title}=""
     ${tabs}=    Get Window Handles
     ${original tab}=    Get From List    ${tabs}    0
     ${new tab}=    Get From List    ${tabs}    1
     Select Window    ${new tab}
-    Wait Until Page Contains    ${title}
+    Run Keyword If    "${title}" != ""    Wait Until Page Contains    ${title}
     Close Window
     Select Window    ${original tab}
 
@@ -325,6 +325,10 @@ Check Favorites And Reccomendations Page
     Wait Until Page Contains    ${name}
     Wait Until Page Contains Pagination    //div[@class="wrapMain"]
     Wait Until Page Contains    Recommended
-    Comment    TODO
+    Click On Recommended Link
     Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
     Wait Until Page Contains Link With Text    Clear filters
+
+Click On Recommended Link
+    Click Element    //div[@class="quick-links" and ./h3[text()="Recommended"]]//a
+    Check If New Tab Is Opened

@@ -106,6 +106,7 @@ Click Input Button With Value
 
 Click Sidebar Nav Link
     [Arguments]    ${link text}    # Link text
+    Scroll Element Into View    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
     Click Element    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
 
 Button With Text Should Have Class

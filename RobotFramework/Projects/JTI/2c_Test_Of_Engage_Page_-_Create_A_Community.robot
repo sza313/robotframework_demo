@@ -27,4 +27,4 @@ Open Create A Community Popup And Create One
     Unselect Frame
 
 Check If Community Is Created
-    Wait Until Keyword Succeeds    5 mins    15 secs    Check If Community Is Created    Com_${test user 1 name}_${current timestamp}
+    Wait Until Keyword Succeeds    15 mins    15 secs    Check If Community Is Created    Com_${test user 1 name}_${current timestamp}

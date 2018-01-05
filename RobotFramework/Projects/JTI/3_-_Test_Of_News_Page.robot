@@ -23,7 +23,7 @@ Check My News Popup
 
 Count Number Of Articles
     [Documentation]    Check if there are 10 articles visible on the page.
-    Page Should Contain Element    ${article item}    \    \    10
+    Page Should Contain Element    ${article item}    None    INFO    10
 
 Load Articles With Infinite Scroll
     [Documentation]    Scroll To the bottom of the page. Wait for infinite scroll to load more articles.

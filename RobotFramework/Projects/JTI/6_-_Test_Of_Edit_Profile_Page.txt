@@ -56,8 +56,8 @@ Change Settings In Profile And Save
     List Selection Should Be    id:AccountBirthDayMonth    7
     Textarea Value Should Be    id:AccountInterestsVal    Photography
     Textarea Value Should Be    id:AccountAboutMeVal    My life for Ner'Zhul
-    Select From List By Label    id:AccountDefaultMarketVal    Hungary
-    Select From List By Label    id:AccountPrimaryDepartmentVal    Finance
+    Select From List By Label    id:AccountDefaultMarketVal    Adriatica
+    Select From List By Label    id:AccountPrimaryDepartmentVal    Anti-Illicit Trade
     Select From List By Label    id:AccountBirthDayDay    7
     Select From List By Value    id:AccountBirthDayMonth    3
     Clear Element Text    id:AccountInterestsVal
@@ -65,8 +65,8 @@ Change Settings In Profile And Save
     Clear Element Text    id:AccountAboutMeVal
     Input Text    id:AccountAboutMeVal    About Me
     Save Profile Page
-    List Selection Should Be    id:AccountDefaultMarketVal    Hungary
-    List Selection Should Be    id:AccountPrimaryDepartmentVal    Finance
+    List Selection Should Be    id:AccountDefaultMarketVal    Adriatica
+    List Selection Should Be    id:AccountPrimaryDepartmentVal    Anti-Illicit Trade
     List Selection Should Be    id:AccountBirthDayDay    7
     List Selection Should Be    id:AccountBirthDayMonth    3
     Textarea Value Should Be    id:AccountInterestsVal    Music
@@ -114,9 +114,10 @@ Check News Tabs
     Check Tag By Name    NAS    ${panel}
     Remove Tag    NAS
     Click Tab    Regions    ${panel}
-    Select Check Box By Label    Global    ${panel}
-    Check Tag By Name    Global    ${panel}
+    Select Check Box By Label    Global    //div[@id="regions"]
+    Check Tag By Name    Global    //div[@id="regions"]
     Remove Tag    Global
+    \    \    aria-controls="regions"
 
 Click Notifications Panel
     [Documentation]    Click to Notifications in the left navigation.
