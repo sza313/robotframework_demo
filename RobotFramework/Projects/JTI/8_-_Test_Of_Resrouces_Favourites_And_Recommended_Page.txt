@@ -30,8 +30,9 @@ Check If All Webparts Are Loaded
     Wait Until Page Contains Span With Text    My saved documents
     Check Library Content Pagination    My saved documents
     Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
+    Filter Documents
     Wait Until Page Contains Element    //h3[text()="My pages"]
-    Comment    TODO
+    Wait Until Page Contains Element    //div[@class="quick-links my-pages"]//a
 
 Navigate To Recommended Page
     [Documentation]    Click "Recommended" link in left navigation and check if contents are loaded properly.
@@ -44,8 +45,9 @@ Navigate To Recommended Page
     Wait Until Page Contains Span With Text    Recommended documents
     Check Library Content Pagination    Recommended documents
     Wait Until Page Contains Element    //span[text()="Recommended documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
+    Filter Documents
     Wait Until Page Contains Element    //h3[text()="My pages"]
-    Comment    TODO
+    Wait Until Page Contains Element    //div[@class="quick-links my-pages"]//a
 
 Check Applications And Sites Page
     Check Favorites And Reccomendations Page    Applications & sites

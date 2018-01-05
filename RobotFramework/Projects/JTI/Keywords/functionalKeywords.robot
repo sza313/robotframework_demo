@@ -332,3 +332,9 @@ Check Favorites And Reccomendations Page
 Click On Recommended Link
     Click Element    //div[@class="quick-links" and ./h3[text()="Recommended"]]//a
     Check If New Tab Is Opened
+
+Filter Documents
+    Click Button With Text    Departments
+    ${unfiltered documents}=    Get WebElements    //div[@class="item"]
+    Click Link Which Contains    Anti-Illicit Trade
+    Check If WebElements Are Not Equal    ${unfiltered documents}    //div[@class="item"]
