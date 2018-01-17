@@ -139,7 +139,7 @@ Change Settings In Notifications And Save
     Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
     Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Monday
     Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
-    Select Checkbox    //input[@id="newsEmailDigestSwitch"]
+    Unselect Checkbox    //input[@id="newsEmailDigestSwitch"]
     Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
     Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Monday
     Save Profile Page
@@ -149,7 +149,7 @@ Change Settings In Notifications And Save
     Checkbox Should Be Selected    //input[@id="engageEmailDigestMyActivitiesSwitch"]
     Checkbox Should Be Selected    //input[@id="weeklyNotificationSwitch"]
     List Selection Should Be    //select[@id="weeklyNotificationDayPicker"]    Monday
-    Checkbox Should Be Selected    //input[@id="newsEmailDigestSwitch"]
+    Checkbox Should Not Be Selected    //input[@id="newsEmailDigestSwitch"]
     List Selection Should Be    //select[@id="newsEmailDigestDayPicker"]    Monday
     Scroll Element Into View    //input[@id="engageEmailDigestSwitch"]
     Unselect Checkbox    //input[@id="engageEmailDigestSwitch"]
@@ -164,7 +164,7 @@ Change Settings In Notifications And Save
     Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
     Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Friday
     Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
-    Unselect Checkbox    //input[@id="newsEmailDigestSwitch"]
+    Select Checkbox    //input[@id="newsEmailDigestSwitch"]
     Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
     Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Friday
     Save Profile Page
@@ -174,7 +174,7 @@ Change Settings In Notifications And Save
     Checkbox Should Not Be Selected    //input[@id="engageEmailDigestMyActivitiesSwitch"]
     Checkbox Should Not Be Selected    //input[@id="weeklyNotificationSwitch"]
     List Selection Should Be    //select[@id="weeklyNotificationDayPicker"]    Friday
-    Checkbox Should Not Be Selected    //input[@id="newsEmailDigestSwitch"]
+    Checkbox Should Be Selected    //input[@id="newsEmailDigestSwitch"]
     List Selection Should Be    //select[@id="newsEmailDigestDayPicker"]    Friday
 
 Click Colleagues Panel

@@ -107,6 +107,7 @@ Click All Communities In Sidebar
     Go To    ${engage page url}
     Scroll To Top
     Click Sidebar Nav Link    All communities
+    Wait Until Page Contains Element    ${community tabs}
     Wait Until Element Contains    ${community tabs}    All communities
     Wait Until Element Contains    ${community tabs}    My communities
     Wait Until Element Contains    ${community tabs}    Create a community
@@ -298,7 +299,6 @@ Check Admin Settings Tab In Opened Community
     [Documentation]    Check Admin settings tab and sidebar on community page.
     Go To    ${fixed community url}
     Click Tab    Admin settings
-    Wait Until Page Does Not Contain Element    //div[contains(@class,"secondaryInfo")]
     Select Frame    //iframe[@title="Community admin page viewer"]
     Wait Until Page Contains Span With Text    Admin links
     Wait Until Page Contains Link With Text    Edit properties

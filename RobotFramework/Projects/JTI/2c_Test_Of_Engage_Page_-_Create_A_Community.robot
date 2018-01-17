@@ -10,7 +10,6 @@ Log In
     Log In    ${test user 1 name}    ${test user 1 pwd}
 
 Open Create A Community Popup And Create One
-    Log In    ${test user 1 name}    ${test user 1 pwd}
     Go To    ${all communities url}
     Wait Until Page Contains Link With Text    Create a community
     Click Link Which Contains    Create a community
