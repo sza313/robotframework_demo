@@ -12,6 +12,7 @@ Add Suggested Tag
     [Arguments]    ${keyword}    ${container}
     ${results} =    Set Variable    ${container}//div[@id='myNewsTagsResults']
     ${tagsinput} =    Set Variable    ${container}//input[@type='text' and @id='myNewsTags']
+    Wait Until Page Contains Element    ${tagsinput}    0.5 secs
     Clear Element Text    ${tagsinput}
     Input Text    ${tagsinput}    ${keyword}
     Wait Until Element Is Visible    ${results}    2 secs

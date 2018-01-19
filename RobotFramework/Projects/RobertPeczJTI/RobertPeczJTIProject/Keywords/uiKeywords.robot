@@ -8,9 +8,9 @@ Library           ExcelLibrary
 Library           openpyxl
 Library           pyexcel_xls
 Library           CSVLibrary
-Resource          ../TestData/testData.robot
 Resource          ../TestData/elements.robot
 Library           AutoItLibrary
+Resource          ../Testdata/Resource.robot
 
 *** Keywords ***
 Button With Text Should Be Visible
@@ -139,9 +139,7 @@ Link Should Have Class
     Page Should Contain Element    ${container}//a[contains(text(),"${link text}") and contains(@class,"${class}")]
 
 Open Profile Menu
-    Wait Until Page Contains Element    //li[@id="jtiMyProfile"]
     Click Element    //li[@id="jtiMyProfile"]/a
-    Wait Until Page Contains Element    //ul[@class="dropdown-menu"]
 
 Open SharePoint Menu
     Click Element    //a[@class="toolsButton"]

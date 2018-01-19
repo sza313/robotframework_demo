@@ -72,6 +72,7 @@ Check Engage Part Sticky Behaviour
     [Documentation]    Engage part should be sticky when scrolled down.
     ...    Expected - Engage part is visible and has fixed position.
     ${container}=    Set Variable    //section[contains(@class,'engagepart')]
+    Go To    https://insidetest.jti.com
     Scroll To Bottom
     ${elementIsInViewport} =    Get Is Element In Viewport    ${container}
     Should Be True    ${elementIsInViewport}
@@ -113,7 +114,9 @@ Test Search With Results
     [Documentation]    Click to Seachbox in Top menu and type e.g."test" and press Enter.
     ...    Expected - Redirected to results page with correct results.
     Go To    ${index page url}
-    Search For Keyword    test
+    Wait Until Page Contains Element    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input
+    Input Text    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input    test
+    Press Key    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input    \\13
     Check Search Page Elements    test
     ${results count}    Set Variable    //div[@id="ResultCount"]
     Element Should Contain    ${results count}    ABOUT
@@ -123,6 +126,8 @@ Test Search With No Results
     [Documentation]    Click to Seachbox in Top menu and type e.g."asdfg" and press Enter.
     ...    Expected - Redirected to results page with NO results.
     Go To    ${index page url}
-    Search For Keyword    asdfg
+    Wait Until Page Contains Element    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input
+    Input Text    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input    asdfg
+    Press Key    //nav[not(@id="mobileNav")]//div[@id="SearchBox"]//input    \\13
     Check Search Page Elements    asdfg
     Wait Until Element Contains    //div[@id="NoResult"]    Sorry, no results matching your search query
