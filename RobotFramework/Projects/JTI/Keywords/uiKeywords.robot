@@ -170,7 +170,7 @@ Page Should Not Contain Button With Text
 Select Check Box By Label
     [Arguments]    ${label}    ${container}=
     ${checkbox} =    Set Variable    ${container}//span[text()="${label}"]/../input[@type="checkbox"]
-    Wait Until Page Contains Element    ${checkbox}    15
+    Wait Until Element Is Visible    ${checkbox}
     Select Checkbox    ${checkbox}
 
 Scroll Element Into View
