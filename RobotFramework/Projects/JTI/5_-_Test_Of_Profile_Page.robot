@@ -14,9 +14,10 @@ Navigate To My Profile Page
     ...    Expected - My profile site is opened in Activity stream tab.
     Open Profile Menu
     Click Profile Menu Item    My profile
-    #Wait Until Page Contains Element    //h1[contains(text(),"${test user 1 full name}")]
-    Wait Until Page Contains Element    //div[@id='profilePresenceIndicator']/h1[1]
-    #A masodikkal nagyobb az eselye, hogy passol, de ezzel is van, hogy failel.
+    Wait Until Page Contains Element    //h1[contains(text(),"${test user 1 full name}")]
+
+Go To Profile Page
+    Go To    ${profile page url}
 
 Check If Left Side Webparts Are Loaded
     [Documentation]    Check if Left side - Areas of expertise, My communities, Following, Followers are loaded.

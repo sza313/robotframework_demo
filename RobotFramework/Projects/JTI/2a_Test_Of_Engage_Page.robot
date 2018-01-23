@@ -15,6 +15,9 @@ Navigate To Engage Page
     Click Main Menu Item    Engage
     Location Should Be    ${engage page url}
 
+Go To Engage Page
+    Go To    ${engage page url}
+
 Check Global Menu Is Loaded
     [Documentation]    Check if main navigation is loaded by checking the container, profile pic and level 0 menu items.
     Check If Global Menu Is Loaded

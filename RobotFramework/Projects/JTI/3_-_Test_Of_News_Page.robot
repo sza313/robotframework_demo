@@ -15,6 +15,9 @@ Navigate To News Page
     Click Main Menu Item    News
     Location Should Be    ${news page url}
 
+Go To News Page
+    Go To    ${news page url}
+
 Check My News Popup
     [Documentation]    Click on cog button next to My News title. Popup with filters and tags should open.
     Check My News Popup

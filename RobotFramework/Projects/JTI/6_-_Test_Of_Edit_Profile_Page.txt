@@ -15,6 +15,9 @@ Navigate To Edit Profile Page
     Click Profile Menu Item    Settings
     Wait Until Element Contains    //h3[@class="panel-title"]    Profile
 
+Go To Edit Profile Page
+    Go To    ${profile settings url}
+
 Click Profile Panel
     [Documentation]    Click to Profile in the left navigation.
     ...    Expected - Profile webpart is shown in top of window and button Profile in the left navigation is highlighted.

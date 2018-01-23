@@ -21,6 +21,9 @@ Navigate To Favourites Page
     Wait Until Page Contains    My favorites
     Wait Until Page Contains Element    //a[@class="active" and text()="My favorites"]
 
+Go To Resources And Favorites Page
+    Go To    ${resources and favorites page url}
+
 Check If All Webparts Are Loaded
     [Documentation]    Check If My favorites page parts are loaded corectly.
     Check Favorites Page Sidebar

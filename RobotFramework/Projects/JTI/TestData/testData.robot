@@ -19,3 +19,4 @@ ${profile page url}    https://myinsidetest.jti.com/Person.aspx?accountname=JTIC
 ${profile settings url}    https://myinsidetest.jti.com/JTIEditPerson.aspx#param_skills
 ${onboarding page url}    https://insidetest.jti.com/Pages/Onboarding.aspx
 ${welcome page url}    https://insidetest.jti.com/pages/welcome.aspx
+${resources and favorites page url}    ${EMPTY}
