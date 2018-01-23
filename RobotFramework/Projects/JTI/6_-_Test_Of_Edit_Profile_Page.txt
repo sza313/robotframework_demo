@@ -114,8 +114,8 @@ Check News Tabs
     Check Tag By Name    NAS    ${panel}
     Remove Tag    NAS
     Click Tab    Regions    ${panel}
-    Select Check Box By Label    Global    //div[@id="regions"]
-    Check Tag By Name    Global    //div[@id="regions"]
+    Select Check Box By Label    Global    //div[@id="param_news"]
+    Check Tag By Name    Global    //div[@id="param_news"]
     Remove Tag    Global
     \    \    aria-controls="regions"
 

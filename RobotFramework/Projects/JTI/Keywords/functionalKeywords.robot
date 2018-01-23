@@ -293,7 +293,7 @@ Save Profile Page
     Sleep    3 secs
     Reload Page
     Wait Until Page Contains    CSTFERNBA
-    Sleep    5 secs
+    Sleep    10 secs
 
 Search For Community
     [Arguments]    ${name}

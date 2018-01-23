@@ -141,7 +141,7 @@ Link Should Have Class
 Open Profile Menu
     Wait Until Page Contains Element    //li[@id="jtiMyProfile"]
     Click Element    //li[@id="jtiMyProfile"]/a
-    Wait Until Page Contains Element    //ul[@class="dropdown-menu"]
+    Wait Until Element Is Visible    //li[@id="jtiMyProfile"]//ul[@class="dropdown-menu"]
 
 Open SharePoint Menu
     Click Element    //a[@class="toolsButton"]
