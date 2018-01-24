@@ -321,7 +321,7 @@ Set Filter
 
 Setup Test Environment
     Open Browser    ${index page url}    ${browser}
-    Maximize Browser Window
+    Set Window Size    1920    1080
     ${time}=    Get Time    epoch
     Set Global Variable    ${current timestamp}    ${time}
     Set Selenium Timeout    15

@@ -1,6 +1,6 @@
 *** Settings ***
 Suite Setup       Setup Test Environment
-Suite Teardown    # Close Browser
+Suite Teardown    Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
