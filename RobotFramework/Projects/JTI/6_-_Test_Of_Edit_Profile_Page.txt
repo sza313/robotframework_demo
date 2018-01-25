@@ -141,7 +141,7 @@ Change Settings In Notifications And Save
     Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
     Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Monday
     Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
-    Unselect Checkbox    //input[@id="newsEmailDigestSwitch"]
+    Select Checkbox    //input[@id="newsEmailDigestSwitch"]
     Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
     Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Monday
     Save Profile Page
@@ -161,23 +161,23 @@ Change Settings In Notifications And Save
     Unselect Checkbox    //input[@id="engageEmailDigestColleaguesSwitch"]
     Scroll Element Into View    //input[@id="engageEmailDigestMyActivitiesSwitch"]
     Unselect Checkbox    //input[@id="engageEmailDigestMyActivitiesSwitch"]
-    Scroll Element Into View    //input[@id="weeklyNotificationSwitch"]
-    Unselect Checkbox    //input[@id="weeklyNotificationSwitch"]
-    Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
-    Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Friday
-    Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
-    Select Checkbox    //input[@id="newsEmailDigestSwitch"]
-    Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
-    Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Friday
+    #Scroll Element Into View    //input[@id="weeklyNotificationSwitch"]
+    #Unselect Checkbox    //input[@id="weeklyNotificationSwitch"]
+    #Scroll Element Into View    //select[@id="weeklyNotificationDayPicker"]
+    #Select From List By Label    //select[@id="weeklyNotificationDayPicker"]    Friday
+    #Scroll Element Into View    //input[@id="newsEmailDigestSwitch"]
+    #unselect Checkbox    //input[@id="newsEmailDigestSwitch"]
+    #Scroll Element Into View    //select[@id="newsEmailDigestDayPicker"]
+    #Select From List By Label    //select[@id="newsEmailDigestDayPicker"]    Friday
     Save Profile Page
     Checkbox Should Not Be Selected    //input[@id="engageEmailDigestSwitch"]
     Checkbox Should Not Be Selected    //input[@id="engageEmailDigestCommunitiesSwitch"]
     Checkbox Should Not Be Selected    //input[@id="engageEmailDigestColleaguesSwitch"]
     Checkbox Should Not Be Selected    //input[@id="engageEmailDigestMyActivitiesSwitch"]
-    Checkbox Should Not Be Selected    //input[@id="weeklyNotificationSwitch"]
-    List Selection Should Be    //select[@id="weeklyNotificationDayPicker"]    Friday
-    Checkbox Should Be Selected    //input[@id="newsEmailDigestSwitch"]
-    List Selection Should Be    //select[@id="newsEmailDigestDayPicker"]    Friday
+    #Checkbox Should Not Be Selected    //input[@id="weeklyNotificationSwitch"]
+    #List Selection Should Be    //select[@id="weeklyNotificationDayPicker"]    Friday
+    #Checkbox Should Be Selected    //input[@id="newsEmailDigestSwitch"]
+    #List Selection Should Be    //select[@id="newsEmailDigestDayPicker"]    Friday
 
 Click Colleagues Panel
     [Documentation]    Click to Colleagues in the left navigation.
