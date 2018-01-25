@@ -28,4 +28,5 @@ Check If Community Is Created
     Wait Until Keyword Succeeds    15 mins    15 secs    Check If Community Is Created    Com_${test user 1 name}_${current timestamp}
 
 Check If Community Can Be Opened
+    Go To    ${engage page url}
     Click On A Newly Created Community
