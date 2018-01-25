@@ -35,6 +35,14 @@ Change Language
     Select From List By Label    id:AccountLanguageVal    English
     Wait Until Page Contains    Your preferred language
 
+Reset Language To English
+    Go To    ${profile settings url}
+    Select From List By Label    id:AccountLanguageVal    English
+    Click Element    id:saveSettings
+    Sleep    5 secs
+    Reload Page
+    Wait Until Page Contains    Your preferred language
+
 Check About Text Length
     [Documentation]    Go to "About me" field and insert text that is longer than 240 characters.
     ...    Expected - Text limited to 240 characters.

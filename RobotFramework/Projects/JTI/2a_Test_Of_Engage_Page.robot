@@ -131,8 +131,7 @@ Check All Communities Tab
 
 Set All Communities Filters
     [Documentation]    Choose on from each community filter. Check if communities are filtered.
-    Click Communities Tab    All communities
-    Set Filter    Market    Adriatica    ${all communities tab}
+    Go To    ${all communities url}
     Set Filter    Department    Anti-Illicit Trade    ${all communities tab}
     Set Filter    Brand    Amber Leaf    ${all communities tab}
     Set Filter    Language    English    ${all communities tab}
