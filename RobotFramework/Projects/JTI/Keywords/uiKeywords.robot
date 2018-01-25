@@ -232,3 +232,9 @@ Wait Until Page Contains Span With Text
 Wait Until Search Tab Exists And Highlighted
     [Arguments]    ${tab name}
     Wait Until Page Contains Element    //a[@class="ms-srchnav-link-selected" and text()="${tab name}"]
+
+Click On A Newly Created Community
+    Wait Until Page Contains Element    //ul[@class='nav nav-sidebar']
+    Wait Until Page Contains Element    //ul[@id='MyActivityStream-MyCommunitiesList']/li/a[text()='Com_${test user 1 name}_${current timestamp}']
+    Click Element    //ul[@id='MyActivityStream-MyCommunitiesList']/li/a[text()='Com_${test user 1 name}_${current timestamp}']
+    Wait Until Page Contains Element    //div[@class='col-sm-8']/h1[text()='Com_${test user 1 name}_${current timestamp}']
