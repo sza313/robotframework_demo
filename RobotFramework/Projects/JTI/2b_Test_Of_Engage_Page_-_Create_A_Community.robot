@@ -29,4 +29,4 @@ Check If Community Is Created
 
 Check If Community Can Be Opened
     Go To    ${engage page url}
-    Click On A Newly Created Community
+    Wait Until Keyword Succeeds    15 mins    15 secs    Click On A Newly Created Community
