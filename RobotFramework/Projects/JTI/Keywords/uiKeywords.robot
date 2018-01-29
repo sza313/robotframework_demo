@@ -235,6 +235,7 @@ Wait Until Search Tab Exists And Highlighted
 
 Click On A Newly Created Community
     Go To    ${engage page url}
+    Log To Console    Newly created community validation process running
     Wait Until Page Contains Element    //ul[@class='nav nav-sidebar']
     Wait Until Page Contains Element    //ul[@id='MyActivityStream-MyCommunitiesList']/li/a[text()='Com_${test user 1 name}_${current timestamp}']
     Click Element    //ul[@id='MyActivityStream-MyCommunitiesList']/li/a[text()='Com_${test user 1 name}_${current timestamp}']
