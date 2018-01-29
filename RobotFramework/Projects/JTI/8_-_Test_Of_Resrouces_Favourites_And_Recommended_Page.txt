@@ -24,48 +24,48 @@ Navigate To Favourites Page
 Go To Resources And Favorites Page
     Go To    ${resources and favorites page url}
 
-Check If All Webparts Are Loaded
+Check My Favorites Page
     [Documentation]    Check If My favorites page parts are loaded corectly.
-    Check Favorites Page Sidebar
+    Check Resources Page Left Sidebar
     Wait Until Page Contains Span With Text    My applications and sites
-    Check Library Content Pagination    My applications and sites
     Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
+    Check Resources Page Pagination    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]
     Wait Until Page Contains Span With Text    My saved documents
-    Check Library Content Pagination    My saved documents
     Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
-    Filter Documents
+    Check Resources Page Pagination    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]
+    Filter Favorites Library By Filters    //div[@class="my-pages"]
     Wait Until Page Contains Element    //h3[text()="My pages"]
-    Wait Until Page Contains Element    //div[@class="quick-links my-pages"]//a
+    Check External Links    //div[@class="my-pages"]
 
-Navigate To Recommended Page
+Check Recommended Page
     [Documentation]    Click "Recommended" link in left navigation and check if contents are loaded properly.
     Click Sidebar Nav Link    Recommended
     Wait Until Page Contains    Recommended for you
-    Check Favorites Page Sidebar
+    Check Resources Page Left Sidebar
     Wait Until Page Contains Span With Text    Recommended applications and sites
-    Check Library Content Pagination    Recommended applications and sites
+    Check Resources Page Pagination    //span[text()="Recommended applications and sites"]/../div[@class="library-content"]
     Wait Until Page Contains Element    //span[text()="Recommended applications and sites"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Wait Until Page Contains Span With Text    Recommended documents
-    Check Library Content Pagination    Recommended documents
+    Check Resources Page Pagination    //span[text()="Recommended documents"]/../div[@class="library-content"]
     Wait Until Page Contains Element    //span[text()="Recommended documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
-    Filter Documents
-    Wait Until Page Contains Element    //h3[text()="My pages"]
-    Wait Until Page Contains Element    //div[@class="quick-links my-pages"]//a
+    Filter Favorites Library By Filters    //div[@class="stm-library saved-docs"]
+    Wait Until Page Contains Element    //h3[text()="Recommended"]
+    Check External Links    //h3[text()="Recommended"]
 
 Check Applications And Sites Page
-    Check Favorites And Reccomendations Page    Applications & sites
+    Check Resources Page    Applications & sites
 
 Check Guidelines And Toolkits Page
-    Check Favorites And Reccomendations Page    Guidelines & toolkits
+    Check Resources Page    Guidelines & toolkits
 
 Check Policies And Procedures Page
-    Check Favorites And Reccomendations Page    Policies & procedures
+    Check Resources Page    Policies & procedures
 
 Check Reports And Case Studies Page
-    Check Favorites And Reccomendations Page    Reports & case studies
+    Check Resources Page    Reports & case studies
 
 Check Templates Page
-    Check Favorites And Reccomendations Page    Templates
+    Check Resources Page    Templates
 
 Check Training Page
-    Check Favorites And Reccomendations Page    Training
+    Check Resources Page    Training

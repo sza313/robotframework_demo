@@ -41,18 +41,26 @@ Check Community Page Sidebar
     Wait Until Element Contains    ${sidebar}    RECOMMENDED COMMUNITIES
     Wait Until Element Contains    ${sidebar}    AVAILABLE COMMUNITY BADGES
 
-Check Favorites And Reccomendations Page
+Check External Links
+    [Arguments]    ${container}=
+    Wait Until Page Contains Element    ${container}
+    Click Link    ${container}/../div[@class="ms-fullWidth ms-webpart-zone"]//a
+    Check If New Tab Is Opened
+
+Check Resources Page
     [Arguments]    ${name}
     Click Sidebar Nav Link    ${name}
-    Check Favorites Page Sidebar
-    Wait Until Page Contains    ${name}
-    Wait Until Page Contains Pagination    //div[@class="wrapMain"]
-    Wait Until Page Contains    Recommended
-    Click On Recommended Link
+    Wait Until Element Contains    //div[@class="wrapMain"]    ${name}
     Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
-    Wait Until Page Contains Link With Text    Clear filters
+    Check Resources Page Left Sidebar
+    Filter Favorites Library By Tags
+    Clear Filters    //div[@class="wrapMain"]
+    Filter Favorites Library By Filters    //div[@class="wrapMain"]
+    Clear Filters    //div[@class="wrapMain"]
+    Check Resources Page Pagination    //div[@class="wrapMain"]
+    Check External Links    //h3[text()="Recommended"]
 
-Check Favorites Page Sidebar
+Check Resources Page Left Sidebar
     Wait Until Page Contains Link With Text    My favorites
     Wait Until Page Contains Link With Text    Recommended
     Wait Until Page Contains Link With Text    Applications & sites
@@ -61,6 +69,11 @@ Check Favorites Page Sidebar
     Wait Until Page Contains Link With Text    Reports & case studies
     Wait Until Page Contains Link With Text    Templates
     Wait Until Page Contains Link With Text    Training
+
+Check Resources Page Pagination
+    [Arguments]    ${container}=
+    Wait Until Page Contains Pagination    ${container}
+    Paginate To    2    ${container}
 
 Check If Articles Loaded
     [Documentation]    Returns true if additional articles are loaded. (more than 10 articles are present).
@@ -179,13 +192,6 @@ Click Profile Menu Item
     [Arguments]    ${name}
     Click Link Which Contains    ${name}    //li[@id="jtiMyProfile"]
 
-Filter By Tags
-    Scroll To Top
-    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
-    ${tag name}=    Get Text    ${tag}
-    Click Element    ${tag}
-    Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
-
 Filter By Filters
     [Arguments]    ${container}
     Set Filter    Brand    \    ${container}
@@ -193,11 +199,26 @@ Filter By Filters
     Set Filter    Market    \    ${container}
     Set Filter    Language    \    ${container}
 
-Filter Documents
+Filter Favorites Library By Tags
+    Scroll To Top
+    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
+    ${tag name}=    Get Text    ${tag}
+    Click Element    ${tag}
+    Wait Until Page Does Not Contain Element    //div[contains(@class,"doc-item") and not(.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]
+
+Filter Favorites Library By Filters
+    [Arguments]    ${container}=
     Click Button With Text    Departments
-    ${unfiltered documents}=    Get WebElements    //div[@class="item"]
+    ${unfiltered documents}=    Get WebElements    ${container}//div[@class="item"]
     Click Link Which Contains    Anti-Illicit Trade
-    Check If WebElements Are Not Equal    ${unfiltered documents}    //div[@class="item"]
+    Check If WebElements Are Not Equal    ${unfiltered documents}    ${container}//div[@class="item"]
+
+Filter News By Tags
+    Scroll To Top
+    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
+    ${tag name}=    Get Text    ${tag}
+    Click Element    ${tag}
+    Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
 
 Filter Search Results By Any Sidebar Filter
     [Arguments]    ${result item locator}
@@ -263,7 +284,6 @@ Log Out
 
 Paginate To
     [Arguments]    ${page number}    ${container}
-    Scroll To Bottom
     ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
     Wait Until Page Contains Element    ${container}//a[@title="Move to page ${page number}"]
     Scroll Element Into View    ${container}//a[@title="Move to page ${page number}"]

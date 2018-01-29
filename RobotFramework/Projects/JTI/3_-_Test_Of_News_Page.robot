@@ -36,7 +36,7 @@ Test My News
     [Documentation]    Click My news in sidebar and check filters.
     Click Sidebar Nav Link    My news
     Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
-    Filter By Tags
+    Filter News By Tags
     Filter By Filters    ${main content}
     Clear Filters    ${main content}
 
@@ -44,7 +44,7 @@ Test All News
     [Documentation]    Click On All News in sidebar and check filters.
     Click Sidebar Nav Link    All news
     Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"All news")]
-    Filter By Tags
+    Filter News By Tags
     Filter By Filters    ${main content}
     Clear Filters    ${main content}
 
@@ -52,7 +52,7 @@ Test Corporate News
     [Documentation]    Click on Corporate news and check filters.
     Click Sidebar Nav Link    Corporate news
     Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
-    Filter By Tags
+    Filter News By Tags
     Filter By Filters    ${main content}
     Clear Filters    ${main content}
 
@@ -60,7 +60,7 @@ Test Announcements
     [Documentation]    Click on Announcements in sidebar and check filters.
     Click Sidebar Nav Link    Announcements
     Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
-    Filter By Tags
+    Filter News By Tags
     Filter By Filters    ${main content}
     Clear Filters    ${main content}
 
