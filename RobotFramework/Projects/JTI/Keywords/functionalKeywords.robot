@@ -89,6 +89,7 @@ Check If Community Is Opened
 Check If Community Is Created
     [Arguments]    ${name}
     Go To    ${sp communities list url}
+    Log To Console    Community created process is running
     Input Text    id:inplaceSearchDiv_WPQ4_lsinput    Com_${test user 1 name}_${current timestamp}
     Press Key    id:inplaceSearchDiv_WPQ4_lsinput    \\13
     Wait Until Page Contains    Com_${test user 1 name}_${current timestamp}
