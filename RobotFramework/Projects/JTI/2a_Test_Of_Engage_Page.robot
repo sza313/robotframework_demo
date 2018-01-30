@@ -251,7 +251,7 @@ Check Files Tab In Opened Community
     [Documentation]    Check files tab and sidebar on community page.
     Go To    ${fixed community url}
     Click Tab    Files
-    Wait Until Page Contains Element    //table[contains(@summary,"Files")]
+    Wait Until Page Contains Element    //table[contains(@summary,"Shared Documents")]
     Check Community Page Sidebar
 
 Check Pictures Tab In Opened Community
