@@ -120,10 +120,6 @@ Check If Results Page Tab Loaded
     Wait Until Keyword Succeeds    15 secs    0.5 secs    Page Should Contain Element    ${item locator}    None    NONE
     ...    10
 
-Check Library Content Pagination
-    [Arguments]    ${library name}
-    Wait Until Page Contains Pagination    //span[text()="${library name}"]/following-sibling::div[@class="library-content"]
-
 Check My News Popup
     ${cogButton} =    Set Variable    //h1[@class='sectionTitle']//a[@class='edit']
     ${modal} =    Set Variable    //div[@id="modal_editmyNews"]
@@ -202,7 +198,7 @@ Filter By Filters
 
 Filter Favorites Library By Tags
     Scroll To Top
-    ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
+    ${tag}=    Set Variable    //div[@refinername="RefinerTaRTags"]//*[@name="Item"]/a
     ${tag name}=    Get Text    ${tag}
     Click Element    ${tag}
     Wait Until Page Does Not Contain Element    //div[contains(@class,"doc-item") and not(.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]

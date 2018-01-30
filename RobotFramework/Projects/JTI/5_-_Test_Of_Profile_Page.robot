@@ -142,7 +142,7 @@ Delete A Post
     ...    Expected - Post should be removed.
     Go To    ${profile page url}
     Add A Post On My Profle Page
-    ${post}=    Set Variable    (//div[contains(@class,"ngActivityProfileIcon")]/ancestor::div[contains(@class,"ngActivityRow")])[1]
+    ${post}=    Set Variable    (//div[contains(@class,"ngActivityProfileIcon")]/ancestor::div[contains(@class,"ngActivityRow")])[not(.//div[contains(@class,"ngActivityMetaDiv")])]
     Click On Post Quick Menu Item    ${post}    Delete
     Handle Alert    ACCEPT
     Wait Until Page Does Not Contain    TestPost_${test user 1 name}_${current timestamp}

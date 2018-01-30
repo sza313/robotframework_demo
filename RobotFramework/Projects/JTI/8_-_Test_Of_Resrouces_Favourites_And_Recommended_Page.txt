@@ -1,6 +1,5 @@
 *** Settings ***
 Suite Setup       Setup Test Environment
-Suite Teardown    Close Browser
 Resource          Keywords/functionalKeywords.robot
 
 *** Test Cases ***
@@ -28,12 +27,12 @@ Check My Favorites Page
     [Documentation]    Check If My favorites page parts are loaded corectly.
     Check Resources Page Left Sidebar
     Wait Until Page Contains Span With Text    My applications and sites
-    Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
-    Check Resources Page Pagination    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]
+    Wait Until Page Contains Element    //span[text()="My applications and sites"]/following-sibling::div[@class="library-content"]//div[@class="item"]
+    Check Resources Page Pagination    //span[text()="My applications and sites"]/following-sibling::div[@class="library-content"]
     Wait Until Page Contains Span With Text    My saved documents
     Wait Until Page Contains Element    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Check Resources Page Pagination    //span[text()="My saved documents"]/following-sibling::div[@class="library-content"]
-    Filter Favorites Library By Filters    //div[@class="my-pages"]
+    Filter Favorites Library By Filters    //div[@class="stm-library saved-docs"]
     Wait Until Page Contains Element    //h3[text()="My pages"]
     Check External Links    //div[@class="my-pages"]
 
