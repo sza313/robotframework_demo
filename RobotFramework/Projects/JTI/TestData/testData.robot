@@ -1,7 +1,7 @@
 *** Variables ***
 ${browser}        chrome
 ${test user 1 name}    CSTPECZR
-${test user 1 full name}    Fernbach, Aron
+${test user 1 full name}    Pecz, Robert
 ${test user 1 pwd}    Pohar343
 ${test user 2 name}    CSTHUDAKS
 ${test user 2 full name}    Hudak, Szabolcs

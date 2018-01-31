@@ -309,7 +309,7 @@ Save Profile Page
     Wait Until Element Contains    //div[@class="innersaveBar"]    User profile updated
     Sleep    3 secs
     Reload Page
-    Wait Until Page Contains    CSTFERNBA
+    Wait Until Page Contains    ${test user 1 name}
     Sleep    10 secs
 
 Search For Community
