@@ -1,12 +1,12 @@
 *** Variables ***
 ${browser}        chrome
-${test user 1 name}    CSTPECZR
-${test user 1 full name}    Pecz, Robert
-${test user 1 pwd}    Pohar343
+${test user 1 name}    CSTFERNBA
+${test user 1 full name}    Fernbach, Aron
+${test user 1 pwd}    SuperCastlevania4
 ${test user 2 name}    CSTHUDAKS
 ${test user 2 full name}    Hudak, Szabolcs
 ${test user 2 pwd}    Szury4489
-${fixed community}    Com_Fernbach_Fixed_Private
+${fixed community}    Com_Pecz_Fixed_Private
 ${index page url}    https://insidetest.jti.com
 ${engage page url}    https://insidetest.jti.com/Social/Engage
 ${all communities url}    https://insidetest.jti.com/Social/Engage/Pages/AllCommunities.aspx
