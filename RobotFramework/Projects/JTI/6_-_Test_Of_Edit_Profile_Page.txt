@@ -27,7 +27,7 @@ Change Language
     [Documentation]    Click to "Your preferred language" dropdown in Profile webpart and change language to e.g.Deutsch.
     ...    Expected - The site is automatically reload and the language is changed to German.
     Go To    ${profile settings url}
-    Wait Until Page Contains    CSTFERNBA
+    Wait Until Page Contains    ${test user 1 name}
     Wait Until Page Contains Element    id:AccountLanguageVal
     Sleep    5 secs
     Select From List By Label    id:AccountLanguageVal    Deutsch
