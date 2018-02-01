@@ -2,7 +2,7 @@
 ${browser}        chrome
 ${test user 1 name}    CSTFERNBA
 ${test user 1 full name}    Fernbach, Aron
-${test user 1 pwd}    rETURNOFTHEJET1
+${test user 1 pwd}    SuperCastlevania4
 ${test user 2 name}    CSTHUDAKS
 ${test user 2 full name}    Hudak, Szabolcs
 ${test user 2 pwd}    Szury4489

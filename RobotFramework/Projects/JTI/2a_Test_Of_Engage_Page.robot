@@ -387,7 +387,8 @@ Check Community Engagement Scorecard Popup
     Select Frame    //iframe[@title="Community admin page viewer"]
     Wait Until Page Contains Link With Text    Community engagement scorecard
     Click Link Which Contains    Community engagement scorecard
-    Wait Until Page Contains    ${fixed community} - \ dashboard
+    Wait Until Page Contains    Com_Fernbach_Fixed_Private - \ dashboard
+    Wait Until Element Is Visible    //a[text()="detailed graphs"]
     Click Link    //a[text()="detailed graphs"]
     Wait Until Page Contains    Engagement Scorecard
     Wait Until Page Contains    ${fixed community} detailed graphs

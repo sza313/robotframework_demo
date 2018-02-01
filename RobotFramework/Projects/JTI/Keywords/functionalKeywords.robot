@@ -44,7 +44,7 @@ Check Community Page Sidebar
 Check External Links
     [Arguments]    ${container}=
     Wait Until Page Contains Element    ${container}
-    Click Link    ${container}/../div[@class="ms-fullWidth ms-webpart-zone"]//a
+    Click Link    ${container}//a
     Check If New Tab Is Opened
 
 Check Resources Page
@@ -58,7 +58,7 @@ Check Resources Page
     Filter Favorites Library By Filters    //div[@class="wrapMain"]
     Clear Filters    //div[@class="wrapMain"]
     Check Resources Page Pagination    //div[@class="wrapMain"]
-    Check External Links    //h3[text()="Recommended"]
+    Check External Links    //h3[text()="Recommended"]/..
 
 Check Resources Page Left Sidebar
     Wait Until Page Contains Link With Text    My favorites
@@ -205,10 +205,10 @@ Filter Favorites Library By Tags
 
 Filter Favorites Library By Filters
     [Arguments]    ${container}=
-    Click Button With Text    Departments
+    Click Button With Text    Department
     ${unfiltered documents}=    Get WebElements    ${container}//div[@class="item"]
     Click Link Which Contains    Anti-Illicit Trade
-    Check If WebElements Are Not Equal    ${unfiltered documents}    ${container}//div[@class="item"]
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered documents}    ${container}//div[@class="item"]
 
 Filter News By Tags
     Scroll To Top
