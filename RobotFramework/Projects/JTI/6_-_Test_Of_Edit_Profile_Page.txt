@@ -220,7 +220,8 @@ Add A Colleguae
     Wait Until Page Contains Element    //div[@id="ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyMainSection_upSelectContact_upLevelDiv"]
     Input Text    //div[@id="ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyMainSection_upSelectContact_upLevelDiv"]    ${test user 2 full name}
     Click Element    //a[@title='Check Names']
-    Wait Until Page Contains Element    //span[@class="ms-entity-resolved"]
+    #Wait Until Page Contains Element    //span[@class="ms-entity-resolved"]
+    Wait Until Keyword Succeeds    15 mins    15 secs    Wait Until Page Contains Element    //span[@class="ms-entity-resolved"]
     Click Button    //input[@name='ctl00$OkButton']
     Sleep    10
 
