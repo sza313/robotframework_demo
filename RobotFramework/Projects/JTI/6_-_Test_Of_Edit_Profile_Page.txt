@@ -186,32 +186,6 @@ Click Colleagues Panel
     ...    Expected - Colleagues webpart is shown in top of window and button Colleagues in the left navigation is highlighted.
     Click Edit Profile Page Nav Link    Colleagues    Colleagues
 
-Add A Colleague(not used at the momemt)
-    [Documentation]    Add a colleague via the popup in Colleagues panel. Check if colleague added after page reload.
-    #Click Link Which Contains    Add Colleagues
-    #Wait Until Dialog Is Open    Add Colleagues
-    #${add colleagues dialog}=    Set Variable    //div[@role="dialog" and .//h1[contains(text(),"Add Colleagues")]]
-    #Select Frame    ${add colleagues dialog}//iframe
-    #Sleep    5
-    #Click Element    //a[@title="Browse"]
-    #Unselect Frame
-    #${select people dialog}=    Set Variable    //div[@role="dialog" and .//h1[contains(text(),"Select People")]]
-    #Wait Until Dialog Is Open    Select People
-    #Wait Until Page Contains Element    ${select people dialog}//iframe
-    #Select Frame    ${select people dialog}//iframe
-    #Wait Until Page Contains Element    //input[contains(@id,"queryTextBox")]
-    #Input Text    //input[contains(@id,"queryTextBox")]    ${test user 2 full name}
-    #Press Key    //input[contains(@id,"queryTextBox")]    \\13
-    #Wait Until Page Contains Element    //tr[./td[contains(text(),"${test user 2 full name}")]]
-    #Click Element    //tr[./td[contains(text(),"${test user 2 full name}")]]
-    #Click Element    //input[contains(@name,"AddSel")]
-    #Click Element    //input[contains(@name,"btnOk")]
-    #Unselect Frame
-    #Select Frame    ${add colleagues dialog}//iframe
-    #Click Element    //input[contains(@name,"OkButton")]
-    #Unselect Frame
-    #Wait Until Page Contains Element    //a[text()="${test user 2 full name}"]
-
 Add A Colleguae
     Click Link Which Contains    Add Colleagues
     Wait Until Dialog Is Open    Add Colleagues
