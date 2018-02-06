@@ -182,6 +182,7 @@ Check Links Tab
     Click Link Which Contains    Add Link
     Wait Until Dialog Is Open    Add Link
     Select Frame    //div[@role="dialog" and .//h1[text()="Add Link"]]//iframe
+    Sleep    10
     Wait Until Page Contains Element    //input[contains(@name,"txbTitle")]
     Input Text    //input[contains(@name,"txbTitle")]    test link ${current timestamp}
     Input Text    //input[contains(@name,"txbUrl")]    http://google.com
@@ -196,6 +197,7 @@ Manage Links
     Click Link Which Contains    Edit Links    //span[@id="DeltaPlaceHolderMain"]
     Wait Until Dialog Is Open    Edit My Link
     Select Frame    //div[@role="dialog" and .//h1[text()="Edit My Link"]]//iframe
+    Sleep    10
     Input Text    //input[contains(@name,"txbTitle")]    test link edit ${current timestamp}
     Click Input Button With Value    OK
     Unselect Frame
