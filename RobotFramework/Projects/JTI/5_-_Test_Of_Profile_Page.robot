@@ -91,8 +91,8 @@ Share A Post Via Engage
     Select Radio Button    shareModalOptions    engage
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Input Text    id:shareModalEntity    \@${test user 1 full name}
     Sleep    1 secs
-    Wait Until Element Is Visible    ${dialog}//li[.//small[text()="${test user 1 name}"]]
-    Click Element    ${dialog}//li[.//small[text()="${test user 1 name}"]]
+    #Wait Until Element Is Visible    ${dialog}//li[.//small[text()="${test user 1 name}"]]
+    #Click Element    ${dialog}//li[.//small[text()="${test user 1 name}"]]
     Input Text    id:shareModalMessage    TestShareMsg_${test user 1 name}_${current timestamp}
     Click Button With Text    Share    ${dialog}
     Wait Until Element Is Not Visible    ${dialog}
