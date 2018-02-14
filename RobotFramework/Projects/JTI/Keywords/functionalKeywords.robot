@@ -215,7 +215,7 @@ Filter News By Tags
     ${tag}=    Set Variable    //label[text()="Filter by tags:"]/parent::div[@class="tags"]//*[@name="Item"]/a
     ${tag name}=    Get Text    ${tag}
     Click Element    ${tag}
-    #Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
+    Wait Until Page Does Not Contain Element    //ul[@id="ms-srch-result-groups-VisibleOutput"]//div[contains(@class,"tags") and not(a[text()="${tag name}"])]/ancestor::div[contains(@class,"articleListItem")]
 
 Filter Search Results By Any Sidebar Filter
     [Arguments]    ${result item locator}
