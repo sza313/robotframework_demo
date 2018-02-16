@@ -6,7 +6,7 @@ ${test user 1 pwd}    Pohar343
 ${test user 2 name}    CSTHUDAKS
 ${test user 2 full name}    Hudak, Szabolcs
 ${test user 2 pwd}    Szury4489
-${fixed community}    COM_Pecz_Fixed_Private
+${fixed community}    COM_PeczR_Fixed_Private
 ${index page url}    https://insidetest.jti.com
 ${engage page url}    https://insidetest.jti.com/Social/Engage
 ${all communities url}    https://insidetest.jti.com/Social/Engage/Pages/AllCommunities.aspx
