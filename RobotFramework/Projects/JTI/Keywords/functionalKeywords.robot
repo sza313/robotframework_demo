@@ -306,7 +306,7 @@ Remove Tag
 Save Profile Page
     [Documentation]    Clicks on the "Save" button on the profile page and reloads page.
     Click Button With Text    Save changes
-    Wait Until Element Contains    //div[@class="innersaveBar"]    User profile updated
+    Wait Until Element Contains    //div[@class="innersaveBar"]    User profile updated    20
     Sleep    3 secs
     Reload Page
     Wait Until Page Contains    ${test user 1 name}
