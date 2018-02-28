@@ -57,7 +57,7 @@ Test Topics Generic Site
     Wait Until Page Contains Element    //ul[contains(@class,"pagination")]
 
 Test Topics Simple Site
-    Go To    https://insidetest.jti.com/Markets/HQ/Pages/Topics_Simple.aspx
+    Go To    https://insidetest.jti.com/Markets/Global/Pages/Topics_Simple.aspx
     Wait Until Page Contains Element    //div[@class="owner"]/a[text()!=""]
     Wait Until Page Contains Element    //h1[@class="topicTitle"]
     Wait Until Page Contains Element    //p[@class="first-description topicNarrative"]

@@ -18,11 +18,13 @@ Navigate To Favourites Page
     Click Main Menu Item    My pages
     Wait Until Page Contains Link With Text    See All
     Click Link Which Contains    See All
+    Sleep    5
     Wait Until Page Contains    My favorites
     Wait Until Page Contains Element    //a[@class="active" and text()="My favorites"]
 
 Go To Resources And Favorites Page
     Go To    ${resources and favorites page url}
+    Sleep    5
 
 Check My Favorites Page
     [Documentation]    Check If My favorites page parts are loaded corectly.
