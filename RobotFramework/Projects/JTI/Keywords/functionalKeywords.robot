@@ -50,14 +50,14 @@ Check External Links
 Check Resources Page
     [Arguments]    ${name}
     Click Sidebar Nav Link    ${name}
-    #Wait Until Element Contains    //div[@class="wrapMain"]    ${name}
-    #Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
-    #Check Resources Page Left Sidebar
-    #Filter Favorites Library By Tags
-    #Clear Filters    //div[@class="wrapMain"]
-    #Filter Favorites Library By Filters    //div[@class="wrapMain"]
-    #Clear Filters    //div[@class="wrapMain"]
-    #Check Resources Page Pagination    //div[@class="wrapMain"]
+    Wait Until Element Contains    //div[@class="wrapMain"]    ${name}
+    Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
+    Check Resources Page Left Sidebar
+    Filter Favorites Library By Tags
+    Clear Filters    //div[@class="wrapMain"]
+    Filter Favorites Library By Filters    //div[@class="wrapMain"]
+    Clear Filters    //div[@class="wrapMain"]
+    Check Resources Page Pagination    //div[@class="wrapMain"]
     Check External Links    //h3[text()="Recommended"]/..
 
 Check Resources Page Left Sidebar
