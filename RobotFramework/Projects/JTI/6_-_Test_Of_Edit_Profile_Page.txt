@@ -90,10 +90,12 @@ Click Expertise Panel
 
 Add Expertise Tag
     [Documentation]    Click to add topics and type text of item to field and select one of suggestions.
-    Input Text    id:manageMyResponsibilities-addResponsibility-input    tag-${current timestamp}
+    Scroll Element Into View    //li[@class="btn btn-default pill"]/span[text()="#CAnC_Academy"]
+    Wait Until Page Contains Element    //li[@class="btn btn-default pill"]/span[text()="#CAnC_Academy"]
+    Click Element    //li[contains(@class,"pill") and ./span[text()="#CAnC_Academy"]]/span[@class="glyphicon glyphicon-close"]
+    Input Text    id:manageMyResponsibilities-addResponsibility-input    \#CAnC_Academy
+    Wait Until Page Contains Element    //div[@class='name']
     Press Key    id:manageMyResponsibilities-addResponsibility-input    \\13
-    Wait Until Page Contains Element    //li[contains(@class,"pill") and ./span[text()="tag-${current timestamp}"]]
-    Click Element    //li[contains(@class,"pill") and ./span[text()="tag-${current timestamp}"]]/span[@class="glyphicon glyphicon-close"]
 
 Click News Panel
     [Documentation]    Click to News in the left navigation.
