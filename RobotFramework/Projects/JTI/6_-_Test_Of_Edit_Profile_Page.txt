@@ -95,6 +95,7 @@ Add Expertise Tag
     Click Element    //li[contains(@class,"pill") and ./span[text()="#CAnC_Academy"]]/span[@class="glyphicon glyphicon-close"]
     Input Text    id:manageMyResponsibilities-addResponsibility-input    \#CAnC_Academy
     Wait Until Page Contains Element    //div[@class='name']
+    Click Element    //div[@class='name']
     Press Key    id:manageMyResponsibilities-addResponsibility-input    \\13
 
 Click News Panel
