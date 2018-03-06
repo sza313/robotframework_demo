@@ -205,9 +205,9 @@ Filter Favorites Library By Tags
 
 Filter Favorites Library By Filters
     [Arguments]    ${container}=
-    Click Button With Text    Department
+    Click Element    //button[contains(text(),'Department')]
     ${unfiltered documents}=    Get WebElements    ${container}//div[@class="item"]
-    Click Link Which Contains    Anti-Illicit Trade
+    Click Element    //ul[@class='dropdown-menu']//a[contains(text(),'Anti-Illicit Trade')]
     Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered documents}    ${container}//div[@class="item"]
 
 Filter News By Tags
