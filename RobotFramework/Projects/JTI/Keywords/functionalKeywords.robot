@@ -281,11 +281,11 @@ Log Out
 
 Paginate To
     [Arguments]    ${page number}    ${container}
-    ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
+    ${unfiltered elements}=    Get WebElements    ${container}//div[@class="item"]
     Wait Until Page Contains Element    ${container}//a[@title="Move to page ${page number}"]
     Scroll Element Into View    ${container}//a[@title="Move to page ${page number}"]
     Wait Until Keyword Succeeds    15 sec    0.5 sec    Click Element    ${container}//a[@title="Move to page ${page number}"]
-    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@class="item"]
 
 Request To Join A Community
     Search For Community    ${fixed community}
