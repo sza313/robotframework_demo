@@ -52,6 +52,7 @@ Check Recommended Page
 
 Check Applications And Sites Page
     Check Resources Page    Applications & sites
+    Check External Links    //h3[text()="Recommended"]
 
 Check Guidelines And Toolkits Page
     Check Resources Page    Guidelines & toolkits

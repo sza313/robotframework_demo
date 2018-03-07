@@ -58,7 +58,6 @@ Check Resources Page
     Filter Favorites Library By Filters    //div[@class="wrapMain"]
     Clear Filters    //div[@class="wrapMain"]
     Check Resources Page Pagination    //div[@class="wrapMain"]
-    Check External Links    //h3[text()="Recommended"]/..
 
 Check Resources Page Left Sidebar
     Wait Until Page Contains Link With Text    My favorites
