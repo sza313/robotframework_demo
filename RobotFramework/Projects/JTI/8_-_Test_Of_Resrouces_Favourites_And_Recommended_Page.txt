@@ -25,7 +25,8 @@ Navigate To Favourites Page
 Check My Favorites Page
     [Documentation]    Check If My favorites page parts are loaded corectly.
     Check Resources Page Left Sidebar
-    Wait Until Page Contains Span With Text    My applications and sites
+    Wait Until Keyword Succeeds    5 mins    15 secs    Wait Until Page Contains Span With Text    My applications and sites
+    #Wait Until Page Contains Span With Text    My applications and sites
     Wait Until Page Contains Element    //span[text()="My applications and sites"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Check Resources Page Pagination    //span[text()="My applications and sites"]/following-sibling::div[@class="library-content"]
     Wait Until Page Contains Span With Text    My saved documents
@@ -37,7 +38,8 @@ Check My Favorites Page
 
 Check Recommended Page
     [Documentation]    Click "Recommended" link in left navigation and check if contents are loaded properly.
-    Click Sidebar Nav Link    Recommended
+    Wait Until Keyword Succeeds    5 mins    15 secs    Click Sidebar Nav Link    Recommended
+    #Click Sidebar Nav Link    Recommended
     Wait Until Page Contains    Recommended for you
     Check Resources Page Left Sidebar
     Wait Until Page Contains Span With Text    Recommended applications and sites

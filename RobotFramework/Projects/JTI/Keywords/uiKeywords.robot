@@ -88,6 +88,7 @@ Click Sidebar Nav Link
     [Arguments]    ${link text}    # Link text
     Scroll Element Into View    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
     Click Element    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
+    Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
 
 Click Tab
     [Arguments]    ${name}    ${container}=
@@ -228,6 +229,7 @@ Wait Until Page Contains Pagination
 Wait Until Page Contains Span With Text
     [Arguments]    ${text}
     Wait Until Page Contains Element    //span[contains(text(),"${text}")]
+    Go To     https://insidetest.jti.com/Resources/Pages/MyFavorites.aspx
 
 Wait Until Search Tab Exists And Highlighted
     [Arguments]    ${tab name}

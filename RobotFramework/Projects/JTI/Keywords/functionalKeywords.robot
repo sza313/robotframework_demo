@@ -44,14 +44,15 @@ Check Community Page Sidebar
 Check External Links
     [Arguments]    ${container}=
     Wait Until Page Contains Element    ${container}
-    Click Link    ${container}//a[2]
+    Click Link    //div[@class='quick-links']//a[2]
     Check If New Tab Is Opened
 
 Check Resources Page
     [Arguments]    ${name}
-    Click Sidebar Nav Link    ${name}
+    Wait Until Keyword Succeeds    5min    15 secs    Click Sidebar Nav Link    ${name}
+    #Click Sidebar Nav Link    ${name}
     Wait Until Element Contains    //div[@class="wrapMain"]    ${name}
-    Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
+    #Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
     Check Resources Page Left Sidebar
     Filter Favorites Library By Tags
     Clear Filters    //div[@class="wrapMain"]
@@ -201,6 +202,7 @@ Filter Favorites Library By Tags
     ${tag name}=    Get Text    ${tag}
     Click Element    ${tag}
     Wait Until Page Does Not Contain Element    //div[contains(@class,"doc-item") and not(.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]
+    Sleep    5 secs
 
 Filter Favorites Library By Filters
     [Arguments]    ${container}=
