@@ -42,10 +42,10 @@ Check Recommended Page
     #Click Sidebar Nav Link    Recommended
     Wait Until Page Contains    Recommended for you
     Check Resources Page Left Sidebar
-    Wait Until Page Contains Span With Text    Recommended applications and sites
+    Wait Until Page Contains Span With Text Engage    Recommended applications and sites
     Check Resources Page Pagination    //span[text()="Recommended applications and sites"]/../div[@class="library-content"]
     Wait Until Page Contains Element    //span[text()="Recommended applications and sites"]/following-sibling::div[@class="library-content"]//div[@class="item"]
-    Wait Until Page Contains Span With Text    Recommended documents
+    Wait Until Page Contains Span With Text Engage    Recommended documents
     Check Resources Page Pagination    //span[text()="Recommended documents"]/../div[@class="library-content"]
     Wait Until Page Contains Element    //span[text()="Recommended documents"]/following-sibling::div[@class="library-content"]//div[@class="item"]
     Filter Favorites Library By Filters    //div[@class="stm-library saved-docs"]

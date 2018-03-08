@@ -88,7 +88,7 @@ Click Sidebar Nav Link
     [Arguments]    ${link text}    # Link text
     Scroll Element Into View    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
     Click Element    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
-    Wait Until Page Contains Element    //div[@class="library-content"]//div[@class="item"]
+    Wait Until Page Contains Element    //div[@class='ms-srch-group-content']
 
 Click Tab
     [Arguments]    ${name}    ${container}=
@@ -229,7 +229,7 @@ Wait Until Page Contains Pagination
 Wait Until Page Contains Span With Text
     [Arguments]    ${text}
     Wait Until Page Contains Element    //span[contains(text(),"${text}")]
-    Go To     https://insidetest.jti.com/Resources/Pages/MyFavorites.aspx
+    Go To    https://insidetest.jti.com/Resources/Pages/MyFavorites.aspx
 
 Wait Until Search Tab Exists And Highlighted
     [Arguments]    ${tab name}
@@ -243,3 +243,12 @@ Click On A Newly Created Community
     Click Element    //ul[@id='MyActivityStream-MyCommunitiesList']/li/a[text()='Com_${test user 1 name}_${current timestamp}']
     Wait Until Page Contains Element    //h1[contains(text(),'Com_${test user 1 name}_${current timestamp}')]
     \    #//div[@class='col-sm-8']/h1[text()='Com_${test user 1 name}_${current timestamp}']
+
+Wait Until Page Contains Span With Text Engage
+    [Arguments]    ${text}
+    Wait Until Page Contains Element    //span[contains(text(),"${text}")]
+
+Click Sidebar Nav Link TestNews
+    [Arguments]    ${link text}    # Link text
+    Scroll Element Into View    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
+    Click Element    //div[contains(@class,"sidebar")]//a[text()="${link text}"]

@@ -168,7 +168,7 @@ Join 12 Pubilc Communities
     Go To    ${all communities url}
     Set Filter    Access    Public    ${all communities tab}
     Repeat Keyword    10 times    Join A Community    ${all communities tab}
-    Paginate To    2    ${all communities tab}
+    Paginate To Engage    2    ${all communities tab}
     Repeat Keyword    2 times    Join A Community    ${all communities tab}
 
 Check My Communities Tab
@@ -286,7 +286,7 @@ Check Ideas Tab In Opened Community
     [Documentation]    Check Ideas tab and sidebar on community page.
     Go To    ${fixed community url}
     Click Tab    Ideas
-    Wait Until Page Contains Span With Text    Campaign Management
+    Wait Until Page Contains Span With Text Engage    Campaign Management
     Wait Until Page Contains Link With Text    Manage Users
     Wait Until Page Contains Link With Text    Manage Idea Campaign Settings
     Wait Until Page Contains Link With Text    Idea List Permissions
@@ -302,7 +302,7 @@ Check Admin Settings Tab In Opened Community
     Go To    ${fixed community url}
     Click Tab    Admin settings
     Select Frame    //iframe[@title="Community admin page viewer"]
-    Wait Until Page Contains Span With Text    Admin links
+    Wait Until Page Contains Span With Text Engage    Admin links
     Wait Until Page Contains Link With Text    Edit properties
     Wait Until Page Contains Link With Text    Edit membership
     Wait Until Page Contains Link With Text    Badges - edit community badges
@@ -313,11 +313,11 @@ Check Admin Settings Tab In Opened Community
     Wait Until Page Contains Link With Text    Email followers
     Wait Until Page Contains Link With Text    Recycle bin
     Wait Until Page Contains Link With Text    Delete this community
-    Wait Until Page Contains Span With Text    Top Users Activity Report
-    Wait Until Page Contains Span With Text    Activity By Type
-    Wait Until Page Contains Span With Text    Admin Notifications
-    Wait Until Page Contains Span With Text    Activity History
-    Wait Until Page Contains Span With Text    Export Report
+    Wait Until Page Contains Span With Text Engage    Top Users Activity Report
+    Wait Until Page Contains Span With Text Engage    Activity By Type
+    Wait Until Page Contains Span With Text Engage    Admin Notifications
+    Wait Until Page Contains Span With Text Engage    Activity History
+    Wait Until Page Contains Span With Text Engage    Export Report
     Unselect Frame
 
 Check Edit Properties Popup

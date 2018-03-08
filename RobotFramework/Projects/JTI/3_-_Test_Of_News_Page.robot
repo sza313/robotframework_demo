@@ -34,7 +34,7 @@ Load Articles With Infinite Scroll
 
 Test My News
     [Documentation]    Click My news in sidebar and check filters.
-    Click Sidebar Nav Link    My news
+    Click Sidebar Nav Link TestNews    My news
     Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
     Filter News By Tags
     Filter By Filters    ${main content}
@@ -42,7 +42,7 @@ Test My News
 
 Test All News
     [Documentation]    Click On All News in sidebar and check filters.
-    Click Sidebar Nav Link    All news
+    Click Sidebar Nav Link TestNews    All news
     Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"All news")]
     Filter News By Tags
     Filter By Filters    ${main content}
@@ -50,7 +50,7 @@ Test All News
 
 Test Corporate News
     [Documentation]    Click on Corporate news and check filters.
-    Click Sidebar Nav Link    Corporate news
+    Click Sidebar Nav Link TestNews    Corporate news
     Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
     Filter News By Tags
     Filter By Filters    ${main content}
@@ -58,7 +58,7 @@ Test Corporate News
 
 Test Announcements
     [Documentation]    Click on Announcements in sidebar and check filters.
-    Click Sidebar Nav Link    Announcements
+    Click Sidebar Nav Link TestNews    Announcements
     Comment    Wait Until Page Contains Element    ${main content}//*[contains(text(),"My news")]
     Filter News By Tags
     Filter By Filters    ${main content}
@@ -66,7 +66,7 @@ Test Announcements
 
 Test Jobs
     [Documentation]    Click on Jobs in sidebar and check if there are 3 empty tabs on the page.
-    Click Sidebar Nav Link    Jobs
+    Click Sidebar Nav Link TestNews    Jobs
     Wait Until Page Contains Element    //a[@role="tab" and text()="Job search"]
     Wait Until Page Contains Element    //a[@role="tab" and text()="Candidate"]
     Click Element    //a[@role="tab" and text()="Candidate"]

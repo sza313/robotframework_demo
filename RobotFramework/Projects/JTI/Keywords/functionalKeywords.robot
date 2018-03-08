@@ -44,8 +44,8 @@ Check Community Page Sidebar
 Check External Links
     [Arguments]    ${container}=
     Wait Until Page Contains Element    ${container}
-    Click Link    //div[@class='quick-links']//a[2]
-    Check If New Tab Is Opened
+    Click Link    //div[@class='quick-links']//a[contains(@href,'google')]
+    Check If New Tab Is Opened    Google
 
 Check Resources Page
     [Arguments]    ${name}
@@ -104,12 +104,12 @@ Check If Global Menu Is Loaded
     Check If Menu Item Exists    Resources
 
 Check If New Tab Is Opened
-    [Arguments]    ${title}=""
+    [Arguments]    ${title}
     ${tabs}=    Get Window Handles
     ${original tab}=    Get From List    ${tabs}    0
     ${new tab}=    Get From List    ${tabs}    1
     Select Window    ${new tab}
-    Run Keyword If    ${title} != ""    Wait Until Page Contains    ${title}
+    Wait Until Page Contains    ${title}
     Close Window
     Select Window    ${original tab}
 
@@ -137,7 +137,7 @@ Check My News Popup
 
 Check Pagination
     [Arguments]    ${container}
-    Paginate To    2    ${container}
+    Paginate To Engage    2    ${container}
     Page Should Contain Element    ${container}//div[@name="Item"]
 
 Check Search Page Elements
@@ -201,7 +201,7 @@ Filter Favorites Library By Tags
     ${tag}=    Set Variable    //div[@refinername="RefinerTaRTags"]//*[@name="Item"]/a
     ${tag name}=    Get Text    ${tag}
     Click Element    ${tag}
-    Wait Until Page Does Not Contain Element    //div[contains(@class,"doc-item") and not(.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]
+    Wait Until Page Contains Element    //div[contains(@class,"doc-item") and not(.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]
     Sleep    5 secs
 
 Filter Favorites Library By Filters
@@ -355,3 +355,11 @@ Unset Tags
     Unselect Check Box By Label    Andorra    ${modal}
     Unselect Check Box By Label    Canary Island    ${modal}
     Unselect Check Box By Label    Spain    ${modal}
+
+Paginate To Engage
+    [Arguments]    ${page number}    ${container}
+    ${unfiltered elements}=    Get WebElements    ${container}//div[@name="Item"]
+    Wait Until Page Contains Element    ${container}//a[@title="Move to page ${page number}"]
+    Scroll Element Into View    ${container}//a[@title="Move to page ${page number}"]
+    Wait Until Keyword Succeeds    15 sec    0.5 sec    Click Element    ${container}//a[@title="Move to page ${page number}"]
+    Wait Until Keyword Succeeds    5 secs    0.5 secs    Check If WebElements Are Not Equal    ${unfiltered elements}    ${container}//div[@name="Item"]
