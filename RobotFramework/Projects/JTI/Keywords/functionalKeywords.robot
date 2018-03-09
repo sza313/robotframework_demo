@@ -201,7 +201,7 @@ Filter Favorites Library By Tags
     ${tag}=    Set Variable    //div[@refinername="RefinerTaRTags"]//*[@name="Item"]/a
     ${tag name}=    Get Text    ${tag}
     Click Element    ${tag}
-    Wait Until Page Contains Element    //div[contains(@class,"doc-item") and not(.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]
+    Wait Until Page Contains Element    //div[contains(@class,"doc-item") and (.//div[@class="tags"]/ul/li[contains(text(),"${tag name}")])]
     Sleep    5 secs
 
 Filter Favorites Library By Filters
