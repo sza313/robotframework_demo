@@ -355,11 +355,11 @@ QueryField
     [Return]    ${value}
 
 AddItemToCartDataBase
-    ${category}    functionalKeywords.QueryField    category
+    ${category}    QueryField    category
     ClickLink    ${category}
     CheckSpanTitle    Shopping cart
     CheckSpanTitle    (0)
-    ${item}    functionalKeywords.QueryField    subcategory
+    ${item}    QueryField    subcategory
     ClickOnLink    ${item}
     CheckH1Title    ${item}
     CheckNumericStepperContent    Qty    1
