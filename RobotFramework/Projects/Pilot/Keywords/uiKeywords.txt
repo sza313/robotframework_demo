@@ -1,5 +1,5 @@
 *** Settings ***
-Library           Selenium2Library
+Library           SeleniumLibrary
 Library           Dialogs
 Library           Collections
 Resource          ../TestData/testData.txt
@@ -21,7 +21,7 @@ ClickOnLink
 SetTextBoxValue
     [Arguments]    ${title}    ${value}
     Wait Until Page Contains Element    xpath=//label[text()[contains(.,'${title}')]]/../input
-    Selenium2Library.Input Text    xpath=//label[text()[contains(.,'${title}')]]/../input    ${value}
+    SeleniumLibrary.Input Text    xpath=//label[text()[contains(.,'${title}')]]/../input    ${value}
 
 ClickOnButton
     [Arguments]    ${title}
@@ -145,7 +145,7 @@ CheckTextBoxValueInTable
 SetTextBoxValueInTable
     [Arguments]    ${title}    ${value}
     Wait Until Page Contains Element    xpath=//label[text()[contains(.,'${title}')]]/../..//input
-    Selenium2Library.Input Text    xpath=//label[text()[contains(.,'${title}')]]/../..//input    ${value}
+    SeleniumLibrary.Input Text    xpath=//label[text()[contains(.,'${title}')]]/../..//input    ${value}
 
 CheckTextBoxContentInTable
     [Arguments]    ${title}    ${value}
