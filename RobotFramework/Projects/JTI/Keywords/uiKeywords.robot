@@ -86,7 +86,6 @@ Click Search Tab
 
 Click Sidebar Nav Link
     [Arguments]    ${link text}    # Link text
-    Log To Console    Checking ${link text}
     Scroll Element Into View    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
     Click Element    //div[contains(@class,"sidebar")]//a[text()="${link text}"]
     Wait Until Page Contains Element    //div[@class='ms-srch-group-content']
@@ -229,7 +228,6 @@ Wait Until Page Contains Pagination
 
 Wait Until Page Contains Span With Text
     [Arguments]    ${text}
-    Log To Console    Checking ${text}
     Wait Until Page Contains Element    //span[contains(text(),"${text}")]
     Go To    https://insidetest.jti.com/Resources/Pages/MyFavorites.aspx
 
